@@ -88,3 +88,6 @@
     input[type="submit"]:hover {
       background-color: #d32f2f;
     }
+form {
+    margin-top: 20px; 
+}

@@ -28,6 +28,8 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::view('/register', 'auth.register')->name('register');
+
 
 Route::get('/almacenes/Listar', [AlmacenController::class, "Listar"])->name('almacenes.Listar')->middleware('auth');
 Route::post('/almacenes/Ingresar', [AlmacenController::class, "Insertar"])->name('almacenes.Insertar')->middleware('auth');
