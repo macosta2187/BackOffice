@@ -51,7 +51,7 @@ public function ListarLote()
         return view('ListarLote', compact('lote'));
     }
 
-
+*/
   
     public function asignarLote(Request $request)
     {
@@ -73,13 +73,13 @@ public function ListarLote()
             }
     
           
-            return redirect()->route('inicio');
+            return redirect()->route('home');
         } else {
             return redirect("/");
        
         }
-        */
-
+        
+    }
 
         public function ingresarLote(Request $request)
         {

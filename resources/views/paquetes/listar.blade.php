@@ -3,24 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/jquery.dataTables.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
     <title>Aplicación de Almacén</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #F85C3D;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #ffff;
             margin: 0;
             padding: 0;
         }
 
-        h1 {
+        h1  {
             text-align: center;
-            color: #FFFFFF;
+            color: #333;
             margin-top: 20px;
         }
 
         table {
-            width: 80%;
+            width: 70%;
             margin: 20px auto;
             border-collapse: collapse;
             background-color: #fff;
@@ -50,21 +51,24 @@
         }
 
         td button:hover {
-            background-color: #555;
+            background-color: #333;
         }
 
-        /* Estilos para el elemento de selección (select) */
-        select {
-            padding: 5px;
-            margin: 10px;
-            font-size: 16px;
-        }
-
-        /* Estilos para la etiqueta del elemento de selección */
         label {
-            font-size: 18px;
-            color: #FFFFFF;
-        }
+        display: block;
+        color: black; /* Color del texto en los labels */
+        text-align: center;
+        margin-bottom: 5px;
+    }
+
+ 
+    select, input {
+        width: 40%; 
+        padding: 5px;
+        margin-bottom: 10px;
+        color: black; 
+        text-align: center; 
+    }
 
         #sumaPesosLabel {
             text-align: center;
@@ -82,7 +86,7 @@
     <label for="filtroDepartamento">Filtrar por Departamento:</label>
     <select id="filtroDepartamento">
         <option value="">Todos</option>
-        <!-- Opciones para departamentos aquí -->
+    
     </select>
 
     <label for="filtroPeso">Filtrar por Peso:</label>
@@ -180,7 +184,7 @@
             .then(data => {
                 if (data.message) {
                     alert(data.message);
-                    cargarPaquetes(); 
+                 
                 } else {
                     alert('Error al consolidar paquetes.');
                 }
@@ -190,9 +194,7 @@
             });
         }
 
-        function cargarPaquetes() {
-    
-        }
+
 
         $(document).ready(function() {
             $('#btnConsolidarPaquetes').click(function() {
@@ -201,6 +203,5 @@
         });
     </script>
 
-    <button id="cerrarSesion">Cerrar sesión</button>
 </body>
 </html>

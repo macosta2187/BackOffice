@@ -39,7 +39,7 @@
         </tbody>
     </table>
 
-    <!-- Agrega enlaces o botones para volver o realizar otras acciones si es necesario -->
+   
 
 </body>
 </html>

@@ -96,5 +96,11 @@ class EmpleadoController extends Controller
         return redirect('/home'); 
     }
     
+    public function listarChoferes()
+{
+    $choferes = Empleado::where('es_chofer', true)->get();
+
+    return view('/vehiculos/Ingresar', ['choferes' => $choferes]);
+}
 
 }

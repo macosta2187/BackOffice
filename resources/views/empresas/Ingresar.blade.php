@@ -10,23 +10,24 @@
     <h1>Alta de Empresa</h1>
     
     <form action="{{ route('empresas.Insertar') }}" method="post">
-    @csrf
+        @csrf
         <label for="rut">RUT:</label>
-        <input type="number" id="rut" name="rut" required><br><br>
+        <input type="text" id="rut" name="rut" maxlength="11" required><br><br>
 
         <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" required><br><br>
+        <input type="text" id="nombre" name="nombre" maxlength="25" required><br><br>
 
         <label for="calle">Calle:</label>
-        <input type="text" id="calle" name="calle" required><br><br>
+        <input type="text" id="calle" name="calle" maxlength="50" required><br><br>
 
         <label for="numero">Número:</label>
-        <input type="number" id="numero" name="numero" required><br><br>
+        <input type="numeric" id="numero" name="numero" maxlength="5" required><br><br>
+
 
         <label for="localidad">Localidad:</label>
-        <input type="text" id="localidad" name="localidad" required><br><br>
+        <input type="text" id="localidad" name="localidad" maxlength="25" required><br><br>
 
-   <label for="departamento">Departamento:</label>
+        <label for="departamento">Departamento:</label>
     <select id="departamento" name="departamento" required>
     <option value="Artigas">Artigas</option>
     <option value="Canelones">Canelones</option>
@@ -51,7 +52,7 @@
 
 
         <label for="telefono">Teléfono:</label>
-        <input type="tel" id="telefono" name="telefono" required><br><br>
+        <input type="text" id="telefono" name="telefono" maxlength="12" required><br><br>
 
         <input type="submit" value="Guardar">
     </form>

@@ -5,19 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Almacenes</title>
+    <link rel="stylesheet" type="text/css" href="/jquery.dataTables.css">
+
     <style>
-        body {
+ body {
             font-family: 'Montserrat', sans-serif;
-            background-color: #f4f4f4;
+            background-color: #ffff;
             margin: 0;
             padding: 0;
+            display: flex;
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
         }
 
         .container {
             width: 100%;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #F85C3D;
+            max-width: 100%;
+            padding: 20px;            
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
@@ -29,6 +34,7 @@
 
         table {
             width: 100%;
+            max-width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
             background-color: #fff;
@@ -42,7 +48,9 @@
         }
 
         th {
-            background-color: #f2f2f2;
+            background-color: #333; 
+            color: #fff; 
+            font-weight: bold; 
         }
 
         tr:nth-child(even) {
@@ -72,53 +80,66 @@
         }
 
         tr:hover {
-    background-color: #e0e0e0; 
-}
+            background-color: #e0e0e0;
+        }
 
     </style>
-      
+   
 </head>
 <body>
-@csrf
     <div class="container">
         <h1>Lista de Almacenes</h1>
-        <table>
-            <tr>
-                <th>Nombre</th>
-                <th>Calle</th>
-                <th>Número</th>
-                <th>Localidad</th>
-                <th>Departamento</th>
-                <th>Telefono</th>
-                <th>Editar</th>
-                <th>Eliminar</th>
-            </tr>
-            @forelse($almacenes as $almacen)
-          
+        <table id="tabla-almacenes" class="table table-striped">
+            <thead>
                 <tr>
-                    <td data-label="Nombre">{{ $almacen->nombre }}</td>
-                    <td data-label="Calle">{{ $almacen->calle }}</td>
-                    <td data-label="Número">{{ $almacen->numero }}</td>
-                    <td data-label="Localidad">{{ $almacen->localidad }}</td>
-                    <td data-label="Departamento">{{ $almacen->departamento }}</td>
-                    <td data-label="Telefono">{{ $almacen->telefono }}</td>
-                    <td data-label="Editar">
-                        <a href="{{ route('almacenes.Editar', $almacen->id) }}" class="edit-button">Editar</a>
-                    </td>
-                    <td data-label="Eliminar">
-                        <form action="{{ route('almacenes.eliminar', $almacen->id) }}" method="POST" class="delete-form">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="delete-button">Eliminar</button>
-                        </form>
-                    </td>
+                    <th>Nombre</th>
+                    <th>Calle</th>
+                    <th>Número</th>
+                    <th>Localidad</th>
+                    <th>Departamento</th>
+                    <th>Teléfono</th> 
+                    <th>Editar</th>
+                    <th>Eliminar</th>
                 </tr>
-            @empty
-                <tr id="no-results-row"><td colspan="8">No se encontraron resultados.</td></tr>
-            @endforelse
+            </thead>
+            <tbody>
+                @forelse($almacenes as $almacen)
+                    <tr>
+                        <td>{{ $almacen->nombre }}</td>
+                        <td>{{ $almacen->calle }}</td>
+                        <td>{{ $almacen->numero }}</td>
+                        <td>{{ $almacen->localidad }}</td>
+                        <td>{{ $almacen->departamento }}</td>
+                        <td>{{ $almacen->telefono }}</td>
+                        <td>
+                            <a href="{{ route('almacenes.Editar', $almacen->id) }}" class="btn btn-primary">Editar</a>
+                        </td>
+                        <td>
+                            <form action="{{ route('almacenes.eliminar', $almacen->id) }}" method="POST" class="delete-form">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="8">No se encontraron resultados.</td>
+                    </tr>
+                @endforelse
+            </tbody>
         </table>
     </div>
-
-
+    <script src="{{ asset('jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('jquery.dataTables.js') }}"></script> 
+    <script>
+     $(document).ready(function() {
+            $('#tabla-almacenes').DataTable({
+                "language": {
+                    "url": "{{ asset('es-ES.json') }}"
+                }
+            });
+        });
+    </script>
 </body>
 </html>

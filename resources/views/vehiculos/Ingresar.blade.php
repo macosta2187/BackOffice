@@ -23,14 +23,20 @@
         <input type="text" id="modelo" name="modelo" required>       
 
         <label for="peso">Peso</label>
-        <input type="text" id="peso" name="peso">
+        <input type="text" id="peso" name="peso" required> 
 
 
         <label for="capacidad">Capacidad</label>
-        <input type="text" id="capacidad" name="capacidad">
+        <input type="text" id="capacidad" name="capacidad" required> 
 
-        <label for="id_chofer">id_chofer:</label>
-        <input type="numeric" id="id_chofer" name="id_chofer">
+        <label for="id_chofer">Chofer:</label>
+<select id="id_chofer" name="id_chofer" required>
+    <option value="">Selecciona un chofer</option>
+    @foreach($choferes as $chofer)
+        <option value="{{ $chofer->id }}">{{ $chofer->nombre }} {{ $chofer->apellido }}</option>
+    @endforeach
+</select>
+       
 
         <input type="submit" value="Guardar">
     </form>

@@ -31,6 +31,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //Route::view('/register', 'auth.register')->name('register');
 
+Route::get('/inicio', function () {
+    return view('/inicio');
+})->middleware('auth');
+
 
 Route::get('/almacenes/Listar', [AlmacenController::class, "Listar"])->name('almacenes.Listar')->middleware('auth');
 Route::post('/almacenes/Ingresar', [AlmacenController::class, "Insertar"])->name('almacenes.Insertar')->middleware('auth');
@@ -76,6 +80,9 @@ Route::get('/empleados/Actualizar', function () {
 
 Route::get('/vehiculos/Listar', [VehiculoController::class, "Listar"])->name('vehiculos.Listar')->middleware('auth');
 Route::post('/vehiculos/Ingresar', [VehiculoController::class, "Insertar"])->name('vehiculos.Insertar')->middleware('auth');
+Route::get('/vehiculos/Ingreso', [EmpleadoController::class, 'listarChoferes'])->middleware('auth');
+
+
 Route::get('/vehiculos/{vehiculo}/editar', [VehiculoController::class, "Editar"])->name('vehiculos.Editar')->middleware('auth');
 Route::put('/vehiculos/{vehiculo}', [VehiculoController::class, "Actualizar"])->name('vehiculos.Actualizar')->middleware('auth');
 Route::delete('/vehiculos/{id}', [VehiculoController::class, "Eliminar"])->name('vehiculos.eliminar')->middleware('auth');
@@ -131,6 +138,8 @@ Route::get('/EliminarLote/{id}', [LoteController::class, "EliminarLote"])->name(
 Route::get('/EditarLote/{id}/editar', [LoteController::class, 'editarLote'])->name('lote.editar')->middleware('auth');
 Route::post('/lote/{id}/actualizar', [LoteController::class, 'actualizarLote'])->name('lote.actualizar')->middleware('auth');
 
+
+
 Route::get('/IngresarLote', function () {
     return view('IngresarLote');
 })->middleware('auth');
@@ -138,6 +147,12 @@ Route::get('/IngresarLote', function () {
 Route::get('/IngresarLote', function () {
     return view('IngresarLote');
 })->middleware('auth');
+
+
+Route::get('/FormularioRlotes', function () {
+    return view('/FormularioRlotes');
+});
+
 
 
 

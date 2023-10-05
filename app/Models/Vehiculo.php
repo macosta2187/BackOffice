@@ -13,4 +13,6 @@ class Vehiculo extends Model
     protected $table = 'vehiculos';
     use SoftDeletes;
 
+    
+
 }
