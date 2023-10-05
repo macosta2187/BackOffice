@@ -7,10 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Chofer extends Model
+class Funcionario extends Model
 {
     use HasFactory;
-    protected $table = 'choferes';
+    protected $table = 'funcionarios';
     use SoftDeletes;
-   
 }

@@ -72,27 +72,38 @@
         @csrf
         @method('PUT')
 
-        <label for="ci">Cedula:</label>
-        <input type="numeric" name="ci" value="{{ $empleado->ci }}" required>
+        <label for="ci">Cédula:</label>
+        <input type="text" name="ci" value="{{ $empleado->ci }}" pattern="[0-9]{8}" required maxlength="8">
 
         <label for="nombre">Nombre:</label>
-        <input type="text" name="nombre" value="{{ $empleado->nombre }}" required>
+        <input type="text" name="nombre" value="{{ $empleado->nombre }}" maxlength="25" required>
 
         <label for="apellido">Apellido:</label>
-        <input type="text" name="apellido" value="{{ $empleado->apellido }}" required>
+        <input type="text" name="apellido" value="{{ $empleado->apellido }}" maxlength="25" required>
 
         <label for="email">Correo Electrónico:</label>
-        <input type="email" name="email" value="{{ $empleado->email }}" required>
+        <input type="email" name="email" value="{{ $empleado->email }}" maxlength="50" required>
 
         <label for="celular">Número de celular:</label>
         <input type="tel" name="celular" value="{{ $empleado->celular }}" required>
 
-        <label for="fechanac">fechanac:</label>
-        <input type="date" name="fechanac" value="{{ $empleado->fechanac }}" required>      
+        <label for="fechanac">Fecha de Nacimiento:</label>
+        <input type="date" name="fechanac" value="{{ $empleado->fechanac }}" max="2005-09-22" required>
+
+        <label>Selecciona una opción:</label><br>
+
+        <div>
+            <label for="es_chofer">¿Es un chofer?</label>
+            <input type="radio" id="es_chofer_si" name="es_chofer" value="1" {{ $empleado->es_chofer == 1 ? 'checked' : '' }}> Sí
+            <input type="radio" id="es_chofer_no" name="es_chofer" value="0" {{ $empleado->es_chofer == 0 ? 'checked' : '' }}> No
+        </div>
+
+        <div>
+            <label for="es_almacen">¿Es funcionario de almacén?</label>
+            <input type="radio" id="es_almacen_si" name="es_almacen" value="1" {{ $empleado->es_almacen == 1 ? 'checked' : '' }}> Sí
+            <input type="radio" id="es_almacen_no" name="es_almacen" value="0" {{ $empleado->es_almacen == 0 ? 'checked' : '' }}> No
+        </div>
 
         <button type="submit">Guardar cambios</button>
     </form>
 </div>
-
-</body>
-</html>

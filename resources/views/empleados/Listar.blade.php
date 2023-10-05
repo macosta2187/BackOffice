@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Empleados</title>
     <style>
-     
         body {
             font-family: 'Montserrat', sans-serif;
             background-color: #f4f4f4;
@@ -73,23 +72,23 @@
         }
 
         tr:hover {
-    background-color: #e0e0e0; /* Cambia el color de fondo al pasar el mouse */
-}
-
+            background-color: #e0e0e0;
+        }
     </style>
-
 </head>
 <body>
     <div class="container">
         <h1>Lista de empleados</h1>
         <table>
             <tr>
-                <th>Ci</th>
+                <th>Cedula</th>
                 <th>Nombre</th>
                 <th>Apellido</th>
                 <th>Celular</th>
                 <th>Email</th>
-                <th>Fecha de nacimiento</th>                
+                <th>Fecha de nacimiento</th>
+                <th>Funcionario de Almacén</th>
+                <th>Funcionario Chofer</th>
                 <th>Editar</th>
                 <th>Eliminar</th>
             </tr>
@@ -100,7 +99,9 @@
                     <td data-label="Apellido">{{ $empleado->apellido }}</td>
                     <td data-label="Celular">{{ $empleado->celular }}</td>
                     <td data-label="Email">{{ $empleado->email }}</td>
-                    <td data-label="Fecha de nacimiento">{{ $empleado->fechanac }}</td>                    
+                    <td data-label="Fecha de nacimiento">{{ $empleado->fechanac }}</td>
+                    <td data-label="Funcionario de Almacén">{{ $empleado->es_almacen ? 'Sí' : 'No' }}</td>
+                    <td data-label="Funcionario Chofer">{{ $empleado->es_chofer ? 'Sí' : 'No' }}</td>
                     <td data-label="Editar">
                         <a href="{{ route('empleados.Editar', $empleado->id) }}" class="edit-button">Editar</a>
                     </td>
@@ -114,10 +115,11 @@
                 </tr>
             @empty
                 <tr id="no-results-row">
-                    <td colspan="8">No se encontraron resultados.</td>
+                    <td colspan="10">No se encontraron resultados.</td>
                 </tr>
             @endforelse
         </table>
     </div>
 </body>
 </html>
+

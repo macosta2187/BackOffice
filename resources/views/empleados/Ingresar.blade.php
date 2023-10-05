@@ -14,7 +14,7 @@
      @csrf
 
         <label for="ci">CI:</label>
-        <input type="numeric" id="ci" name="ci" required>
+        <input type="numeric" id="ci" name="ci" required pattern="[0-9]{8}" maxlength="8">
 
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" name="nombre" required>
@@ -33,12 +33,18 @@
 
         <label>Selecciona una opción:</label><br>
 
-        <label for="chofer">Es Chofer?</label>
-        <input type="radio" id="chofer" name="opcion" value="chofer">
+    <div>
+    <label for="es_chofer">¿Es un chofer?</label>
+    <input type="checkbox" id="es_chofer" name="es_chofer" value="1"> Sí
+     </div>
 
-        <label for="emplAlmacen">Es funcionario de Almacen?</label>
-        <input type="radio" id="emplAlmacen" name="opcion" value="emplAlmacen">
+    <div>
+    <label for="es_almacen">¿Es funcionario de almacén?</label>
+    <input type="checkbox" id="es_almacen" name="es_almacen" value="1"> Sí
+    </div>
 
+
+       
         <input type="submit" value="Guardar">
     </form>
 
