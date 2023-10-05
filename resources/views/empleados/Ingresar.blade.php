@@ -23,13 +23,21 @@
         <input type="text" id="apellido" name="apellido" required>
 
         <label for="celular">Número de celular:</label>
-        <input type="text" id="celular" name="celular">        
+        <input type="text" id="celular" name="celular" required>       
 
         <label for="email">Correo Electrónico:</label>
         <input type="email" id="email" name="email" required>
 
         <label for="fechanac">Fecha nacimiento:</label>
-        <input type="date" id="fechanac" name="fechanac">
+        <input type="date" id="fechanac" name="fechanac" required>
+
+        <label>Selecciona una opción:</label><br>
+
+        <label for="chofer">Es Chofer?</label>
+        <input type="radio" id="chofer" name="opcion" value="chofer">
+
+        <label for="emplAlmacen">Es funcionario de Almacen?</label>
+        <input type="radio" id="emplAlmacen" name="opcion" value="emplAlmacen">
 
         <input type="submit" value="Guardar">
     </form>

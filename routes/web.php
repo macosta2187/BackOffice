@@ -6,6 +6,7 @@ use App\Http\Controllers\LoteController;
 use App\Http\Controllers\PaqueteController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\VehiculoController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
@@ -28,14 +29,14 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::view('/register', 'auth.register')->name('register');
+//Route::view('/register', 'auth.register')->name('register');
 
 
 Route::get('/almacenes/Listar', [AlmacenController::class, "Listar"])->name('almacenes.Listar')->middleware('auth');
 Route::post('/almacenes/Ingresar', [AlmacenController::class, "Insertar"])->name('almacenes.Insertar')->middleware('auth');
 Route::get('/almacenes/{almacen}/editar', [AlmacenController::class, "Editar"])->name('almacenes.Editar')->middleware('auth');
 Route::put('/almacenes/{almacen}', [AlmacenController::class, "Actualizar"])->name('almacenes.Actualizar')->middleware('auth');
-Route::delete('/almacenes/{almacen}', [AlmacenController::class, "Eliminar"])->name('almacenes.eliminar')->middleware('auth');
+Route::delete('/almacenes/{almacen}', [AlmacenController::class, "Eliminar"])->name('almacenes.eliminar');
 
 
 Route::get('/almacenes/Ingresar', function () {
@@ -138,10 +139,38 @@ Route::get('/IngresarLote', function () {
     return view('IngresarLote');
 })->middleware('auth');
 
-Route::get('/registro', function () {
-    return view('registro');
-})->middleware('auth');
+
+
+
 
 Route::get('/error', function () {
     return view('error');
+})->middleware('auth');
+
+
+
+
+
+
+Route::get('/choferes/Ingresar', function () {
+    return view('/choferes/Ingresar');
+})->middleware('auth');
+
+
+
+/*Empresa*/
+
+Route::get('/empresas/Listado', [EmpresaController::class, 'Listar'])->name('empresas.Listado')->middleware('auth');
+Route::post('/empresas/Ingresar', [EmpresaController::class, "Insertar"])->name('empresas.Insertar')->middleware('auth');
+Route::get('/empresas/{empresas}/editar', [EmpresaController::class, "Editar"])->name('empresas.Editar')->middleware('auth');
+Route::put('/empresas/{empresas}', [EmpresaController::class, "Actualizar"])->name('empresas.Actualizar')->middleware('auth');
+Route::delete('/empresas/{empresas}', [EmpresaController::class, "Eliminar"])->name('empresas.eliminar')->middleware('auth');
+
+
+Route::get('/empresas/Listado', function () {
+    return view('/empresas/Listado');
+})->middleware('auth');
+
+Route::get('/empresas/Ingresar', function () {
+    return view('/empresas/Ingresar');
 })->middleware('auth');

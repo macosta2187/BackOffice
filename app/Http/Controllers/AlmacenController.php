@@ -27,6 +27,8 @@ class AlmacenController extends Controller
         $almacen->departamento = $request->input('departamento');        
         $almacen->telefono = $request->input('telefono'); 
         $almacen->save();
+
+        return redirect("/home");
 }
 
 
@@ -37,13 +39,16 @@ class AlmacenController extends Controller
         return view('almacenes.Listar', ['almacenes' => $almacenes]);
     }
 
-
-    public function Eliminar(Almacen $almacen){
-
-        $almacen->delete();    
-        return redirect("/");
-
+    public function eliminar($id)
+    {
+        
+        $almacen = Almacen::find($id);         
+        $almacen->delete();
+    
+      
+        return redirect("/home");
     }
+    
 
    public function Editar(Almacen $almacen)
 {

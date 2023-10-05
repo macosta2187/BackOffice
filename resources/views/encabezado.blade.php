@@ -13,6 +13,13 @@
     <ul>
         <li><a href="/home">Home</a></li>
         <li>
+            <a href="#">Empresa</a>
+            <ul class="submenu">
+                <li><a href="/empresas/Ingresar">Ingresar</a></li>
+                <li><a href="/empresas/Listar">Listar</a></li>
+            </ul>
+        </li>
+        <li>
             <a href="#">Almacenes</a>
             <ul class="submenu">
                 <li><a href="/almacenes/Ingresar">Ingreso</a></li>
@@ -26,7 +33,8 @@
                 <li><a href="/empleados/Listar">Listar</a></li>
             </ul>
         </li>
-        <li><a href="#">Paquetes</a>
+        <li>
+            <a href="#">Paquetes</a>
             <ul class="submenu">
                 <li><a href="/paquetes/Ingresar">Ingresar</a></li>
                 <li><a href="/paquetes/Listar">Listar</a></li>
@@ -39,14 +47,9 @@
                 <li><a href="/vehiculos/Listar">Listar</a></li>
             </ul>
         </li>
-        <li><a href="{{ route('register') }}">Registrarse</a></li>
+        <li><a href="/registro">Listar</a></li>
     </ul>
 </div>
-
-
-
-
-
 
 
 
