@@ -31,7 +31,7 @@
         <label for="fechanac">Fecha nacimiento:</label>
         <input type="date" id="fechanac" name="fechanac" required>
 
-        <label>Selecciona una opción:</label><br>
+        <label>Selecciona Roles:</label><br>
 
     <div>
     <label for="es_chofer">¿Es un chofer?</label>
@@ -44,23 +44,19 @@
     </div>
 
 
+
        
         <input type="submit" value="Guardar">
     </form>
 
     <script>
-       
-        var token = localStorage.getItem('token');
+    var token = localStorage.getItem('token');
 
-        
-      
+    if (token) {
+        var form = document.getElementById('myForm');
+        form.action = "{{ route('empleados.Insertar') }}?token=" + token;
+    }
+</script>
 
-
-if (token) {
-    var form = document.getElementById('myForm');
-    form.action = "{{ route('empleados.Insertar') }}" + "?=" + token;
-}
-
-    </script>
 </body>
 </html>

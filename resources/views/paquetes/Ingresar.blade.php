@@ -3,19 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <title>Formulario de Ingreso de Paquetes</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #ffff;
-            text-align: center;
+            text-align: center;           
+            padding: 20px;
             margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
         }
 
         h1 {
@@ -24,43 +19,42 @@
 
         form {
             background-color: #fff;
-            border: 1px solid #ccc;
             padding: 20px;
-            max-width: 400px;
-            width: 100%;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 5px;
-            text-align: left; /* Alinea el texto a la izquierda */
-            margin-top: 20px; /* Agrega un poco de espacio arriba */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: center;
         }
 
         label {
             display: block;
-            margin-bottom: 10px;
-            font-weight: bold;
+            margin-bottom: 8px;
         }
 
         input[type="text"],
-        input[type="number"],
-        input[type="tel"] {
+        input[type="email"],
+        input[type="password"],
+        input[type="checkbox"] {
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
             border: 1px solid #ccc;
-            border-radius: 3px;
+            border-radius: 4px;
+            text-align: center;
         }
 
         input[type="submit"] {
-            background-color: #007bff;
+            background-color: #333;
             color: #fff;
             padding: 10px 20px;
             border: none;
-            border-radius: 3px;
+            border-radius: 4px;
             cursor: pointer;
         }
 
         input[type="submit"]:hover {
-            background-color: #0056b3;
+            background-color: #555;
         }
     </style>
 </head>

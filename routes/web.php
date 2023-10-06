@@ -6,6 +6,7 @@ use App\Http\Controllers\LoteController;
 use App\Http\Controllers\PaqueteController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\VehiculoController;
 use Illuminate\Support\Facades\Route;
@@ -189,3 +190,10 @@ Route::get('/empresas/Listado', function () {
 Route::get('/empresas/Ingresar', function () {
     return view('/empresas/Ingresar');
 })->middleware('auth');
+
+
+Route::get('/registro', function () {
+    return view('/registro');
+});
+
+Route::post('/registro', [UsuariosController::class, "RegistroUsuario"])->name('registrar');

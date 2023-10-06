@@ -165,7 +165,7 @@
         <li><a href="/vehiculos/Listar" class="menu-link" data-page="/vehiculos/Listar">Listar</a></li>
       </ul>
     </li>
-    <li><a href="/registro" class="menu-link" data-page="/registro">Listar</a></li>
+    <li><a href="/registro" class="menu-link" data-page="/registro">Registro</a></li>
   </ul>
 </div>
 

@@ -98,9 +98,11 @@
                     <th>Email</th>
                     <th>Fecha de nacimiento</th>
                     <th>Funcionario de Almacén</th>
-                    <th>Funcionario Chofer</th>
+                    <th>Funcionario Chofer</th>                                       
                     <th>Editar</th>
                     <th>Eliminar</th>
+
+
                 </tr>
             </thead>
             <tbody>
@@ -114,6 +116,7 @@
                         <td>{{ $empleado->fechanac }}</td>
                         <td>{{ $empleado->es_almacen ? 'Sí' : 'No' }}</td>
                         <td>{{ $empleado->es_chofer ? 'Sí' : 'No' }}</td>
+                   
                         <td><a href="{{ route('empleados.Editar', $empleado->id) }}" class="edit-button">Editar</a></td>
                         <td>
                             <form action="{{ route('empleados.eliminar', $empleado->id) }}" method="POST" class="delete-form">

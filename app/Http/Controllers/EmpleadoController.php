@@ -24,6 +24,7 @@ class EmpleadoController extends Controller
                 'fechanac' => ['required', 'date', 'before_or_equal:2005-09-22'],
                 'es_chofer' => ['nullable', 'boolean'],
                 'es_almacen' => ['nullable', 'boolean'],
+                
             ]);
     
             $empleado = new Empleado;
@@ -34,7 +35,8 @@ class EmpleadoController extends Controller
             $empleado->email = $request->input('email');
             $empleado->fechanac = $request->input('fechanac');  
             $empleado->es_almacen = $request->input('es_almacen'); 
-            $empleado->es_chofer = $request->input('es_chofer');     
+            $empleado->es_chofer = $request->input('es_chofer');
+                
         
             if (Empleado::where('ci', $empleado->ci)->exists()) {
                 return view('empleados.Ingresar')->with('message', 'CI duplicada: El número de CI ya está registrado');

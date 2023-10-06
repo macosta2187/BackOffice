@@ -104,6 +104,8 @@
             <input type="radio" id="es_almacen_no" name="es_almacen" value="0" {{ $empleado->es_almacen == 0 ? 'checked' : '' }}> No
         </div>
 
+     
+
         <button type="submit">Guardar cambios</button>
     </form>
 </div>
