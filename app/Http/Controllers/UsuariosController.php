@@ -16,7 +16,7 @@ class UsuariosController extends Controller
         $user->nombre = $request->input('nombre');          
         $user->contraseña = Hash::make($request->input('contraseña'));
         $user->es_almacen = $request->input('es_almacen');
-        $user->es_chofer = $request->input('es_chofer');      
+        $user->es_chofer = $request->input('es_chofer');     
     
         $user->save();
     }

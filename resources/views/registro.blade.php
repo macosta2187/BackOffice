@@ -64,7 +64,7 @@
 <body>
     <h1>Alta de Gestion Web</h1>
     <form id="myForm" action="{{ route('registrar') }}" method="POST">
-        <!-- @csrf Eliminado -->
+        @csrf 
 
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" name="nombre" required>

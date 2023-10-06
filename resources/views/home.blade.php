@@ -130,8 +130,7 @@
 
     <a href="#">Consolidar</a>
       <ul class="submenu">
-      <li><a href="/paquetes/Listar" class="menu-link" data-page="/paquetes/Listar">Consolidar</a></li>
-      
+      <li><a href="/paquetes/Listar" class="menu-link" data-page="/paquetes/Listar">Consolidar</a></li>      
       </ul>
     </li>
     <li>

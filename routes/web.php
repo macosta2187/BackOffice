@@ -196,4 +196,4 @@ Route::get('/registro', function () {
     return view('/registro');
 });
 
-Route::post('/registro', [UsuariosController::class, "RegistroUsuario"])->name('registrar');
+Route::post('/registro',[UsuariosController::class, "RegistroUsuario"])->name('registrar');
