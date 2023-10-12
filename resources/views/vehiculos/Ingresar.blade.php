@@ -2,99 +2,54 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
-    <title>Formulario de Ingreso de Vehiculos</title>
-    
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Ingreso de Vehículos</title>
 
     <!-- Incluye el CSS de Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;           
-            padding: 20px;
-            margin: 0;
-        }
-
-        h1 {
-            color: #333;
-        }
-
-        form {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="password"],
-        input[type="checkbox"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            text-align: center;
-        }
-
-        input[type="submit"] {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #555;
-        }
-    </style>
+</head>
 <body>
-    <h1>Formulario de Ingreso de Vehiculos</h1>
+    <div class="container mt-5">
+        <h1 class="text-center">Formulario de Ingreso de Vehículos</h1>
+        <form id="myForm" action="{{ route('vehiculos.Insertar') }}" method="POST">
+            @csrf
 
-    <form id="myForm" action="{{ route('vehiculos.Insertar') }}" method="POST">
-     @csrf
+            <div class="form-group">
+                <label for="matricula">Matrícula:</label>
+                <input type="text" class="form-control" id="matricula" name="matricula" required maxlength="7">
+            </div>
 
-        <label for="matricula">matricula:</label>
-        <input type="text" id="matricula" name="matricula" required>
+            <div class="form-group">
+                <label for="marca">Marca:</label>
+                <input type="text" class="form-control" id="marca" name="marca" required maxlength="20">
+            </div>
 
-        <label for="marca">marca:</label>
-        <input type="text" id="marca" name="marca" required>
+            <div class="form-group">
+                <label for="modelo">Modelo:</label>
+                <input type="text" class="form-control" id="modelo" name="modelo" required maxlength="20">
+            </div>
 
-        <label for="modelo">modelo:</label>
-        <input type="text" id="modelo" name="modelo" required>       
+            <div class="form-group">
+                <label for="peso">Peso:</label>
+                <input type="number" step="0.01" class="form-control" id="peso" name="peso" required>
+            </div>
 
-        <label for="peso">Peso</label>
-        <input type="text" id="peso" name="peso" required> 
+            <div class="form-group">
+                <label for="capacidad">Capacidad:</label>
+                <input type="number" step="0.01" class="form-control" id="capacidad" name="capacidad" required>
+            </div>
 
 
-        <label for="capacidad">Capacidad</label>
-        <input type="text" id="capacidad" name="capacidad" required> 
 
-        <label for="id_chofer">Chofer:</label>
-<select id="id_chofer" name="id_chofer" required>
-    <option value="">Selecciona un chofer</option>
-    @foreach($choferes as $chofer)
-        <option value="{{ $chofer->id }}">{{ $chofer->nombre }} {{ $chofer->apellido }}</option>
-    @endforeach
-</select>
-       
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+    </div>
 
-        <input type="submit" value="Guardar">
-    </form>
+    <!-- Incluye los scripts de Bootstrap y jQuery al final del documento -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+
 

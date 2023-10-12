@@ -62,7 +62,7 @@ class EmpleadoController extends Controller
 {
     $empleado = Empleado::find($id);
     $empleado->delete();
-    return redirect('/home'); 
+    
 }
 
 
@@ -95,7 +95,7 @@ class EmpleadoController extends Controller
         $empleado->es_chofer = $request->input('es_chofer');   
         $empleado->save();
     
-        return redirect('/home'); 
+        
     }
     
     public function listarChoferes()

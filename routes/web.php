@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\VehiculoController;
+use App\Http\Controllers\ChoferController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use App\Http\Middleware\Autenticacion;
@@ -80,8 +81,16 @@ Route::get('/empleados/Actualizar', function () {
 })->middleware('auth');
 
 Route::get('/vehiculos/Listar', [VehiculoController::class, "Listar"])->name('vehiculos.Listar')->middleware('auth');
+
+
 Route::post('/vehiculos/Ingresar', [VehiculoController::class, "Insertar"])->name('vehiculos.Insertar')->middleware('auth');
+
+
 Route::get('/vehiculos/Ingreso', [EmpleadoController::class, 'listarChoferes'])->middleware('auth');
+
+
+
+Route::get('/vehiculos/Ingresar', [ChoferController::class, 'mostrarVistaIngresar'])->name('vehiculos.Insertar');
 
 
 Route::get('/vehiculos/{vehiculo}/editar', [VehiculoController::class, "Editar"])->name('vehiculos.Editar')->middleware('auth');

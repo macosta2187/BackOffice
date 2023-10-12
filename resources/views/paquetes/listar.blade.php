@@ -6,148 +6,92 @@
     <link rel="stylesheet" type="text/css" href="/jquery.dataTables.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
     <title>Aplicación de Almacén</title>
-    <style>
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #ffff;
-            margin: 0;
-            padding: 0;
-        }
-
-        h1  {
-            text-align: center;
-            color: #333;
-            margin-top: 20px;
-        }
-
-        table {
-            width: 70%;
-            margin: 20px auto;
-            border-collapse: collapse;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        }
-
-        table, th, td {
-            border: 1px solid #ddd;
-        }
-
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #333;
-            color: white;
-        }
-
-        td button {
-            background-color: #333;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-
-        td button:hover {
-            background-color: #333;
-        }
-
-        label {
-        display: block;
-        color: black; /* Color del texto en los labels */
-        text-align: center;
-        margin-bottom: 5px;
-    }
-
- 
-    select, input {
-        width: 40%; 
-        padding: 5px;
-        margin-bottom: 10px;
-        color: black; 
-        text-align: center; 
-    }
-
-        #sumaPesosLabel {
-            text-align: center;
-            font-size: 18px;
-            color: #333;
-            margin-top: 20px;
-        }
-    </style>
+   
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Aplicación de Almacén</h1>
-    <h1>Paquetes cargados actualmente en el sistema</h1>
-    <h1>Los camiones tienen un MÁXIMO de 1000 KG</h1>
+    <div class="container mt-5">
+        <h1 class="text-center">Aplicación de Almacén</h1>
+        <h2 class="text-center">Paquetes cargados actualmente en el sistema</h2>
+        <h2 class="text-center">Los camiones tienen un MÁXIMO de 1000 KG</h2>
 
-    <label for="filtroDepartamento">Filtrar por Departamento:</label>
-    <select id="filtroDepartamento">
-        <option value="">Todos</option>
-    
-    </select>
+        <div class="form-group">
+            <label for="filtroDepartamento">Filtrar por Departamento:</label>
+            <select class="form-control" id="filtroDepartamento">
+                <option value="">Todos</option>
+            </select>
+        </div>
 
-    <label for="filtroPeso">Filtrar por Peso:</label>
-    <select id="filtroPeso">
-        <option value="">Todos</option>
-        <option value="1000">Menos de 1000 kg</option>
-    </select>
+        <div class="form-group">
+            <label for="filtroPeso">Filtrar por Peso:</label>
+            <select class="form-control" id="filtroPeso">
+                <option value="">Todos</option>
+                <option value="1000">Menos de 1000 kg</option>
+            </select>
+        </div>
 
-    <label for="inputLote">LOTE:</label>
-    <input type="number" id="inputLote" placeholder="Ingrese el número de lote" min="1">
+        <div class="form-group">
+            <label for="inputLote">LOTE:</label>
+            <input type="number" class="form-control" id="inputLote" placeholder="Ingrese el número de lote" min="1">
+        </div>
 
-    <label for="camionesSelect">Selecciona un camión:</label>
-    <select id="camionesSelect">
-        @foreach($camiones as $camion)
-            <option value="{{ $camion->id_camion }}">{{ $camion->id_camion }}</option>
-        @endforeach
-    </select>
+        <div class="form-group">
+            <label for="camionesSelect">Selecciona un camión:</label>
+            <select class="form-control" id="camionesSelect">
+                @foreach($camiones as $camion)
+                    <option value="{{ $camion->id_camion }}">{{ $camion->id_camion }}</option>
+                @endforeach
+            </select>
+        </div>
 
-    <button id="btnConsolidarPaquetes">Consolidar Paquetes</button>
+        <button id="btnConsolidarPaquetes" class="btn btn-primary">Consolidar Paquetes</button>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Numero de Paquete</th>
-                <th>Calle</th>
-                <th>Número de puerta</th>
-                <th>Localidad</th>
-                <th>Departamento destino</th>
-                <th>Estatus</th>
-                <th>Tamaño del paquete</th>
-                <th>Peso (kg)</th>
-                <th>Teléfono contacto</th>
-                <th>Fecha de recepción</th>
-                <th>Seleccionar</th>
-            </tr>
-        </thead>
-        <tbody id="paquetesData">
-            @foreach($paquetes as $paquete)
+        <table class="table table-bordered mt-4">
+            <thead class="thead-dark">
                 <tr>
-                    <td>{{ $paquete->id }}</td>
-                    <td>{{ $paquete->calle }}</td>
-                    <td>{{ $paquete->numero }}</td>
-                    <td>{{ $paquete->localidad }}</td>
-                    <td>{{ $paquete->departamento }}</td>
-                    <td>{{ $paquete->estatus }}</td>
-                    <td>{{ $paquete->tamaño }}</td>
-                    <td>{{ $paquete->peso }}</td>
-                    <td>{{ $paquete->telefono }}</td>
-                    <td>{{ $paquete->fecha }}</td>
-                    <td><input type="checkbox" name="seleccionarPaquete" value="{{ $paquete->id }}"></td>
+                    <th>Numero de Paquete</th>
+                    <th>descripcion</th>
+                    <th>Calle</th>
+                    <th>Número de puerta</th>
+                    <th>Localidad</th>
+                    <th>Departamento destino</th>
+                    <th>Estatus</th>
+                    <th>Tamaño del paquete</th>
+                    <th>Peso (kg)</th>
+                    <th>Teléfono contacto</th>
+                    <th>Fecha de recepción</th>
+                    <th>Seleccionar</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody id="paquetesData">
+                @foreach($paquetes as $paquete)
+                    <tr>
+                        <td>{{ $paquete->id }}</td>
+                        <td>{{ $paquete->descripcion }}</td>
+                        <td>{{ $paquete->calle }}</td>
+                        <td>{{ $paquete->numero }}</td>
+                        <td>{{ $paquete->localidad }}</td>
+                        <td>{{ $paquete->departamento }}</td>
+                        <td>{{ $paquete->estatus }}</td>
+                        <td>{{ $paquete->tamaño }}</td>
+                        <td>{{ $paquete->peso }}</td>
+                        <td>{{ $paquete->telefono }}</td>
+                        <td>{{ $paquete->fecha }}</td>
+                        <td><input type="checkbox" class="form-check-input" name="seleccionarPaquete" value="{{ $paquete->id }}"></td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
 
-    <div id="sumaPesosLabel">Peso Total del envío en kg: 0.00 kg</div>
+        <div id="sumaPesosLabel" class="text-center">Peso Total del envío en kg: 0.00 kg</div>
 
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script>
-
-	
-            function consolidarPaquetes() {
+        function consolidarPaquetes() {
             const checkboxes = document.querySelectorAll('input[name="seleccionarPaquete"]:checked');
             const loteValue = parseInt(document.getElementById('inputLote').value);
             const camionSeleccionado = parseInt(document.getElementById('camionesSelect').value);
@@ -184,7 +128,6 @@
             .then(data => {
                 if (data.message) {
                     alert(data.message);
-                 
                 } else {
                     alert('Error al consolidar paquetes.');
                 }
@@ -194,14 +137,12 @@
             });
         }
 
-
-
         $(document).ready(function() {
             $('#btnConsolidarPaquetes').click(function() {
                 consolidarPaquetes();
             });
         });
     </script>
-
 </body>
 </html>
+
