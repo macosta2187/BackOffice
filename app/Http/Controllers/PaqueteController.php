@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Paquete;
 use App\Models\Lote;
 use App\Models\Camiones;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
+use App\Http\Controllers\TrackingController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -47,7 +50,14 @@ public function Insertar(Request $request)
         $paquete->peso = $request->input('peso');
         $paquete->fecha_creacion = $request->input('fecha_creacion');
         $paquete->hora_creacion = $request->input('hora_creacion');
-        $paquete->save();
+
+
+       
+       $identificadorUnico = $request->input('identificadorUnico');
+       $codigoDeSeguimiento = $this->obtenerTracking($identificadorUnico);
+       $paquete->codigo_seguimiento = $codigoDeSeguimiento; 
+
+       $paquete->save();
 
         return 'Paquete insertado con éxito'; 
     } catch (\Exception $e) {
@@ -61,86 +71,21 @@ public function consolidar(Request $request)
     $camionId = $request->input('selectedCamion');
     $id_paquete = $request->input('selectedPackages');
     
-    // Convierte los paquetes seleccionados en un arreglo
+ 
     $paquetesSeleccionados = json_decode($id_paquete, true)['Paquetes'];
 
-    // Crear un nuevo lote
+    
     $loteModel = new Lote();
     $loteModel->camionId = $camionId;
     $loteModel->estado = 'Consolidado';
     $loteModel->save();
 
-    // Asigna los paquetes seleccionados al lote
     $loteModel->paquetes()->attach($paquetesSeleccionados);
 
-    // Elimina la referencia de los paquetes en la tabla Paquete
     Paquete::whereIn('id', $paquetesSeleccionados)->delete();
 
     return redirect()->back()->with('success', 'Paquetes consolidados correctamente y se eliminó la referencia en Paquete.');
 }
-
-
-/*
-
-public function consolidar(Request $request)
-{
-    
-    $camionId = $request->input('selectedCamion');
-    $id_paquete = $request->input('selectedPackages');
-
-    $obj = json_decode($id_paquete, true);
-    $obj = $obj['Paquetes'];
-
-    
-        $loteModel = new Lote();
-        $loteModel->camionId = $camionId;
-        $loteModel->estado = 'Consolidado';    
-        $loteModel->save(); 
-        $loteModel->paquetes()->attach($obj);
-    
-    
-    //$loteModel->paquetes()->attach($obj);
-   
-    Paquete::whereIn('id', $id_paquete)->delete();
-
-    return redirect()->back()->with('success', 'Paquetes consolidados correctamente y se eliminó la referencia en Paquete.');
-}
-*/
-
-/*
-
-public function consolidar(Request $request)
-{
-    //$lote = $request->input('inputLote');
-    $camionId = $request->input('selectedCamion');
-    $id_paquetes = $request->input('selectedPackages');
-
-    if (!is_array($id_paquetes)) {
-        $id_paquetes = [$id_paquetes];
-    }
-
-    // Creo lote
-    $loteModel = new Lote();
-    $loteModel->camionId = $camionId;
-    $loteModel->estado = 'Consolidado';
-    $loteModel->save();
-
-    foreach ($id_paquetes as $paquete) {
-        $loteModel->paquetes()->attach($paquete); 
-    }
-
-    Paquete::whereIn('id', $id_paquetes)->delete();
-
-    return redirect()->back()->with('success', 'Paquetes consolidados correctamente y se eliminó la referencia en Paquete.');
-}
-*/
-
-
-
-
-
-    
-
 
 
 public function listarPaquetes()
@@ -150,4 +95,18 @@ public function listarPaquetes()
     return view('paquetes.listar', compact('camiones', 'paquetes'));
 }
 
+public function obtenerTracking($identificadorUnico) {
+    $fechaHoraActual = now();
+    $año = $fechaHoraActual->year;
+    $mes = str_pad($fechaHoraActual->month, 2, '0', STR_PAD_LEFT);
+    $dia = str_pad($fechaHoraActual->day, 2, '0', STR_PAD_LEFT);
+    $hora = str_pad($fechaHoraActual->hour, 2, '0', STR_PAD_LEFT);
+    $minutos = str_pad($fechaHoraActual->minute, 2, '0', STR_PAD_LEFT);
+    $segundos = str_pad($fechaHoraActual->second, 2, '0', STR_PAD_LEFT);
+
+    
+    $codigoDeSeguimiento = "TRACK_ADN2018" . $año . $mes . $dia . $hora . $minutos . $segundos . $identificadorUnico;
+
+    return $codigoDeSeguimiento;
+}
 }
