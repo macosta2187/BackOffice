@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Ingreso de Empleados</title>
-      <link rel="stylesheet" href="stylesm.css">
-    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -15,11 +15,6 @@
 
         <form id="myForm" action="{{ route('empleados.Insertar') }}" method="POST">
             @csrf
-
-            <div class="form-group">
-                <label for="ci">CI:</label>
-                <input type="numeric" class="form-control" id="ci" name="ci" required pattern="[0-9]{8}" maxlength="8">
-            </div>
 
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
@@ -32,47 +27,55 @@
             </div>
 
             <div class="form-group">
-                <label for="celular">Número de celular:</label>
-                <input type="text" class="form-control" id="celular" name="celular" required>
+                <label for="ci">CI (de 8 dígitos):</label>
+                <input type="text" class="form-control" id="ci" name="ci" required pattern="[0-9]{8}" maxlength="8">
             </div>
 
             <div class="form-group">
-                <label for="email">Correo Electrónico:</label>
-                <input type="email" class="form-control" id="email" name="email" required>
+                <label for="celular">Número de celular (de 9 dígitos):</label>
+                <input type="text" class="form-control" id="celular" name="celular" required maxlength="9">
             </div>
 
             <div class="form-group">
-                <label for="fechanac">Fecha de nacimiento:</label>
-                <input type="date" class="form-control" id="fechanac" name="fechanac" required>
+                <label for="email">Correo Electrónico (máximo 50 caracteres):</label>
+                <input type="email" class="form-control" id="email" name="email" required maxlength="50">
             </div>
 
             <div class="form-group">
-                <label>Selecciona Roles:</label><br>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="es_chofer" name="es_chofer" value="1">
-                    <label class="form-check-label" for="es_chofer">¿Es un chofer?</label>
-                </div>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="es_almacen" name="es_almacen" value="1">
-                    <label class="form-check-label" for="es_almacen">¿Es funcionario de almacén?</label>
-                </div>
+                <label for="contraseña">Contraseña (Debe tener 12 caracteres):</label>
+                <input type="password" class="form-control" id="contraseña" name="contraseña" required maxlength="12" autocomplete="current-password">
+
+            </div>
+
+            <div class="form-check">
+            <input type="checkbox" name="op_almacen" value="1"> Funcionario de Almacén<br>
+</div>
+
+            <div class="form-check">
+            <input type="checkbox" name="op_chofer" value="1"> Chofer<br>
             </div>
 
             <button type="submit" class="btn btn-primary">Guardar</button>
         </form>
+
+        <div id="message" class="mt-3"></div>
+
+        <script>
+            var token = localStorage.getItem('token');
+            
+            if (token) {
+                var form = document.getElementById('myForm');
+                form.action = "{{ route('empleados.Insertar') }}?token=" + token;
+            }
+
+            // Mostrar mensajes de éxito o error
+            @if(session('message'))
+                document.getElementById('message').innerHTML = '<div class="alert alert-success">{{ session('message') }}</div>';
+            @elseif(session('error'))
+                document.getElementById('message').innerHTML = '<div class="alert alert-danger">{{ session('error') }}</div>';
+            @endif
+        </script>
     </div>
-
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <script>
-    var token = localStorage.getItem('token');
-
-    if (token) {
-        var form = document.getElementById('myForm');
-        form.action = "{{ route('empleados.Insertar') }}?token=" + token;
-    }
-</script>
-
 </body>
 </html>
 

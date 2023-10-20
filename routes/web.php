@@ -137,9 +137,9 @@ Route::get('/paquetes/Ingresar', function () {
     return view('paquetes/Ingresar');
 })->middleware('auth');
 
-Route::get('/paquetes/Listar', [PaqueteController::class, 'listarPaquetes'])->name('paquetes.Listar')->middleware('auth');
+Route::get('/paquetes/Listar', [PaqueteController::class, 'listarPaquetes'])->name('paquetes.Listar');
 
-Route::post('/asignar-lote', [LoteController::class, "asignarLote"])->name('asignar.lote')->middleware('auth');
+Route::post('/asignar-lote', [LoteController::class, "asignarLote"]);
 
 Route::post('/IngresarLote', [LoteController::class, "ingresarLote"])->name('ingresarLote')->middleware('auth');
 
@@ -147,6 +147,9 @@ Route::get('/ListarLote', [LoteController::class, "ListarLote"])->middleware('au
 Route::get('/EliminarLote/{id}', [LoteController::class, "EliminarLote"])->name('lote.eliminar')->middleware('auth');
 Route::get('/EditarLote/{id}/editar', [LoteController::class, 'editarLote'])->name('lote.editar')->middleware('auth');
 Route::post('/lote/{id}/actualizar', [LoteController::class, 'actualizarLote'])->name('lote.actualizar')->middleware('auth');
+
+
+Route::post('/paquetes/consolidar', [PaqueteController::class, 'consolidar'])->name('paquetes.consolidar');
 
 
 
@@ -163,7 +166,7 @@ Route::get('/FormularioRlotes', function () {
     return view('/FormularioRlotes');
 });
 
-
+Route::post('/crearLotes', [LoteController::class, 'crearLotes'])->name('consolidar.paquetes');
 
 
 

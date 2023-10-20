@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
+    <script src="{{ asset('bootstrap/js/jquery-3.5.1.slim.min.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/popper.min.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
     <title>Formulario de Ingreso de Vehículos</title>
 
-    <!-- Incluye el CSS de Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
     <div class="container mt-5">
@@ -30,13 +32,13 @@
             </div>
 
             <div class="form-group">
-                <label for="peso">Peso:</label>
-                <input type="number" step="0.01" class="form-control" id="peso" name="peso" required>
+                <label for="peso_camion">Peso:</label>
+                <input type="number" step="0.01" class="form-control" id="peso_camion" name="peso_camion" required>
             </div>
 
             <div class="form-group">
-                <label for="capacidad">Capacidad:</label>
-                <input type="number" step="0.01" class="form-control" id="capacidad" name="capacidad" required>
+                <label for="capacidad_camion">Capacidad:</label>
+                <input type="number" step="0.01" class="form-control" id="capacidad_camion" name="capacidad_camion" required>
             </div>
 
 
@@ -45,10 +47,6 @@
         </form>
     </div>
 
-    <!-- Incluye los scripts de Bootstrap y jQuery al final del documento -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
 

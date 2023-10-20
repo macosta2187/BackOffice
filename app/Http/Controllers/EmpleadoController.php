@@ -12,43 +12,58 @@ use Illuminate\Validation\Rule;
 class EmpleadoController extends Controller
 {
 
-    public function Insertar(Request $request)
-    {
-        try {
-            $request->validate([
-                'ci' => ['required', 'string', 'max:8', Rule::unique('empleados')],
-                'nombre' => ['required', 'string', 'max:25'],
-                'apellido' => ['required', 'string', 'max:25'],
-                'celular' => ['required', 'integer'],
-                'email' => ['required', 'string', 'email', 'max:50'],
-                'fechanac' => ['required', 'date', 'before_or_equal:2005-09-22'],
-                'es_chofer' => ['nullable', 'boolean'],
-                'es_almacen' => ['nullable', 'boolean'],
-                
-            ]);
-    
-            $empleado = new Empleado;
-            $empleado->ci = $request->input('ci');
-            $empleado->nombre = $request->input('nombre');
-            $empleado->apellido = $request->input('apellido');
-            $empleado->celular = $request->input('celular');
-            $empleado->email = $request->input('email');
-            $empleado->fechanac = $request->input('fechanac');  
-            $empleado->es_almacen = $request->input('es_almacen'); 
-            $empleado->es_chofer = $request->input('es_chofer');
-                
+
+    public function ValidarInsertar(Request $request)
+{
+    $request->validate([
+        'ci' => ['required', 'string', 'max:8', 'unique:empleados'],
+        'nombre' => ['required', 'string', 'max:25'],
+        'apellido' => ['required', 'string', 'max:25'],
+        'celular' => ['required', 'string', 'max:9'],
+        'email' => ['required', 'string','max:50'],
+        'contraseña' => ['required', 'string', 'max:12'],
+    ]);
+}
+
+public function Insertar(Request $request)
+{
+    try {
+        $this->ValidarInsertar($request); 
+
+        // Crear un nuevo empleado
+        $empleado = new Empleado;
+        $empleado->ci = $request->input('ci');
+        $empleado->nombre = $request->input('nombre');
+        $empleado->apellido = $request->input('apellido');
+        $empleado->celular = $request->input('celular');
+        $empleado->email = $request->input('email');
+        $empleado->contraseña = bcrypt($request->input('contraseña'));
+        $empleado->op_chofer = $request->input('op_chofer');
+        $empleado->op_almacen = $request->input('op_almacen');
+       
         
-            if (Empleado::where('ci', $empleado->ci)->exists()) {
-                return view('empleados.Ingresar')->with('message', 'CI duplicada: El número de CI ya está registrado');
-            }
-        
-            $empleado->save();
-            
-            return view('/home')->with('message', 'Empleado insertado con éxito');
-        } catch (\Exception $e) {           
-            return view('empleados.Ingresar')->with('error', 'Error al insertar el empleado: ' . $e->getMessage());
+        $empleado->save();
+
+        if ($empleado->op_chofer) {
+            $chofer = new Chofer;
+            $chofer->empleado_id = $empleado->id; 
+            $chofer->save();
         }
+
+       
+        if ($empleado->op_almacen) {
+            $funcionario = new Funcionario;
+            $funcionario->empleado_id = $empleado->id; 
+            $funcionario->save();
+        }
+        
+        
+    } catch (\Exception $e) {           
+        return view('empleados.Ingresar')->with('error', 'Error al insertar el empleado: ' . $e->getMessage());
     }
+}
+
+
 
     public function Listar()
     {
@@ -80,9 +95,8 @@ class EmpleadoController extends Controller
             'apellido' => ['required', 'string', 'max:25'],
             'celular' => ['required', 'integer'],
             'email' => ['required', 'string', 'email', 'max:50'],
-            'fechanac' => ['required', 'date', 'before_or_equal:2005-09-22'],
-            'es_chofer' => ['nullable', 'boolean'],
-            'es_almacen' => ['nullable', 'boolean'],
+            'contraseña' => ['required', 'string', 'max:12'],
+         
         ]);
     
         $empleado->ci = $request->input('ci');
@@ -90,9 +104,7 @@ class EmpleadoController extends Controller
         $empleado->apellido = $request->input('apellido');
         $empleado->celular = $request->input('celular');
         $empleado->email = $request->input('email');
-        $empleado->fechanac = $request->input('fechanac');
-        $empleado->es_almacen = $request->input('es_almacen'); 
-        $empleado->es_chofer = $request->input('es_chofer');   
+        $empleado->contraseña = bcrypt($request->input('contraseña'));  
         $empleado->save();
     
         

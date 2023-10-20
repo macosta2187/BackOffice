@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Almacen extends Model
 {
     use HasFactory;
-    protected $table = 'almacenes';
+    protected $table = 'almacen_es';
     use SoftDeletes;
    
 

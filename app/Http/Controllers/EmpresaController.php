@@ -42,7 +42,7 @@ class EmpresaController extends Controller
         $empresa->telefono = $request->input('telefono');
         $empresa->save();
     
-        return redirect("/home");
+   
     }
     
 
@@ -89,6 +89,6 @@ class EmpresaController extends Controller
         $empresa->telefono = $request->input('telefono');
         $empresa->save();
     
-        return redirect("/");
+ 
     }
 }

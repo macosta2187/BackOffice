@@ -11,15 +11,19 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Lote extends Model
 {
     protected $table = 'lotes';    
-    protected $fillable = ['paqueteId', 'lote', 'estatus','camionId'];
+    //protected $fillable = ['paqueteId', 'lote', 'estatus','camionId'];
     use SoftDeletes;
     use HasFactory;
 
-    public function paquetes()
-    {
-        return $this->belongsToMany(Paquete::class);
-    }
+// Lote.php
 
-
-
+public function paquetes()
+{
+    return $this->belongsToMany(Paquete::class, 'lote_paquete', 'lote_id', 'paquete_id');
+}
+public function camion()
+{
+    return $this->belongsTo(Camion::class, 'camionId');
+}
+  
 }

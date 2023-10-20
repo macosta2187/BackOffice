@@ -1,148 +1,173 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/jquery.dataTables.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
     <title>Aplicación de Almacén</title>
-   
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bootstrap/jquery.dataTables.css') }}">
+    <style>
+        .bg-custom-orange {
+            background-color: #e16b16fb;
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: #e16b16fb;
+        }
+    </style>
 </head>
+
 <body>
-    <div class="container mt-5">
+<header class="bg-custom-orange text-white">
+    <div class="container">
         <h1 class="text-center">Aplicación de Almacén</h1>
-        <h2 class="text-center">Paquetes cargados actualmente en el sistema</h2>
-        <h2 class="text-center">Los camiones tienen un MÁXIMO de 1000 KG</h2>
+    </div>
+</header>
 
-        <div class="form-group">
-            <label for="filtroDepartamento">Filtrar por Departamento:</label>
-            <select class="form-control" id="filtroDepartamento">
-                <option value="">Todos</option>
-            </select>
+@csrf
+
+<div class="container text-center">
+    <div class="row">
+        <div class="col-md-4 mx-auto mb-3">
+            <div class="form-group">
+                <label for="filtroDepartamento">Filtrar por Departamento:</label>
+                <select id="filtroDepartamento" class="form-control">
+                    <option value="">Todos</option>
+                    <option value="Artigas">Artigas</option>
+                    <!-- Agrega otras opciones aquí -->
+                </select>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label for="filtroPeso">Filtrar por Peso:</label>
-            <select class="form-control" id="filtroPeso">
-                <option value="">Todos</option>
-                <option value="1000">Menos de 1000 kg</option>
-            </select>
+        <div class="col-md-4 mx-auto mb-3">
+            <div class="form-group">
+                <label for="filtroPeso">Filtrar por Peso:</label>
+                <select id="filtroPeso" class="form-control">
+                    <option value="">Todos</option>
+                    <option value="1000">Menos de 1000 kg</option>
+                    <!-- Agrega otras opciones aquí -->
+                </select>
+            </div>
         </div>
+    </div>
 
+    <form id="consolidarForm" action="{{ route('paquetes.consolidar') }}" method="POST">
+        @csrf
+        <input type="hidden" id="selectedPackages" name="selectedPackages" value="">
+      
+   
         <div class="form-group">
-            <label for="inputLote">LOTE:</label>
-            <input type="number" class="form-control" id="inputLote" placeholder="Ingrese el número de lote" min="1">
-        </div>
-
-        <div class="form-group">
-            <label for="camionesSelect">Selecciona un camión:</label>
-            <select class="form-control" id="camionesSelect">
+            <label for="selectedCamion">Camión:</label>
+            <select class="form-control" id="selectedCamion" name="selectedCamion" required>
                 @foreach($camiones as $camion)
-                    <option value="{{ $camion->id_camion }}">{{ $camion->id_camion }}</option>
+                <option value="{{ $camion->id_camion }}">{{ $camion->id_camion }}</option>
                 @endforeach
             </select>
         </div>
+        
+    </form>
 
-        <button id="btnConsolidarPaquetes" class="btn btn-primary">Consolidar Paquetes</button>
-
-        <table class="table table-bordered mt-4">
+    <div class="table-responsive text-center">
+        <table class="table table-hover table-lg w-auto">
             <thead class="thead-dark">
                 <tr>
-                    <th>Numero de Paquete</th>
-                    <th>descripcion</th>
+                    <th>ID</th>
+                    <th>Descripción</th>
                     <th>Calle</th>
-                    <th>Número de puerta</th>
+                    <th>Número</th>
                     <th>Localidad</th>
-                    <th>Departamento destino</th>
-                    <th>Estatus</th>
-                    <th>Tamaño del paquete</th>
-                    <th>Peso (kg)</th>
-                    <th>Teléfono contacto</th>
-                    <th>Fecha de recepción</th>
+                    <th>Departamento</th>
+                    <th>Teléfono</th>
+                    <th>Estado</th>
+                    <th>Tamaño</th>
+                    <th>Peso</th>
+                    <th>Fecha de Creación</th>
+                    <th>Hora de Creación</th>
                     <th>Seleccionar</th>
                 </tr>
             </thead>
             <tbody id="paquetesData">
-                @foreach($paquetes as $paquete)
-                    <tr>
-                        <td>{{ $paquete->id }}</td>
-                        <td>{{ $paquete->descripcion }}</td>
-                        <td>{{ $paquete->calle }}</td>
-                        <td>{{ $paquete->numero }}</td>
-                        <td>{{ $paquete->localidad }}</td>
-                        <td>{{ $paquete->departamento }}</td>
-                        <td>{{ $paquete->estatus }}</td>
-                        <td>{{ $paquete->tamaño }}</td>
-                        <td>{{ $paquete->peso }}</td>
-                        <td>{{ $paquete->telefono }}</td>
-                        <td>{{ $paquete->fecha }}</td>
-                        <td><input type="checkbox" class="form-check-input" name="seleccionarPaquete" value="{{ $paquete->id }}"></td>
-                    </tr>
+                @foreach ($paquetes as $paquete)
+                <tr>
+                    <td>{{ $paquete->id }}</td>
+                    <td>{{ $paquete->descripcion }}</td>
+                    <td>{{ $paquete->calle }}</td>
+                    <td>{{ $paquete->numero }}</td>
+                    <td>{{ $paquete->localidad }}</td>
+                    <td>{{ $paquete->departamento }}</td>
+                    <td>{{ $paquete->telefono }}</td>
+                    <td>{{ $paquete->estado }}</td>
+                    <td>{{ $paquete->tamaño }}</td>
+                    <td>{{ $paquete->peso }}</td>
+                    <td>{{ $paquete->fecha_creacion }}</td>
+                    <td>{{ $paquete->hora_creacion }}</td>
+                    <td><input type="checkbox" name="seleccionarPaquete" value="{{ $paquete->id }}" data-peso="{{ $paquete->peso }}"></td>
+                </tr>
                 @endforeach
             </tbody>
         </table>
-
-        <div id="sumaPesosLabel" class="text-center">Peso Total del envío en kg: 0.00 kg</div>
-
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <div class="alert alert-info" role="alert" id="sumaPesosLabel">Peso Total del envío en kg: 0.00 kg</div>
+    <button type="button" class="btn btn-primary" onclick="consolidarPaquetes()">Consolidar Paquetes</button>
+</div>
 
-    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-    <script>
-        function consolidarPaquetes() {
-            const checkboxes = document.querySelectorAll('input[name="seleccionarPaquete"]:checked');
-            const loteValue = parseInt(document.getElementById('inputLote').value);
-            const camionSeleccionado = parseInt(document.getElementById('camionesSelect').value);
+<script>
 
-            if (isNaN(loteValue)) {
-                alert("Ingresa un valor de lote válido.");
-                return;
-            }
 
-            if (checkboxes.length === 0) {
-                alert("Selecciona al menos un paquete para consolidar.");
-                return;
-            }
+let sumaPesos = 0;
 
-            const paquetesAConsolidar = Array.from(checkboxes).map(checkbox => {
-                return {
-                    paqueteId: parseInt(checkbox.value),
-                    lote: loteValue,
-                    estatus: "Consolidado",
-                    camionId: camionSeleccionado
-                };
-            });
 
-            const url = 'http://127.0.0.1:8000/api/crearLotes';
+const sumaPesosLabel = document.getElementById('sumaPesosLabel');
+const checkboxes = document.querySelectorAll('input[name="seleccionarPaquete"]');
+checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', function () {
+        const pesoDelPaquete = parseFloat(this.getAttribute('data-peso'));
 
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ Paquetes: paquetesAConsolidar }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.message) {
-                    alert(data.message);
-                } else {
-                    alert('Error al consolidar paquetes.');
-                }
-            })
-            .catch(error => {
-                console.error('Error al consolidar paquetes:', error);
-            });
+        if (this.checked) {
+            sumaPesos += pesoDelPaquete;
+        } else {
+            sumaPesos -= pesoDelPaquete;
         }
 
-        $(document).ready(function() {
-            $('#btnConsolidarPaquetes').click(function() {
-                consolidarPaquetes();
-            });
-        });
-    </script>
+        
+        sumaPesosLabel.textContent = `Peso Total del envío en kg: ${sumaPesos.toFixed(2)} kg`;
+
+        if (sumaPesos >= 1000) {
+            alert("El peso total es  mayor a 1000 kg. Máxima capacidad de carga alcanzada");
+            sumaPesos = 0; 
+            desmarcarCheckboxes(); 
+        }
+    });
+});
+
+function consolidarPaquetes() { 
+
+    const camionSeleccionado = parseInt(document.getElementById('selectedCamion').value);   
+    const checkboxes = document.querySelectorAll('input[name="seleccionarPaquete"]:checked');
+
+    if (checkboxes.length === 0) {
+        alert("Selecciona al menos un paquete para consolidar.");
+        return;
+    }
+
+    const selectedPackages = Array.from(checkboxes).map(checkbox => checkbox.value);   
+    document.getElementById('selectedPackages').value = JSON.stringify({ Paquetes: selectedPackages });   
+    document.getElementById('consolidarForm').submit();
+}
+
+
+function desmarcarCheckboxes() {
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = false;
+    });
+    sumaPesosLabel.textContent = "Peso Total del envío en kg: 0.00 kg";
+    sumaPesos = 0;
+}
+
+
+
+</script>
 </body>
 </html>
-

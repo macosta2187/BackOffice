@@ -9,60 +9,18 @@ use Illuminate\Support\Facades\DB;
 
 class LoteController extends Controller
 {
-    /*
-    public function IngresarLote(Request $request)
-    {
-                 
-        $lote = new Lote();              
-        $lote->id = $request->input('lote');  
-        $lote->save();
 
-      }
-      
-
-public function editarLote($id)
-      {
-          $lote = Lote::findOrFail($id);  
-          return view('EditarLote', compact('lote'));
-      }
-  
-public function actualizarLote(Request $request, $id)
-      {
-          $lote = Lote::findOrFail($id);  
-          $lote->id = $request->input('lote');    
-          $lote->save();
-          
-          return view('inicio');
-      }
-
-
-public function EliminarLote($id)
-    {
-        $lote = Lote::findOrFail($id);
-        $lote->delete();
-
-        return view('inicio');
-    }
-    
-
-public function ListarLote()
-    {
-        $lote = Lote::all();
-        return view('ListarLote', compact('lote'));
-    }
-
-*/
-  
+  /*
     public function asignarLote(Request $request)
     {
         $paquete = $request->input('Paquetes');
     
-        if ($paquete !== null && is_array($paquete) && isset($paquete['lote']) && isset($paquete['estatus']) && isset($paquete['paqueteId']) && isset($paquete['camionId'])) {
+       
             $lote = new Lote();
-            $lote->lote = $paquete['lote'];
-            $lote->estatus = $paquete['estatus'];
-            $lote->paqueteId = $paquete['paqueteId'];
+            
             $lote->camionId = $paquete['camionId'];
+            $lote->id_paquete = $paquete['id_paquete'];
+            $lote->estatus = $paquete['estatus'];
             $lote->save();
     
         
@@ -72,14 +30,35 @@ public function ListarLote()
                 $paqueteExistente->delete();
             }
     
-          
-            return redirect()->route('home');
-        } else {
-            return redirect("/");
-       
-        }
         
     }
+*/
+
+public function asignarLote(Request $request)
+{
+    // Obtener los datos enviados a través de la solicitud AJAX
+    $paquetes = $request->input('paquetes');
+    $camion = $request->input('camion');
+    $lote = $request->input('lote');
+
+    // Realizar las operaciones necesarias para guardar los datos en la base de datos
+    // Por ejemplo, puedes utilizar Eloquent para crear registros en la tabla correspondiente
+
+    // Ejemplo (puedes ajustarlo según tu estructura de base de datos):
+    foreach ($paquetes as $paqueteId) {
+        $paquete = Paquete::find($paqueteId);
+
+        // Asignar el camión y el lote al paquete
+        $paquete->camion_id = $camion;
+        $paquete->lote = $lote;
+
+        // Guardar los cambios en el paquete
+        $paquete->save();
+    }
+
+    // Puedes retornar una respuesta JSON si deseas enviar una respuesta al cliente
+    return response()->json(['message' => 'Datos guardados correctamente']);
+}
 
         public function ingresarLote(Request $request)
         {
@@ -99,13 +78,7 @@ public function ListarLote()
        
         public function crearLotes(Request $request)
         {
-            
-            $request = $request->json()->all();
-    
-            if (!is_array($request) || empty($request)) {
-                return response()->json(['message' => 'Error en el formato de datos'], 400);
-            }     
-    
+              
             $paquetesAConsolidar = $request['Paquetes'];
     
             foreach ($paquetesAConsolidar as $paquete) {
@@ -118,9 +91,29 @@ public function ListarLote()
             Paquete::where('id', $paquete['paqueteId'])->delete();
             }        
     
-            return response()->json(['message' => 'Lotes guardados exitosamente'], 200);
+            return redirect()->route('/');
         
         
+    }
+
+    public function mostrarCamionAsignado($loteId)
+    {
+        // Encuentra el lote por su ID
+        $lote = Lote::find($loteId);
+
+        // Verifica si se encontró el lote
+        if (!$lote) {
+            return abort(404); // Puedes personalizar la respuesta si el lote no se encuentra.
+        }
+
+        // Accede al camión asignado al lote
+        $camionAsignado = $lote->camion;
+
+        // Renderiza una vista y pasa los datos del lote y camión a la vista
+        return view('mostrarCamionAsignado', [
+            'lote' => $lote,
+            'camionAsignado' => $camionAsignado,
+        ]);
     }
 
 }

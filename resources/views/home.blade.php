@@ -340,6 +340,11 @@ body {
             <span class="title">Vehiculos Listar</span>
         </a></li>
 
+        <li><a href="/empresas/Ingresar" id="empresasingresar">
+            <span class="icon"><i class="fas fa-blog"></i></span>
+            <span class="title">Alta Empresas</span>
+        </a></li>
+
         <li><a href="/registro" id="altaWeb">
             <span class="icon"><i class="fas fa-blog"></i></span>
             <span class="title">Alta Web</span>
@@ -417,6 +422,14 @@ body {
             document.getElementById("formulario").src = "/vehiculos/Listar";
         });
 
+        const empresasingresar = document.getElementById("empresasingresar");
+        empresasingresar.addEventListener("click", function (e) {
+            e.preventDefault();
+           
+            document.getElementById("formulario").src = "/empresas/Ingresar";
+        });
+
+
         const altaWeb = document.getElementById("altaWeb");
         altaWeb.addEventListener("click", function (e) {
             e.preventDefault();
@@ -445,14 +458,7 @@ body {
         }
     });
 
-    document.addEventListener('DOMContentLoaded', function () {
-  var darkModeToggle = document.getElementById('dark-mode-toggle');
-  var body = document.body;
 
-  darkModeToggle.addEventListener('click', function () {
-    body.classList.toggle('dark-mode');
-  });
-});
 
   var menuLinks = document.querySelectorAll(".menu-link");
   menuLinks.forEach(function (link) {

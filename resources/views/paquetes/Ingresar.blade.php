@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
+    <script src="{{ asset('bootstrap/js/jquery-3.5.1.slim.min.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/popper.min.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
     <title>Formulario de Ingreso de Paquetes</title>
 </head>
 <body>
@@ -15,22 +16,22 @@
 
             <div class="form-group">
                 <label for="descripcion">Descripción:</label>
-                <input type="text" class="form-control" id="descripcion" name="descripcion" required>
+                <input type="text" class="form-control" id="descripcion" name="descripcion" required maxlength="50">
             </div>
 
             <div class="form-group">
                 <label for="calle">Calle:</label>
-                <input type="text" class="form-control" id="calle" name="calle" required>
+                <input type="text" class="form-control" id="calle" name="calle" required maxlength="50">
             </div>
 
             <div class="form-group">
                 <label for="numero">Número:</label>
-                <input type="number" class="form-control" id="numero" name="numero" required>
+                <input type="text" class="form-control" id="numero" name="numero" required maxlength="5">
             </div>
 
             <div class="form-group">
                 <label for="localidad">Localidad:</label>
-                <input type="text" class="form-control" id="localidad" name="localidad" required>
+                <input type="text" class="form-control" id="localidad" name="localidad" required maxlength="25">
             </div>
 
             <div class="form-group">
@@ -45,25 +46,23 @@
 
             <div class="form-group">
                 <label for="telefono">Teléfono:</label>
-                <input type="tel" class="form-control" id="telefono" name="telefono" required>
+                <input type="text" class="form-control" id="telefono" name="telefono" required maxlength="9">
             </div>
 
             <div class="form-group">
-                <label for="estatus">Estatus:</label>
-                <select class="form-control" id="estatus" name="estatus" required>
+                <label for="estado">Estatus:</label>
+                <select class="form-control" id="estado" name="estado" required>
                     <option value="Ingresado">Ingresado</option>
                     <option value="EnAlmacenOrigen">En almacén origen</option>
-                    <!-- Otras opciones de estatus -->
+                    
                 </select>
             </div>
+        
+
 
             <div class="form-group">
-                <label for="tamaño">Tamaño:</label>
-                <select class="form-control" id="tamaño" name="tamaño" required>
-                    <option value="Pequeño">Pequeño</option>
-                    <option value="Mediano">Mediano</option>
-                    <option value="Grande">Grande</option>
-                </select>
+                <label for="tamaño">tamaño:</label>
+                <input type="number" step="0.01" class="form-control" id="tamaño" name="tamaño">
             </div>
 
             <div class="form-group">
@@ -72,13 +71,13 @@
             </div>
 
             <div class="form-group">
-                <label for="fecha">Fecha:</label>
-                <input type="date" class="form-control" id="fecha" name="fecha" required readonly>
+                <label for="fecha_creacion">Fecha:</label>
+                <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion" required readonly>
             </div>
 
             <div class="form-group">
-                <label for="hora">Hora:</label>
-                <input type="time" class="form-control" id="hora" name="hora" required readonly>
+                <label for="hora_creacion">Hora:</label>
+                <input type="time" class="form-control" id="hora_creacion" name="hora_creacion" required readonly>
             </div>
 
             <button type="submit" class="btn btn-primary">Guardar</button>
@@ -88,15 +87,14 @@
             const fechaActual = new Date();
             const fechaISO = fechaActual.toISOString().slice(0, 10);
             const horaISO = fechaActual.toISOString().slice(11, 16);
-            document.getElementById("fecha").value = fechaISO;
-            document.getElementById("hora").value = horaISO;
+            document.getElementById("fecha_creacion").value = fechaISO;
+            document.getElementById("hora_creacion").value = horaISO;
         </script>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <!-- Incluye los scripts de Bootstrap y jQuery al final del documento -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
 </body>
 </html>
 

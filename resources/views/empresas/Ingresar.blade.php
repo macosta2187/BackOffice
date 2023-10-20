@@ -1,113 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
+    <script src="{{ asset('bootstrap/js/jquery-3.5.1.slim.min.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/popper.min.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
     <title>Formulario de Empresa</title>
 </head>
 <body>
 
-<style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;           
-            padding: 20px;
-            margin: 0;
-        }
+    <div class="container mt-5">
+        <h1 class="mb-4">Alta de Empresa</h1>
 
-        h1 {
-            color: #333;
-        }
+        <form action="{{ route('empresas.Insertar') }}" method="post">
+            @csrf
+            <div class="form-group">
+                <label for="RUT">RUT:</label>
+                <input type="text" class="form-control" id="rut" name="rut" maxlength="11" required>
+            </div>
 
-        form {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            margin: 0 auto;
-            text-align: center;
-        }
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" maxlength="25" required>
+            </div>
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-        }
+            <div class="form-group">
+                <label for="calle">Calle:</label>
+                <input type="text" class="form-control" id="calle" name="calle" maxlength="50" required>
+            </div>
 
-        input[type="text"],
-        input[type="email"],
-        input[type="password"],
-        input[type="checkbox"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            text-align: center;
-        }
+            <div class="form-group">
+                <label for="numero">Número:</label>
+                <input type="number" class="form-control" id="numero" name="numero" maxlength="5" required>
+            </div>
 
-        input[type="submit"] {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+            <div class="form-group">
+                <label for="localidad">Localidad:</label>
+                <input type="text" class="form-control" id="localidad" name="localidad" maxlength="25" required>
+            </div>
 
-        input[type="submit"]:hover {
-            background-color: #555;
-        }
-    </style>
-    <h1>Alta de Empresa</h1>
-    
-    <form action="{{ route('empresas.Insertar') }}" method="post">
-        @csrf
-        <label for="rut">RUT:</label>
-        <input type="text" id="rut" name="rut" maxlength="11" required><br><br>
+            <div class="form-group">
+                <label for="departamento">Departamento:</label>
+                <select class="form-control" id="departamento" name="departamento" required>
+                    <option value="Artigas">Artigas</option>
+                    <option value="Canelones">Canelones</option>
+                    <option value="Cerro Largo">Cerro Largo</option>
+                    <option value="Colonia">Colonia</option>
+                    <option value="Durazno">Durazno</option>
+                    <option value="Flores">Flores</option>
+                    <option value="Florida">Florida</option>
+                    <option value="Lavalleja">Lavalleja</option>
+                    <option value="Maldonado">Maldonado</option>
+                    <option value="Montevideo">Montevideo</option>
+                    <option value="Paysandú">Paysandú</option>
+                    <option value="Río Negro">Río Negro</option>
+                    <option value="Rivera">Rivera</option>
+                    <option value="Rocha">Rocha</option>
+                    <option value="Salto">Salto</option>
+                    <option value="San José">San José</option>
+                    <option value="Soriano">Soriano</option>
+                    <option value="Tacuarembó">Tacuarembó</option>
+                    <option value="Treinta y Tres">Treinta y Tres</option>
+                </select>
+            </div>
 
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" maxlength="25" required><br><br>
+            <div class="form-group">
+                <label for="telefono">Teléfono:</label>
+                <input type="text" class="form-control" id="telefono" name="telefono" maxlength="12" required>
+            </div>
 
-        <label for="calle">Calle:</label>
-        <input type="text" id="calle" name="calle" maxlength="50" required><br><br>
-
-        <label for="numero">Número:</label>
-        <input type="numeric" id="numero" name="numero" maxlength="5" required><br><br>
-
-
-        <label for="localidad">Localidad:</label>
-        <input type="text" id="localidad" name="localidad" maxlength="25" required><br><br>
-
-        <label for="departamento">Departamento:</label>
-    <select id="departamento" name="departamento" required>
-    <option value="Artigas">Artigas</option>
-    <option value="Canelones">Canelones</option>
-    <option value="Cerro Largo">Cerro Largo</option>
-    <option value="Colonia">Colonia</option>
-    <option value="Durazno">Durazno</option>
-    <option value="Flores">Flores</option>
-    <option value="Florida">Florida</option>
-    <option value="Lavalleja">Lavalleja</option>
-    <option value="Maldonado">Maldonado</option>
-    <option value="Montevideo">Montevideo</option>
-    <option value="Paysandú">Paysandú</option>
-    <option value="Río Negro">Río Negro</option>
-    <option value="Rivera">Rivera</option>
-    <option value="Rocha">Rocha</option>
-    <option value="Salto">Salto</option>
-    <option value="San José">San José</option>
-    <option value="Soriano">Soriano</option>
-    <option value="Tacuarembó">Tacuarembó</option>
-    <option value="Treinta y Tres">Treinta y Tres</option>
-</select><br><br>
-
-
-        <label for="telefono">Teléfono:</label>
-        <input type="text" id="telefono" name="telefono" maxlength="12" required><br><br>
-
-        <input type="submit" value="Guardar">
-    </form>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+    </div>
 </body>
 </html>
+

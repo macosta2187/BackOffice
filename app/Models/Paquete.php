@@ -16,6 +16,6 @@ class Paquete extends Model
 
     public function lotes()
     {
-        return $this->belongsToMany(Lote::class);
+        return $this->belongsToMany(Lote::class, 'lote_paquete', 'paquete_id', 'lote_id');
     }
 }

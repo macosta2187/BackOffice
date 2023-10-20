@@ -18,23 +18,23 @@
         @method('PUT')
         <div class="form-group">
             <label for="nombre">Nombre:</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" value="{{ $almacen->nombre }}" required>
+            <input type="text" class="form-control" id="nombre" name="nombre" value="{{ $almacen->nombre }}" required maxlength="50">
         </div>
 
         <div class="form-group">
             <label for="calle">Calle:</label>
-            <input type="text" class="form-control" id="calle" name="calle" value="{{ $almacen->calle }}" required>
+            <input type="text" class="form-control" id="calle" name="calle" value="{{ $almacen->calle }}" required maxlength="50">
         </div>
 
         <div class="form-group">
-            <label for="numero">Número:</label>
-            <input type="text" class="form-control" id="numero" name="numero" value="{{ $almacen->numero }}" required>
-        </div>
+    <label for="numero">Número:</label>
+    <input type="text" class="form-control" id="numero" name="numero" value="{{ $almacen->numero }}" required maxlength="6">
+</div>
 
         <div class="form-group">
-            <label for="localidad">Localidad:</label>
-            <input type="text" class="form-control" id="localidad" name="localidad" value="{{ $almacen->localidad }}" required>
-        </div>
+                <label for="localidad">Localidad:</label>
+                <input type="text" class="form-control" id="localidad" name="localidad" value="{{ $almacen->localidad }}" required maxlength="50">
+            </div>
 
         <div class="form-group">
             <label for="departamento">Departamento:</label>
@@ -43,7 +43,7 @@
 
         <div class="form-group">
             <label for="telefono">Teléfono:</label>
-            <input type="tel" class="form-control" id="telefono" name="telefono" value="{{ $almacen->telefono }}" required>
+            <input type="tel" class="form-control" id="telefono" name="telefono" value="{{ $almacen->telefono }}" required maxlength="9">
         </div>
 
         <button type="submit" class="btn btn-primary">Guardar cambios</button>
