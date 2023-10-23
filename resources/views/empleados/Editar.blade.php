@@ -49,10 +49,45 @@
     <input type="password" class="form-control" id="contraseña" name="contraseña" required maxlength="12" value="{{ $empleado->contraseña }}">
 </div>
 
+<div class="form-check">
+    <input type="checkbox" name="op_almacen" id="op_almacen" value="1"> Funcionario de Almacén<br>
+</div>
+
+<div class="form-check">
+    <input type="checkbox" name="op_chofer" id="op_chofer" value="1"> Chofer<br>
+</div>
 
         <button type="submit" class="btn btn-primary">Guardar cambios</button>
     </form>
 </div>
+
+
+<script>
+    const checkboxAlmacen = document.getElementById("op_almacen");
+    const checkboxChofer = document.getElementById("op_chofer");
+
+    checkboxAlmacen.addEventListener("change", function() {
+        if (checkboxAlmacen.checked) {
+            checkboxChofer.disabled = true;
+        } else {
+            checkboxChofer.disabled = false;
+        }
+    });
+
+    checkboxChofer.addEventListener("change", function() {
+        if (checkboxChofer.checked) {
+            checkboxAlmacen.disabled = true;
+        } else {
+            checkboxAlmacen.disabled = false;
+        }
+    });
+</script>
+
+
+
+
+
+
 
 </body>
 </html>

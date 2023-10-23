@@ -4,9 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aplicación de Almacén</title>
+    <title>Consolidar</title>
     <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('bootstrap/jquery.dataTables.css') }}">
+</head>
+<body>
+
+<script src="{{ asset('bootstrap/js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/popper.min.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/jquery.dataTables.js') }}"></script>
     <style>
         .bg-custom-orange {
             background-color: #e16b16fb;
@@ -84,6 +91,7 @@
                     <th>Peso</th>
                     <th>Fecha de Creación</th>
                     <th>Hora de Creación</th>
+                    <th>Tracking</th>
                     <th>Seleccionar</th>
                 </tr>
             </thead>
@@ -102,6 +110,7 @@
                     <td>{{ $paquete->peso }}</td>
                     <td>{{ $paquete->fecha_creacion }}</td>
                     <td>{{ $paquete->hora_creacion }}</td>
+                    <td>{{ $paquete->codigo_seguimiento }}</td>
                     <td><input type="checkbox" name="seleccionarPaquete" value="{{ $paquete->id }}" data-peso="{{ $paquete->peso }}"></td>
                 </tr>
                 @endforeach
@@ -169,5 +178,10 @@ function desmarcarCheckboxes() {
 
 
 </script>
+
+   <!-- Enlace al archivo de jQuery -->
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Enlace al archivo de DataTables JS -->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 </body>
 </html>

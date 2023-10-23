@@ -18,22 +18,22 @@
 
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" required>
+                <input type="text" class="form-control" id="nombre" name="nombre" maxlength="25">
             </div>
 
             <div class="form-group">
                 <label for="apellido">Apellido:</label>
-                <input type="text" class="form-control" id="apellido" name="apellido" required>
+                <input type="text" class="form-control" id="apellido" name="apellido" maxlength="25">
             </div>
 
             <div class="form-group">
                 <label for="ci">CI (de 8 dígitos):</label>
-                <input type="text" class="form-control" id="ci" name="ci" required pattern="[0-9]{8}" maxlength="8">
+                <input type="text" class="form-control" id="ci" name="ci" required pattern="[0-9]{8}" maxlength="8" required minlength="8">
             </div>
 
             <div class="form-group">
                 <label for="celular">Número de celular (de 9 dígitos):</label>
-                <input type="text" class="form-control" id="celular" name="celular" required maxlength="9">
+                <input type="text" class="form-control" id="celular" name="celular" required minlength="9" required maxlength="9">
             </div>
 
             <div class="form-group">
@@ -43,17 +43,17 @@
 
             <div class="form-group">
                 <label for="contraseña">Contraseña (Debe tener 12 caracteres):</label>
-                <input type="password" class="form-control" id="contraseña" name="contraseña" required maxlength="12" autocomplete="current-password">
+                <input type="password" class="form-control" id="contraseña" name="contraseña" required maxlength="12"  required minlength="12" autocomplete="current-password">
 
             </div>
 
             <div class="form-check">
-            <input type="checkbox" name="op_almacen" value="1"> Funcionario de Almacén<br>
+    <input type="checkbox" name="op_almacen" id="op_almacen" value="1"> Funcionario de Almacén<br>
 </div>
 
-            <div class="form-check">
-            <input type="checkbox" name="op_chofer" value="1"> Chofer<br>
-            </div>
+<div class="form-check">
+    <input type="checkbox" name="op_chofer" id="op_chofer" value="1"> Chofer<br>
+</div>
 
             <button type="submit" class="btn btn-primary">Guardar</button>
         </form>
@@ -68,12 +68,34 @@
                 form.action = "{{ route('empleados.Insertar') }}?token=" + token;
             }
 
-            // Mostrar mensajes de éxito o error
+          
             @if(session('message'))
                 document.getElementById('message').innerHTML = '<div class="alert alert-success">{{ session('message') }}</div>';
             @elseif(session('error'))
                 document.getElementById('message').innerHTML = '<div class="alert alert-danger">{{ session('error') }}</div>';
             @endif
+
+
+
+    const checkboxAlmacen = document.getElementById("op_almacen");
+    const checkboxChofer = document.getElementById("op_chofer");
+
+    checkboxAlmacen.addEventListener("change", function() {
+        if (checkboxAlmacen.checked) {
+            checkboxChofer.disabled = true;
+        } else {
+            checkboxChofer.disabled = false;
+        }
+    });
+
+    checkboxChofer.addEventListener("change", function() {
+        if (checkboxChofer.checked) {
+            checkboxAlmacen.disabled = true;
+        } else {
+            checkboxAlmacen.disabled = false;
+        }
+    });
+
         </script>
     </div>
 </body>

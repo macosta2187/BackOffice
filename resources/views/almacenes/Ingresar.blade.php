@@ -67,7 +67,7 @@
 
 <div class="form-group">
     <label for="telefono">Número de telefono (de 8 digitos)</label>
-    <input type="text" class="form-control" id="telefono" name="telefono" required maxlength="9">
+    <input type="text" class="form-control" id="telefono" name="telefono" maxlength="9" required minlength="9">
 </div>
 
             <button type="submit" class="btn btn-primary">Guardar</button>

@@ -7,6 +7,7 @@ use App\Http\Controllers\PaqueteController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UsuariosController;
+use App\Http\Controllers\CreasController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\VehiculoController;
 use App\Http\Controllers\ChoferController;
@@ -80,11 +81,15 @@ Route::get('/empleados/Actualizar', function () {
     return view('empleados/Actualizar');
 })->middleware('auth');
 
+
+
+
+Route::post('/vehiculos/Listar', [VehiculoController::class, "Listar"])->name('vehiculos.Listar')->middleware('auth');
 Route::get('/vehiculos/Listar', [VehiculoController::class, "Listar"])->name('vehiculos.Listar')->middleware('auth');
+Route::post('/vehiculos/Insertar', [VehiculoController::class, "Insertar"])->name('vehiculos.Insertar')->middleware('auth');
 
 
-Route::post('/vehiculos/Ingresar', [VehiculoController::class, "Insertar"])->name('vehiculos.Insertar')->middleware('auth');
-
+Route::get('/guardarRelacion/{id_empleado}/{id_paquete}', [PaqueteController::class, 'guardarRelacion'])->name('guardarRelacion');
 
 Route::get('/vehiculos/Ingreso', [EmpleadoController::class, 'listarChoferes'])->middleware('auth');
 
@@ -137,7 +142,17 @@ Route::get('/paquetes/Ingresar', function () {
     return view('paquetes/Ingresar');
 })->middleware('auth');
 
+
+Route::get('/paquetes/{id}/Editar', [PaqueteController::class, "Editar"])->name('paquetes.Editar')->middleware('auth');
+
+
+Route::get('/paquetes/Editar', function () {
+    return view('paquetes/Editar');
+})->middleware('auth');
+
+
 Route::get('/paquetes/Listar', [PaqueteController::class, 'listarPaquetes'])->name('paquetes.Listar');
+Route::get('/paquetes/ingresados', [PaqueteController::class, 'registro'])->name('paquetes.ingresados');
 
 Route::post('/asignar-lote', [LoteController::class, "asignarLote"]);
 
@@ -164,6 +179,10 @@ Route::get('/IngresarLote', function () {
 
 Route::get('/FormularioRlotes', function () {
     return view('/FormularioRlotes');
+});
+
+Route::get('/ingresados', function () {
+    return view('/ingresados');
 });
 
 Route::post('/crearLotes', [LoteController::class, 'crearLotes'])->name('consolidar.paquetes');
@@ -204,8 +223,10 @@ Route::get('/empresas/Ingresar', function () {
 })->middleware('auth');
 
 
-Route::get('/registro', function () {
-    return view('/registro');
-});
 
-Route::post('/registro',[UsuariosController::class, "RegistroUsuario"])->name('registrar');
+
+
+
+Route::get('/seguimiento', function () {
+    return view('seguimiento');
+})->middleware('auth');

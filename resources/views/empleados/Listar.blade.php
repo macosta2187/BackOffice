@@ -39,6 +39,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Eliminar</button>
+                                
                             </form>
                         </td>
                     </tr>
@@ -49,6 +50,7 @@
                 @endforelse
             </tbody>
         </table>
+        <td><a href="{{ route('empleados.Insertar')}}" class="btn btn-primary">Ingreso empleados</a></td>
     </div>
     
    

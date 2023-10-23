@@ -11,7 +11,7 @@
     <div class="container mt-5">
         <h1 class="text-center">Ingreso de Paquetes</h1>
 
-        <form id="myForm" action="{{ route('paquetes.Insertar') }}" method="POST">
+        <form action="{{ route('paquetes.Actualizar', $paquetes->id) }}" method="POST">
             @csrf
 
             <div class="form-group">

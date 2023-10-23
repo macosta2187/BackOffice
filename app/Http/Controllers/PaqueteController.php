@@ -4,13 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Paquete;
+use App\Http\Controllers\CreasController;
 use App\Models\Lote;
 use App\Models\Camiones;
+use App\Models\Creas;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use App\Http\Controllers\TrackingController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Routing\Controller;
+
+
+
 
 class PaqueteController extends Controller
 {
@@ -25,7 +31,7 @@ class PaqueteController extends Controller
         'localidad' => 'required|max:25',
         'departamento' => 'required|max:25',
         'telefono' => 'required|max:9',
-        'estado' => 'required|in:Ingresado,En almacen origen,En transito,En almacen destino,Disponible en pick up,En distribucion,Reagenda entrega,Entregado',
+        //'estado' => 'required|in:Ingresado,En almacen origen,En transito,En almacen destino,Disponible en pick up,En distribucion,Reagenda entrega,Entregado',
       
         
         
@@ -65,6 +71,14 @@ public function Insertar(Request $request)
     }
 }
 
+public function guardarRelacion($id_empleado, $id_paquete)
+{
+    $creas = new Creas();
+    $creas->id_func = $id_empleado;
+    $creas->id_paquete = $id_paquete;
+    $creas->save();
+}
+
 
 public function consolidar(Request $request)
 {
@@ -81,6 +95,7 @@ public function consolidar(Request $request)
     $loteModel->save();
 
     $loteModel->paquetes()->attach($paquetesSeleccionados);
+
 
     Paquete::whereIn('id', $paquetesSeleccionados)->delete();
 
@@ -109,4 +124,19 @@ public function obtenerTracking($identificadorUnico) {
 
     return $codigoDeSeguimiento;
 }
+
+
+public function registro()
+{
+    $paquetes = Paquete::all();
+    return view('paquetes.ingresados', ['paquetes' => $paquetes]);
+}
+
+public function Editar($id)
+{
+    $paquetes = Paquete::find($id);
+    return view('paquetes.Editar', ['paquetes' => $id]);
+}
+
+
 }

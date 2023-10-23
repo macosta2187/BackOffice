@@ -315,6 +315,7 @@ body {
             <span class="title">Consolidar</span>
         </a></li>
 
+
         <li><a href="/almacenes/Ingresar" id="altaAlmacen">
             <span class="icon"><i class="fas fa-blog"></i></span>
             <span class="title">Alta Almacen</span>
@@ -345,10 +346,16 @@ body {
             <span class="title">Alta Empresas</span>
         </a></li>
 
-        <li><a href="/registro" id="altaWeb">
+        <li><a href="/seguimiento" id="seguimiento">
             <span class="icon"><i class="fas fa-blog"></i></span>
-            <span class="title">Alta Web</span>
+            <span class="title">Seguimiento</span>
         </a></li>
+
+        <li><a href="/paquetes/ingresados" id="pingresados">
+            <span class="icon"><i class="fas fa-blog"></i></span>
+            <span class="title">Paquetes Ingresados</span>
+        </a></li>
+
     </ul>
 
 
@@ -393,12 +400,7 @@ body {
             document.getElementById("formulario").src = "/empleados/Listar"; 
         });
 
-        const listarPaquetes = document.getElementById("listarPaquetes");
-        listarPaquetes.addEventListener("click", function (e) {
-            e.preventDefault();
-    
-            document.getElementById("formulario").src = "/paquetes/Listar"; 
-        });
+  
 
         const paquetes = document.getElementById("paquetes");
         paquetes.addEventListener("click", function (e) {
@@ -422,6 +424,8 @@ body {
             document.getElementById("formulario").src = "/vehiculos/Listar";
         });
 
+
+
         const empresasingresar = document.getElementById("empresasingresar");
         empresasingresar.addEventListener("click", function (e) {
             e.preventDefault();
@@ -430,12 +434,21 @@ body {
         });
 
 
-        const altaWeb = document.getElementById("altaWeb");
-        altaWeb.addEventListener("click", function (e) {
+        const seguimiento = document.getElementById("seguimiento");
+        seguimiento.addEventListener("click", function (e) {
             e.preventDefault();
         
-            document.getElementById("formulario").src = "/registro";
+            document.getElementById("formulario").src = "/seguimiento";
         });
+
+
+        const pingresados = document.getElementById("pingresados");
+        pingresados.addEventListener("click", function (e) {
+            e.preventDefault();
+        
+            document.getElementById("formulario").src = "/paquetes/ingresados";
+        });
+
 
   
 

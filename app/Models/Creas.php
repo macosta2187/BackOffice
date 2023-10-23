@@ -7,14 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Funcionario extends Model
+class Creas extends Model
 {
     use HasFactory;
-    protected $table = 'funcionarios';
+    protected $table = 'crea_s';
     use SoftDeletes;
 
-    public function paquetes()
-    {
-        return $this->belongsToMany(Paquete::class, 'tabla_pivot', 'funcionario_id', 'paquete_id');
-    }
+
+
 }
+
