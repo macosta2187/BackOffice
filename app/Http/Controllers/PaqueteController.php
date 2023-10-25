@@ -132,10 +132,66 @@ public function registro()
     return view('paquetes.ingresados', ['paquetes' => $paquetes]);
 }
 
+
+
+
 public function Editar($id)
 {
-    $paquetes = Paquete::find($id);
-    return view('paquetes.Editar', ['paquetes' => $id]);
+    $paquete = Paquete::find($id);
+    return view('paquetes.Editar', ['paquete' => $paquete]);
+}
+
+public function Eliminar($id)
+{    
+    $paquete = Paquete::find($id);         
+    $paquete->delete();  
+    
+}
+
+
+
+
+
+
+public function Actualizar(Request $request, $paquete)
+{
+    try {
+        $this->ValidarInsertar($request);
+
+        $paquete = Paquete::find($paquete);
+
+        if (!$paquete) {
+            return 'Paquete no encontrado';
+        }
+
+        $paquete->descripcion = $request->input('descripcion');
+        $paquete->calle = $request->input('calle');
+        $paquete->numero = $request->input('numero');
+        $paquete->localidad = $request->input('localidad');
+        $paquete->departamento = $request->input('departamento');
+        $paquete->telefono = $request->input('telefono');
+        $paquete->estado = $request->input('estado');
+        $paquete->tamaño = $request->input('tamaño');
+        $paquete->peso = $request->input('peso');
+        $paquete->fecha_creacion = $request->input('fecha_creacion');
+        $paquete->hora_creacion = $request->input('hora_creacion');
+
+        $identificadorUnico = $request->input('identificadorUnico');
+        $codigoDeSeguimiento = $this->obtenerTracking($identificadorUnico);
+        $paquete->codigo_seguimiento = $codigoDeSeguimiento;
+        $paquete->save();
+
+        return 'Paquete actualizado con éxito';
+    } catch (\Exception $e) {
+        return 'Error al actualizar el paquete: ' . $e->getMessage();
+    }
+}
+
+public function mostrarPaquetes()
+{
+    $paquetes = Paquete::all();
+
+    return view('paquetes.lista', compact('paquetes'));
 }
 
 

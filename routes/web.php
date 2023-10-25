@@ -144,6 +144,8 @@ Route::get('/paquetes/Ingresar', function () {
 
 
 Route::get('/paquetes/{id}/Editar', [PaqueteController::class, "Editar"])->name('paquetes.Editar')->middleware('auth');
+Route::put('/paquetes/{paquete}', [PaqueteController::class, "Actualizar"])->name('paquetes.Actualizar')->middleware('auth');
+Route::delete('/paquetes/{paquete}', [PaqueteController::class, "Eliminar"])->name('paquetes.Eliminar')->middleware('auth');
 
 
 Route::get('/paquetes/Editar', function () {
@@ -151,10 +153,20 @@ Route::get('/paquetes/Editar', function () {
 })->middleware('auth');
 
 
+Route::get('/paquetes/mostrarPaquetes', [PaqueteController::class, 'mostrarPaquetes'])->name('paquetes.mostrarPaquetes');
 Route::get('/paquetes/Listar', [PaqueteController::class, 'listarPaquetes'])->name('paquetes.Listar');
-Route::get('/paquetes/ingresados', [PaqueteController::class, 'registro'])->name('paquetes.ingresados');
+
+Route::get('/paquetes/mostrar', [PaqueteController::class, 'mostrarPaquetes'])->name('paquetes.mostrar');
+
+
 
 Route::post('/asignar-lote', [LoteController::class, "asignarLote"]);
+
+
+
+
+
+
 
 Route::post('/IngresarLote', [LoteController::class, "ingresarLote"])->name('ingresarLote')->middleware('auth');
 

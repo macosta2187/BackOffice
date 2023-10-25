@@ -351,7 +351,7 @@ body {
             <span class="title">Seguimiento</span>
         </a></li>
 
-        <li><a href="/paquetes/ingresados" id="pingresados">
+        <li><a href="/paquetes/mostrar" id="pingresados">
             <span class="icon"><i class="fas fa-blog"></i></span>
             <span class="title">Paquetes Ingresados</span>
         </a></li>
@@ -446,7 +446,7 @@ body {
         pingresados.addEventListener("click", function (e) {
             e.preventDefault();
         
-            document.getElementById("formulario").src = "/paquetes/ingresados";
+            document.getElementById("formulario").src = "/paquetes/mostrar";
         });
 
 

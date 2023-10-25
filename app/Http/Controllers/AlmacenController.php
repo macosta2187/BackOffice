@@ -58,11 +58,9 @@ class AlmacenController extends Controller
     }
 
     public function eliminar($id)
-    {
-        
+    {        
         $almacen = Almacen::find($id);         
-        $almacen->delete();
-    
+        $almacen->delete();  
       
         
     }
