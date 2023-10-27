@@ -44,6 +44,7 @@
 
 
             <button type="submit" class="btn btn-primary">Guardar</button>
+            <td><a href="{{ route('vehiculos.Listar')}}" class="btn btn-primary">Gestion de Vehiculos</a></td>
         </form>
     </div>
 

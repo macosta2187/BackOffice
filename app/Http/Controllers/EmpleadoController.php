@@ -39,9 +39,7 @@ public function Insertar(Request $request)
         $empleado->email = $request->input('email');
         $empleado->contraseña = bcrypt($request->input('contraseña'));
         $empleado->op_chofer = $request->input('op_chofer');
-        $empleado->op_almacen = $request->input('op_almacen');
-       
-        
+        $empleado->op_almacen = $request->input('op_almacen');    
         $empleado->save();
 
         if ($empleado->op_chofer) {
@@ -104,7 +102,9 @@ public function Insertar(Request $request)
         $empleado->apellido = $request->input('apellido');
         $empleado->celular = $request->input('celular');
         $empleado->email = $request->input('email');
-        $empleado->contraseña = bcrypt($request->input('contraseña'));  
+        $empleado->contraseña = bcrypt($request->input('contraseña')); 
+        $empleado->op_chofer = $request->input('op_chofer');
+        $empleado->op_almacen = $request->input('op_almacen'); 
         $empleado->save();
     
         
@@ -112,7 +112,7 @@ public function Insertar(Request $request)
     
     public function listarChoferes()
 {
-    $choferes = Empleado::where('es_chofer', true)->get();
+    $choferes = Empleado::where('op_chofer', true)->get();
 
     return view('/vehiculos/Ingresar', ['choferes' => $choferes]);
 }

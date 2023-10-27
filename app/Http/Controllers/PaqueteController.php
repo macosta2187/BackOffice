@@ -7,6 +7,7 @@ use App\Models\Paquete;
 use App\Http\Controllers\CreasController;
 use App\Models\Lote;
 use App\Models\Camiones;
+use App\Models\LotePaquete;
 use App\Models\Creas;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
@@ -174,11 +175,7 @@ public function Actualizar(Request $request, $paquete)
         $paquete->tamaño = $request->input('tamaño');
         $paquete->peso = $request->input('peso');
         $paquete->fecha_creacion = $request->input('fecha_creacion');
-        $paquete->hora_creacion = $request->input('hora_creacion');
-
-        $identificadorUnico = $request->input('identificadorUnico');
-        $codigoDeSeguimiento = $this->obtenerTracking($identificadorUnico);
-        $paquete->codigo_seguimiento = $codigoDeSeguimiento;
+        $paquete->hora_creacion = $request->input('hora_creacion');  
         $paquete->save();
 
         return 'Paquete actualizado con éxito';
@@ -187,12 +184,22 @@ public function Actualizar(Request $request, $paquete)
     }
 }
 
+public function Estado(Request $request, $paquete)
+{  
+
+        $paquete = Paquete::find($paquete);       
+        $paquete->estado = $request->input('estado');    
+        $paquete->save();
+
+}
 public function mostrarPaquetes()
 {
     $paquetes = Paquete::all();
 
     return view('paquetes.lista', compact('paquetes'));
 }
+
+
 
 
 }

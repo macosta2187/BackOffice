@@ -70,6 +70,8 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Guardar</button>
+            
+            <td><a href="{{ route('empresas.Listar')}}" class="btn btn-primary">Gestion</a></td>
         </form>
     </div>
 </body>

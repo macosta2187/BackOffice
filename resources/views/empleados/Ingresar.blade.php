@@ -55,7 +55,9 @@
     <input type="checkbox" name="op_chofer" id="op_chofer" value="1"> Chofer<br>
 </div>
 
+
             <button type="submit" class="btn btn-primary">Guardar</button>
+            
         </form>
 
         <div id="message" class="mt-3"></div>

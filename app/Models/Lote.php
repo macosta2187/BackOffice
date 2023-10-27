@@ -19,11 +19,11 @@ class Lote extends Model
 
 public function paquetes()
 {
-    return $this->belongsToMany(Paquete::class, 'lote_paquete', 'lote_id', 'paquete_id');
+    return $this->belongsToMany(Paquete::class, 'lote_paquetes', 'lote_id', 'paquete_id');
 }
 public function camion()
 {
-    return $this->belongsTo(Camion::class, 'camionId');
+    return $this->belongsTo(Camiones::class, 'id_camion');
 }
   
 }

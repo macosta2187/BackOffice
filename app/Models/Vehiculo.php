@@ -12,7 +12,7 @@ class Vehiculo extends Model
     use HasFactory;
     protected $table = 'vehiculos';
     use SoftDeletes;
-    public $incrementing = true;
+   // public $incrementing = true;
 
     
 

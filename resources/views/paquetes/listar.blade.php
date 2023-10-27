@@ -120,6 +120,7 @@
 
     <div class="alert alert-info" role="alert" id="sumaPesosLabel">Peso Total del envío en kg: 0.00 kg</div>
     <button type="button" class="btn btn-primary" onclick="consolidarPaquetes()">Consolidar Paquetes</button>
+    
 </div>
 
 <script>

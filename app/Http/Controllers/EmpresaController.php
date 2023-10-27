@@ -33,7 +33,7 @@ class EmpresaController extends Controller
         $request->validate($rules, $messages);    
      
         $empresa = new Empresa;
-        $empresa->rut = $request->input('rut');
+        $empresa->RUT = $request->input('RUT');
         $empresa->nombre = $request->input('nombre');
         $empresa->calle = $request->input('calle');
         $empresa->numero = $request->input('numero');
@@ -49,24 +49,29 @@ class EmpresaController extends Controller
     public function Listar()
     {
         $empresas = Empresa::all();
-        return view('empresas.Listado', ['empresas' => $empresas]);
+        return view('empresas.Listar', ['empresas' => $empresas]);
     }
     
     
 
-    public function eliminar($rut)
+    public function Eliminar($rut)
     {
-        $empresa = Empresa::find($rut);         
-        $empresa->delete();
+        $empresa = Empresa::where('rut', $rut)->first();
     
-        return redirect("/home");
+        if ($empresa) {
+            $empresa->delete();
+        }
+    
+        return redirect()->route('empresas.Listar');
+    }
+  
+
+
+    public function Editar(Empresa $rut)
+    {
+        return view('empresas.Editar', compact('rut'));
     }
 
-    public function Editar($rut)
-    {
-        $empresa = Empresa::find($rut);
-        return view('empresas.Editar', compact('empresa'));
-    }
     
     public function Actualizar(Request $request, $rut)
     {

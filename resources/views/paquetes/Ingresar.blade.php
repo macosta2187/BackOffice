@@ -104,6 +104,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Guardar</button>
+            <td><a href="{{ route('paquetes.Listar')}}" class="btn btn-primary">Consolidar</a></td>
         </form>
 
         <script>

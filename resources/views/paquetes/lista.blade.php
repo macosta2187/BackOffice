@@ -1,16 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Paquetes Ingresados</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Paquetes Ingresados</title>
+    <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bootstrap/jquery.dataTables.css') }}">
 </head>
 <body>
+<script src="{{ asset('bootstrap/js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/popper.min.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/jquery.dataTables.js') }}"></script>
+
     <div class="container mt-5">
-        <h1>Lista de Paquetes Ingresados</h1>
-        <table class="table table-hover">
-            <thead>
+    <h1 class="text-center">Lista de Paquetes cargados en sistema</h1>
+        <table class="table table-striped">
+        <thead class="thead-dark">
                 <tr>
                     <th>ID</th>
                     <th>Descripción</th>
@@ -19,7 +26,7 @@
                     <th>Localidad</th>
                     <th>Departamento</th>
                     <th>Teléfono</th>
-                    <th>Estado</th>
+                    <th>Estado Actual</th>
                     <th>Tamaño</th>
                     <th>Peso</th>
                     <th>Fecha de Creación</th>
@@ -27,6 +34,8 @@
                     <th>Código de Seguimiento</th>
                     <th>Editar</th>
                     <th>Borrar</th>
+                    <th>Actualizar Estado</th>
+                    <th>Guardar</th>
                 </tr>
             </thead>
             <tbody>
@@ -57,10 +66,43 @@
                                 <button type="submit" class="btn btn-danger">Borrar</button>
                             </form>
                         </td>
+                        <td> 
+                            <form action="{{ route('paquetes.Estado', $paquete->id) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <div class="form-group">
+                                <select name="estado" class="form-control">
+                                    <option value="Ingresado" {{ $paquete->estado === 'Ingresado' ? 'selected' : '' }}>Ingresado</option>
+                                    <option value="En almacen origen" {{ $paquete->estado === 'En almacen origen' ? 'selected' : '' }}>En almacen origen</option>
+                                    <option value="En transito" {{ $paquete->estado === 'En transito' ? 'selected' : '' }}>En transito</option>
+                                    <option value="En almacen destino" {{ $paquete->estado === 'En almacen destino' ? 'selected' : '' }}>En almacen destino</option>
+                                    <option value="Disponible en pick up" {{ $paquete->estado === 'Disponible en pick up' ? 'selected' : '' }}>Disponible en pick up</option>
+                                    <option value="En distribucion" {{ $paquete->estado === 'En distribucion' ? 'selected' : '' }}>En distribucion</option>
+                                    <option value="Reagenda entrega" {{ $paquete->estado === 'Reagenda entrega' ? 'selected' : '' }}>Reagenda entrega</option>
+                                    <option value="Entregado" {{ $paquete->estado === 'Entregado' ? 'selected' : '' }}>Entregado</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
+     
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#tabla-paquetes').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" 
+                }
+            });
+        });
+    </script>
+
 </body>
 </html>

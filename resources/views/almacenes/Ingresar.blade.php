@@ -71,6 +71,7 @@
 </div>
 
             <button type="submit" class="btn btn-primary">Guardar</button>
+            <td><a href="{{ route('almacenes.Listar')}}" class="btn btn-primary">Gestion Almacen</a></td>
         </form>
     </div>
 

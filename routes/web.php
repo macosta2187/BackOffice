@@ -11,6 +11,9 @@ use App\Http\Controllers\CreasController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\VehiculoController;
 use App\Http\Controllers\ChoferController;
+use App\Http\Controllers\LotePaqueteController;
+use App\Models\Paquete;
+use App\Models\LotePaquete;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use App\Http\Middleware\Autenticacion;
@@ -148,6 +151,8 @@ Route::put('/paquetes/{paquete}', [PaqueteController::class, "Actualizar"])->nam
 Route::delete('/paquetes/{paquete}', [PaqueteController::class, "Eliminar"])->name('paquetes.Eliminar')->middleware('auth');
 
 
+Route::put('/paquetes/estado/{paquete}', [PaqueteController::class, "Estado"])->name('paquetes.Estado')->middleware('auth');
+
 Route::get('/paquetes/Editar', function () {
     return view('paquetes/Editar');
 })->middleware('auth');
@@ -219,11 +224,12 @@ Route::get('/choferes/Ingresar', function () {
 
 /*Empresa*/
 
-Route::get('/empresas/Listado', [EmpresaController::class, 'Listar'])->name('empresas.Listado')->middleware('auth');
+Route::get('/empresas/Listar', [EmpresaController::class, 'Listar'])->name('empresas.Listar')->middleware('auth');
 Route::post('/empresas/Ingresar', [EmpresaController::class, "Insertar"])->name('empresas.Insertar')->middleware('auth');
-Route::get('/empresas/{empresas}/editar', [EmpresaController::class, "Editar"])->name('empresas.Editar')->middleware('auth');
+Route::get('/empresas/{rut}/editar', [EmpresaController::class, "Editar"])->name('empresas.Editar')->middleware('auth');
+
 Route::put('/empresas/{empresas}', [EmpresaController::class, "Actualizar"])->name('empresas.Actualizar')->middleware('auth');
-Route::delete('/empresas/{empresas}', [EmpresaController::class, "Eliminar"])->name('empresas.eliminar')->middleware('auth');
+Route::delete('/empresas/{rut}', [EmpresaController::class, 'Eliminar'])->name('empresas.Eliminar')->middleware('auth');
 
 
 Route::get('/empresas/Listado', function () {
@@ -242,3 +248,6 @@ Route::get('/empresas/Ingresar', function () {
 Route::get('/seguimiento', function () {
     return view('seguimiento');
 })->middleware('auth');
+
+
+Route::get('/LotePaquete', [LotePaqueteController::class, 'LotePaquete'])->middleware('auth');
