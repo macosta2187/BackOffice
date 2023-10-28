@@ -85,7 +85,7 @@
 
             <div class="form-group">
                 <label for="tamaño">tamaño:</label>
-                <input type="number" step="0.01" class="form-control" id="tamaño" name="tamaño">
+                <input type="number" step="1.00" class="form-control" id="tamaño" name="tamaño">
             </div>
 
             <div class="form-group">

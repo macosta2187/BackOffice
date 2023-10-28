@@ -39,7 +39,7 @@
 
         <div class="form-group">
             <label for="celular">Número de celular:</label>
-            <input type="tel" class="form-control" name="celular" value="{{ $empleado->celular }}" required>
+            <input type="tel" class="form-control" name="celular" value="{{ $empleado->celular }}" maxlength="9" required minlength="9">
         </div>
 
         <div class="form-group">

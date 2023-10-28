@@ -38,7 +38,7 @@
 
         <div class="form-group">
             <label for="departamento">Departamento:</label>
-            <input type="text" class="form-control" id="departamento" name="departamento" value="{{ $almacen->departamento }}" required>
+            <input type="text" class="form-control" id="departamento" name="departamento" value="{{ $almacen->departamento }}"  maxlength="50">
         </div>
 
         <div class="form-group">

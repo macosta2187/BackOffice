@@ -229,7 +229,7 @@ Route::post('/empresas/Ingresar', [EmpresaController::class, "Insertar"])->name(
 Route::get('/empresas/{rut}/editar', [EmpresaController::class, "Editar"])->name('empresas.Editar')->middleware('auth');
 
 Route::put('/empresas/{empresas}', [EmpresaController::class, "Actualizar"])->name('empresas.Actualizar')->middleware('auth');
-Route::delete('/empresas/{rut}', [EmpresaController::class, 'Eliminar'])->name('empresas.Eliminar')->middleware('auth');
+Route::delete('/empresas/{empresa}', [EmpresaController::class, 'Eliminar'])->name('empresas.Eliminar')->middleware('auth');
 
 
 Route::get('/empresas/Listado', function () {

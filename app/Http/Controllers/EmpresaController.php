@@ -54,14 +54,9 @@ class EmpresaController extends Controller
     
     
 
-    public function Eliminar($rut)
+    public function Eliminar(Empresa $empresa)
     {
-        $empresa = Empresa::where('rut', $rut)->first();
-    
-        if ($empresa) {
-            $empresa->delete();
-        }
-    
+        $empresa->delete();
         return redirect()->route('empresas.Listar');
     }
   

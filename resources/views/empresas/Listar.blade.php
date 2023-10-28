@@ -29,18 +29,25 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($empresas as $empresa)
-                    <tr>
-                        <td>{{ $empresa->id }}</td>
-                        <td>{{ $empresa->RUT }}</td>
-                        <td>{{ $empresa->nombre }}</td>
-                        <td>{{ $empresa->calle }}</td>
-                        <td>{{ $empresa->numero }}</td>
-                        <td>{{ $empresa->localidad }}</td>
-                        <td>{{ $empresa->departamento }}</td>
-                        <td>{{ $empresa->telefono }}</td>
-                    </tr>
-                @endforeach
+            @foreach ($empresas as $empresa)
+    <tr>
+        <td>{{ $empresa->id }}</td>
+        <td>{{ $empresa->RUT }}</td>
+        <td>{{ $empresa->nombre }}</td>
+        <td>{{ $empresa->calle }}</td>
+        <td>{{ $empresa->numero }}</td>
+        <td>{{ $empresa->localidad }}</td>
+        <td>{{ $empresa->departamento }}</td>
+        <td>{{ $empresa->telefono }}</td>
+        <td>
+            <form method="POST" action="{{ route('empresas.Eliminar', $empresa->id) }}">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger">Eliminar</button>
+            </form>
+        </td>
+    </tr>
+@endforeach
             </tbody>
         </table>
                <div class="mb-3">

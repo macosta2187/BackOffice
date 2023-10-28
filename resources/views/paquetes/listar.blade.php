@@ -42,18 +42,37 @@
                 <select id="filtroDepartamento" class="form-control">
                     <option value="">Todos</option>
                     <option value="Artigas">Artigas</option>
-                    <!-- Agrega otras opciones aquí -->
+                    <option value="Canelones">Canelones</option>
+                    <option value="Cerro Largo">Cerro Largo</option>
+                    <option value="Colonia">Colonia</option>
+                    <option value="Durazno">Durazno</option>
+                    <option value="Flores">Flores</option>
+                    <option value="Florida">Florida</option>
+                    <option value="Lavalleja">Lavalleja</option>
+                    <option value="Maldonado">Maldonado</option>
+                    <option value="Montevideo">Montevideo</option>
+                    <option value="Paysandú">Paysandú</option>
+                    <option value="Río Negro">Río Negro</option>
+                    <option value="Rivera">Rivera</option>
+                    <option value="Rocha">Rocha</option>
+                    <option value="Salto">Salto</option>
+                    <option value="San José">San José</option>
+                    <option value="Soriano">Soriano</option>
+                    <option value="Tacuarembó">Tacuarembó</option>
+                    <option value="Treinta y Tres">Treinta y Tres</option>
                 </select>
             </div>
         </div>
+
+
+
 
         <div class="col-md-4 mx-auto mb-3">
             <div class="form-group">
                 <label for="filtroPeso">Filtrar por Peso:</label>
                 <select id="filtroPeso" class="form-control">
                     <option value="">Todos</option>
-                    <option value="1000">Menos de 1000 kg</option>
-                    <!-- Agrega otras opciones aquí -->
+                    <option value="1000">Menos de 1000 kg</option>                    
                 </select>
             </div>
         </div>
@@ -176,6 +195,22 @@ function desmarcarCheckboxes() {
     sumaPesos = 0;
 }
 
+const filtroDepartamento = document.getElementById("filtroDepartamento");
+    const paquetesData = document.getElementById("paquetesData").querySelectorAll("tr");
+
+    filtroDepartamento.addEventListener("change", function() {
+        const selectedDepartamento = this.value;
+
+        paquetesData.forEach(row => {
+            const departamento = row.querySelector("td:nth-child(6)").textContent; 
+
+            if (selectedDepartamento === "" || departamento === selectedDepartamento) {
+                row.style.display = ""; 
+            } else {
+                row.style.display = "none"; 
+            }
+        });
+    });
 
 
 </script>

@@ -15,12 +15,12 @@ class LotePaquete extends Model
     protected $table = 'lote_paquetes';
     use SoftDeletes;
 
-    /*
-    public function lote()
+
+ public function lote()
     {
         return $this->belongsTo(Lote::class, 'lote_id');
 }
-*/
+
 
 public function paquete()
 {
