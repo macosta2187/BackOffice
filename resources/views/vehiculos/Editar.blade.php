@@ -44,13 +44,39 @@
             <input type="text" class="form-control" name="capacidad_camion" value="{{ $vehiculo->capacidad_camion }}" required>
         </div>
 
+        <div class="form-check">
+    <input type="checkbox" name="op_camion" id="op_camion" value="1"> Camión
+</div>
+
+<div class="form-check">
+    <input type="checkbox" name="op_flete" id="op_flete" value="1"> Flete
+</div>
     
 
         <button type="submit" class="btn btn-primary">Guardar cambios</button>
     </form>
 </div>
+<script>
 
+const checkboxCamion = document.getElementById("op_camion");
+const checkboxFlete = document.getElementById("op_flete");
 
+checkboxCamion.addEventListener("change", function() {
+            if (checkboxCamion.checked) {
+                checkboxFlete.disabled = true;
+            } else {
+                checkboxFlete.disabled = false;
+            }
+        });
+
+        checkboxFlete.addEventListener("change", function() {
+            if (checkboxFlete.checked) {
+                checkboxCamion.disabled = true;
+            } else {
+                checkboxCamion.disabled = false;
+            }
+        });
+    </script>
 
 
 </body>

@@ -20,7 +20,9 @@
                     <th>Marca</th>
                     <th>Modelo</th>
                     <th>Peso</th> 
-                    <th>Capacidad</th>             
+                    <th>Capacidad</th>
+                    <th>Camion</th>
+                    <th>Flete</th>              
                     <th>Editar</th>
                     <th>Eliminar</th>
                 </tr>
@@ -32,7 +34,21 @@
                         <td>{{ $vehiculo->marca }}</td>
                         <td>{{ $vehiculo->modelo }}</td>
                         <td>{{ $vehiculo->peso_camion }}</td>
-                        <td>{{ $vehiculo->capacidad_camion }}</td>                   
+                        <td>{{ $vehiculo->capacidad_camion }}</td>
+                        <td>
+                     @if($vehiculo->op_camion == 1)
+                     Activo
+                      @else
+                     Inactivo
+                       @endif
+                        </td>
+                      <td>
+    @if($vehiculo->op_flete == 1)
+        Activo
+    @else
+        Inactivo
+    @endif
+</td>                
                         <td>
                             <a href="{{ route('vehiculos.Editar', $vehiculo->id) }}" class="btn btn-primary">Editar</a>
                         </td>

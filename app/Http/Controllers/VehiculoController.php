@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Vehiculo;
 use App\Models\Chofer;
 use App\Models\Camiones;
+use App\Models\Fletes;
 
 
 class VehiculoController extends Controller
@@ -14,48 +15,69 @@ class VehiculoController extends Controller
 {
 
     public function validarInsertar(Request $request)
-{
-    return $request->validate([
-        'matricula' => 'required|string|max:7|unique:vehiculos',
-        'marca' => 'required|string|max:20',
-        'modelo' => 'required|string|max:20',
-        'peso_camion' => 'required|numeric|between:0,9999999.99',
-        'capacidad_camion' => 'required|numeric|between:0,9999999.99',
-    ]);
-}
-
-public function Insertar(Request $request)
-{
-    try {
-        $validatedData = $this->validarInsertar($request);
-        $vehiculo = new Vehiculo;
-        $vehiculo->matricula = $validatedData['matricula'];
-        $vehiculo->marca = $validatedData['marca'];
-        $vehiculo->modelo = $validatedData['modelo'];
-        $vehiculo->peso_camion = $validatedData['peso_camion'];
-        $vehiculo->capacidad_camion = $validatedData['capacidad_camion'];     
-        $vehiculo->save();
-
-        $camion = new Camiones;
-        $camion->id_camion = $vehiculo->id; 
-        $camion->save();
-       
-
-
-        return 'Vehiculo insertado con éxito'; 
-    } catch (\Exception $e) {
-        return 'Error al insertar el Vehiculo: ' . $e->getMessage(); 
+    {
+        return $request->validate([
+            'matricula' => 'required|string|max:7|unique:vehiculos',
+            'marca' => 'required|string|max:20',
+            'modelo' => 'required|string|max:20',
+            'peso_camion' => 'required|numeric|between:0,9999999.99',
+            'capacidad_camion' => 'required|numeric|between:0,9999999.99',     
+        ]);
     }
-}
     
+
+    public function Insertar(Request $request)
+    {
+        try {
+            $validatedData = $this->validarInsertar($request);
+            $vehiculo = new Vehiculo;
+            $vehiculo->matricula = $validatedData['matricula'];
+            $vehiculo->marca = $validatedData['marca'];
+            $vehiculo->modelo = $validatedData['modelo'];
+            $vehiculo->peso_camion = $validatedData['peso_camion'];
+            $vehiculo->capacidad_camion = $validatedData['capacidad_camion'];  
+            $vehiculo->op_camion = $request->has('op_camion');
+            $vehiculo->op_flete = $request->has('op_flete');          
+            $vehiculo->save();
+            
+         
+            if ($request->has('op_camion')) {                
+                $camion = new Camiones;
+                $camion->id_camion = $vehiculo->id;
+                $camion->save();
+            }
+    
+            if ($request->has('op_flete')) {       
+                $flete = new Fletes;
+                $flete->id_flete = $vehiculo->id;
+                $flete->save();
+            }
+    
+            return 'Vehículo insertado con éxito'; 
+        } catch (\Exception $e) {
+            return 'Error al insertar el Vehículo: ' . $e->getMessage(); 
+        }
+    }
+  
 
 
     public function Eliminar($id)
     {
-        $vehiculo = Vehiculo::find($id);
-        $vehiculo->delete();
-       
+        try {
+            $vehiculo = Vehiculo::find($id);
+    
+            if (!$vehiculo) {
+                return 'Vehículo no encontrado';
+            }
+    
+            $vehiculo->delete();
+    
+            return 'Vehículo eliminado con éxito';
+        } catch (\Exception $e) {
+            return 'Error al eliminar el Vehículo: ' . $e->getMessage();
+        }
     }
+    
 
 
     public function Listar()
@@ -73,21 +95,47 @@ public function Insertar(Request $request)
 
 
 
-    public function Actualizar(Request $request, Vehiculo $vehiculo)
+    
+    public function Actualizar(Request $request, $id)
     {
         try {
             $validatedData = $this->validarInsertar($request);
+            $vehiculo = Vehiculo::find($id);
+    
+            if (!$vehiculo) {
+                return 'Vehículo no encontrado';
+            }
     
             $vehiculo->matricula = $validatedData['matricula'];
             $vehiculo->marca = $validatedData['marca'];
             $vehiculo->modelo = $validatedData['modelo'];
             $vehiculo->peso_camion = $validatedData['peso_camion'];
             $vehiculo->capacidad_camion = $validatedData['capacidad_camion'];
+            $vehiculo->op_camion = $request->has('op_camion');
+            $vehiculo->op_flete = $request->has('op_flete');
             $vehiculo->save();
     
-            return 'Vehículo actualizado con éxito';
+            if ($request->has('op_camion')) {
+                $camion = Camiones::updateOrInsert(
+                    ['id_camion' => $vehiculo->id],
+                    ['updated_at' => now()]
+                );
+            } else {
+                Camiones::where('id_camion', $vehiculo->id)->delete();
+            }
+    
+            if ($request->has('op_flete')) {
+                $flete = Fletes::updateOrInsert(
+                    ['id_flete' => $vehiculo->id],
+                    ['updated_at' => now()]
+                );
+            } else {
+                Fletes::where('id_flete', $vehiculo->id)->delete();
+            }
+    
+            return 'ok';
         } catch (\Exception $e) {
-            return 'Error al actualizar el vehículo: ' . $e->getMessage();
+            return 'Error al actualizar el Vehículo: ' . $e->getMessage();
         }
     }
     
