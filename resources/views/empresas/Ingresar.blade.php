@@ -16,7 +16,7 @@
             @csrf
             <div class="form-group">
                 <label for="RUT">RUT:</label>
-                <input type="text" class="form-control" id="rut" name="rut" maxlength="11" required>
+                <input type="text" class="form-control" id="RUT" name="RUT" maxlength="12" required>
             </div>
 
             <div class="form-group">
@@ -66,7 +66,7 @@
 
             <div class="form-group">
                 <label for="telefono">Teléfono:</label>
-                <input type="text" class="form-control" id="telefono" name="telefono" maxlength="12" required>
+                <input type="text" class="form-control" id="telefono" name="telefono" maxlength="9" required>
             </div>
 
             <button type="submit" class="btn btn-primary">Guardar</button>

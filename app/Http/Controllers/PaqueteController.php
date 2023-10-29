@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Cache;
 use App\Http\Controllers\TrackingController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Empresa;
 use Illuminate\Routing\Controller;
 
 
@@ -32,6 +33,7 @@ class PaqueteController extends Controller
         'localidad' => 'required|max:25',
         'departamento' => 'required|max:25',
         'telefono' => 'required|max:9',
+        'empresa' => 'required',
         //'estado' => 'required|in:Ingresado,En almacen origen,En transito,En almacen destino,Disponible en pick up,En distribucion,Reagenda entrega,Entregado',
       
         
@@ -57,6 +59,7 @@ public function Insertar(Request $request)
         $paquete->peso = $request->input('peso');
         $paquete->fecha_creacion = $request->input('fecha_creacion');
         $paquete->hora_creacion = $request->input('hora_creacion');
+        $paquete->empresa = $request->input('empresa');
 
 
        

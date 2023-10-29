@@ -103,6 +103,18 @@
                 <input type="time" class="form-control" id="hora_creacion" name="hora_creacion" required readonly>
             </div>
 
+            <div class="form-group">
+    <label for="empresa">Selecciona una empresa:</label>
+    <select class="form-control" id="empresa" name="empresa">
+        <option value=""></option>
+        @foreach ($empresas as $empresa)
+            <option value="{{ $empresa->id }}">{{ $empresa->nombre }}</option>
+        @endforeach
+    </select>
+</div>
+
+
+
             <button type="submit" class="btn btn-primary">Guardar</button>
             <td><a href="{{ route('paquetes.Listar')}}" class="btn btn-primary">Consolidar</a></td>
         </form>

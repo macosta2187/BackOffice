@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Empresa;
+use App\Models\Paquetes;
 use App\Models\Lote;
 use Illuminate\Support\Facades\DB;
 
@@ -15,7 +16,7 @@ class EmpresaController extends Controller
     {
        
         $rules = [
-            'rut' => 'required|string|max:12|unique:empresas',
+            'RUT' => 'required|string|max:12|unique:empresas',
             'nombre' => 'required|string|max:25',
             'calle' => 'required|string|max:50',
             'numero' => 'required|integer',
@@ -26,7 +27,7 @@ class EmpresaController extends Controller
     
         
         $messages = [
-            'rut.size' => 'El RUT debe tener una longitud de 12 caracteres.',
+            'RUT.size' => 'El RUT debe tener una longitud de 12 caracteres.',
         ];
     
  
@@ -43,6 +44,13 @@ class EmpresaController extends Controller
         $empresa->save();
     
    
+    }
+    
+
+    public function Empresa_paquetes()
+    {
+        $empresas = Empresa::all();
+        return view('paquetes.Ingresar', compact('empresas'));
     }
     
 

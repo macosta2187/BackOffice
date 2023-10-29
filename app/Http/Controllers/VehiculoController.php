@@ -17,7 +17,7 @@ class VehiculoController extends Controller
     public function validarInsertar(Request $request)
     {
         return $request->validate([
-            'matricula' => 'required|string|max:7|unique:vehiculos',
+            'matricula' => 'required|string|max:7',
             'marca' => 'required|string|max:20',
             'modelo' => 'required|string|max:20',
             'peso_camion' => 'required|numeric|between:0,9999999.99',

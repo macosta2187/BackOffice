@@ -14,6 +14,7 @@ use App\Http\Controllers\ChoferController;
 use App\Http\Controllers\LotePaqueteController;
 use App\Models\Paquete;
 use App\Models\LotePaquete;
+use App\Models\Empresa;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use App\Http\Middleware\Autenticacion;
@@ -151,6 +152,9 @@ Route::put('/paquetes/{paquete}', [PaqueteController::class, "Actualizar"])->nam
 Route::delete('/paquetes/{paquete}', [PaqueteController::class, "Eliminar"])->name('paquetes.Eliminar')->middleware('auth');
 
 
+
+Route::get('/paquetes/Ingresar', [EmpresaController::class, 'Empresa_paquetes'])->name('empresas.Ingresar')->middleware('auth');
+
 Route::put('/paquetes/estado/{paquete}', [PaqueteController::class, "Estado"])->name('paquetes.Estado')->middleware('auth');
 
 Route::get('/paquetes/Editar', function () {
@@ -223,6 +227,7 @@ Route::get('/choferes/Ingresar', function () {
 
 
 /*Empresa*/
+
 
 Route::get('/empresas/Listar', [EmpresaController::class, 'Listar'])->name('empresas.Listar')->middleware('auth');
 Route::post('/empresas/Ingresar', [EmpresaController::class, "Insertar"])->name('empresas.Insertar')->middleware('auth');
