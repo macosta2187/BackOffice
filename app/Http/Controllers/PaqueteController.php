@@ -34,10 +34,7 @@ class PaqueteController extends Controller
         'departamento' => 'required|max:25',
         'telefono' => 'required|max:9',
         'empresa' => 'required',
-        //'estado' => 'required|in:Ingresado,En almacen origen,En transito,En almacen destino,Disponible en pick up,En distribucion,Reagenda entrega,Entregado',
-      
-        
-        
+
     ]);
 }
 
@@ -87,8 +84,7 @@ public function guardarRelacion($id_empleado, $id_paquete)
 public function consolidar(Request $request)
 {
     $camionId = $request->input('selectedCamion');
-    $id_paquete = $request->input('selectedPackages');
-    
+    $id_paquete = $request->input('selectedPackages');   
  
     $paquetesSeleccionados = json_decode($id_paquete, true)['Paquetes'];
 
@@ -122,7 +118,6 @@ public function obtenerTracking($identificadorUnico) {
     $hora = str_pad($fechaHoraActual->hour, 2, '0', STR_PAD_LEFT);
     $minutos = str_pad($fechaHoraActual->minute, 2, '0', STR_PAD_LEFT);
     $segundos = str_pad($fechaHoraActual->second, 2, '0', STR_PAD_LEFT);
-
     
     $codigoDeSeguimiento = "TRACK_ADN2018" . $año . $mes . $dia . $hora . $minutos . $segundos . $identificadorUnico;
 
@@ -137,8 +132,6 @@ public function registro()
 }
 
 
-
-
 public function Editar($id)
 {
     $paquete = Paquete::find($id);
@@ -148,8 +141,7 @@ public function Editar($id)
 public function Eliminar($id)
 {    
     $paquete = Paquete::find($id);         
-    $paquete->delete();  
-    
+    $paquete->delete();      
 }
 
 
@@ -198,9 +190,11 @@ public function Estado(Request $request, $paquete)
 public function mostrarPaquetes()
 {
     $paquetes = Paquete::all();
-
     return view('paquetes.lista', compact('paquetes'));
 }
+
+
+
 
 
 

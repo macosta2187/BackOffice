@@ -40,8 +40,7 @@
             </thead>
             <tbody>
                 @foreach ($paquetes as $paquete)
-                @csrf
-                
+                @csrf                
                     <tr>
                         <td>{{ $paquete->id }}</td>
                         <td>{{ $paquete->descripcion }}</td>

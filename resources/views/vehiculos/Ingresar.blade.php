@@ -26,7 +26,7 @@
             </div>
 
             <div class="form-group">
-                <label for "modelo">Modelo:</label>
+                <label for = "modelo">Modelo:</label>
                 <input type="text" class="form-control" id="modelo" name="modelo" required maxlength="20">
             </div>
 

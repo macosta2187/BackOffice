@@ -10,69 +10,33 @@
 </head>
 <body>
 
-<script src="{{ asset('bootstrap/js/jquery-3.6.0.min.js') }}"></script>
-    <script src="{{ asset('bootstrap/js/popper.min.js') }}"></script>
-    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('bootstrap/js/jquery.dataTables.js') }}"></script>
-    <style>
-        .bg-custom-orange {
-            background-color: #e16b16fb;
-        }
-
-        .table-hover tbody tr:hover {
-            background-color: #e16b16fb;
-        }
-    </style>
-</head>
-
-<body>
 <header class="bg-custom-orange text-white">
     <div class="container">
         <h1 class="text-center">Aplicación de Almacén</h1>
     </div>
 </header>
 
-@csrf
-
 <div class="container text-center">
     <div class="row">
         <div class="col-md-4 mx-auto mb-3">
             <div class="form-group">
-                <label for="filtroDepartamento">Filtrar por Departamento:</label>
-                <select id="filtroDepartamento" class="form-control">
+                <label for="filtroGrupo">Filtrar por Grupo:</label>
+                <select id="filtroGrupo" class="form-control">
                     <option value="">Todos</option>
-                    <option value="Artigas">Artigas</option>
-                    <option value="Canelones">Canelones</option>
-                    <option value="Cerro Largo">Cerro Largo</option>
-                    <option value="Colonia">Colonia</option>
-                    <option value="Durazno">Durazno</option>
-                    <option value="Flores">Flores</option>
-                    <option value="Florida">Florida</option>
-                    <option value="Lavalleja">Lavalleja</option>
-                    <option value="Maldonado">Maldonado</option>
-                    <option value="Montevideo">Montevideo</option>
-                    <option value="Paysandú">Paysandú</option>
-                    <option value="Río Negro">Río Negro</option>
-                    <option value="Rivera">Rivera</option>
-                    <option value="Rocha">Rocha</option>
-                    <option value="Salto">Salto</option>
-                    <option value="San José">San José</option>
-                    <option value="Soriano">Soriano</option>
-                    <option value="Tacuarembó">Tacuarembó</option>
-                    <option value="Treinta y Tres">Treinta y Tres</option>
+                    <option value="Grupo 1">Grupo 1</option>
+                    <option value="Grupo 2">Grupo 2</option>
+                    <option value="Grupo 3">Grupo 3</option>
+                    <option value="Grupo 4">Grupo 4</option>
+                    <option value="Grupo 5">Grupo 5</option>
                 </select>
             </div>
         </div>
-
-
-
-
         <div class="col-md-4 mx-auto mb-3">
             <div class="form-group">
                 <label for="filtroPeso">Filtrar por Peso:</label>
                 <select id="filtroPeso" class="form-control">
                     <option value="">Todos</option>
-                    <option value="1000">Menos de 1000 kg</option>                    
+                    <option value="1000">Menos de 1000 kg</option>
                 </select>
             </div>
         </div>
@@ -81,8 +45,7 @@
     <form id="consolidarForm" action="{{ route('paquetes.consolidar') }}" method="POST">
         @csrf
         <input type="hidden" id="selectedPackages" name="selectedPackages" value="">
-      
-   
+
         <div class="form-group">
             <label for="selectedCamion">Camión:</label>
             <select class="form-control" id="selectedCamion" name="selectedCamion" required>
@@ -91,7 +54,6 @@
                 @endforeach
             </select>
         </div>
-        
     </form>
 
     <div class="table-responsive text-center">
@@ -139,7 +101,6 @@
 
     <div class="alert alert-info" role="alert" id="sumaPesosLabel">Peso Total del envío en kg: 0.00 kg</div>
     <button type="button" class="btn btn-primary" onclick="consolidarPaquetes()">Consolidar Paquetes</button>
-    
 </div>
 
 <script>
@@ -194,23 +155,30 @@ function desmarcarCheckboxes() {
     sumaPesosLabel.textContent = "Peso Total del envío en kg: 0.00 kg";
     sumaPesos = 0;
 }
+const filtroGrupo = document.getElementById("filtroGrupo");
+const paquetesData = document.getElementById("paquetesData").querySelectorAll("tr");
 
-const filtroDepartamento = document.getElementById("filtroDepartamento");
-    const paquetesData = document.getElementById("paquetesData").querySelectorAll("tr");
+filtroGrupo.addEventListener("change", function() {
+    const selectedGrupo = this.value;
 
-    filtroDepartamento.addEventListener("change", function() {
-        const selectedDepartamento = this.value;
+    paquetesData.forEach(row => {
+        const departamento = row.querySelector("td:nth-child(6)").textContent;
 
-        paquetesData.forEach(row => {
-            const departamento = row.querySelector("td:nth-child(6)").textContent; 
+        if (selectedGrupo === "" || 
+    (selectedGrupo === "Grupo 5" && (departamento === "Maldonado" || departamento === "Rocha")) ||
+    (selectedGrupo === "Grupo 4" && (departamento === "Lavalleja" || departamento === "Trinta y Tres" || departamento === "Cerro Largo")) ||
+    (selectedGrupo === "Grupo 3" && (departamento === "Flores" || departamento === "San José" || departamento === "Paysandú" || departamento === "Salto")) ||  // Agregado "||" después de "Paysandú"
+    (selectedGrupo === "Grupo 2" && (departamento === "Colonia" || departamento === "Río Negro" || departamento === "Soriano")) ||
+    (selectedGrupo === "Grupo 1" && (departamento === "Montevideo" || departamento === "Canelones" || departamento === "Florida" || departamento === "Durazno" || departamento === "Rivera" || departamento === "Artigas" || departamento === "Tacuarembó"))) {
+    row.style.display = "";
+} else {
+    row.style.display = "none";
+}
 
-            if (selectedDepartamento === "" || departamento === selectedDepartamento) {
-                row.style.display = ""; 
-            } else {
-                row.style.display = "none"; 
-            }
-        });
     });
+});
+
+
 
 
 </script>

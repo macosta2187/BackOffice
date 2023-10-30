@@ -55,12 +55,9 @@
         <option value="San José">San José</option>
         <option value="Soriano">Soriano</option>
         <option value="Tacuarembó">Tacuarembó</option>
-        <option value="Treinta y Tres">Treinta y Tres</option>
-        
+        <option value="Treinta y Tres">Treinta y Tres</option>        
     </select>
 </div>
-
-
             <div class="form-group">
                 <label for="telefono">Teléfono:</label>
                 <input type="text" class="form-control" id="telefono" name="telefono" required maxlength="9">
@@ -78,11 +75,7 @@
         <option value="Reagenda entrega">Reagenda entrega</option>
         <option value="Entregado">Entregado</option>
     </select>
-</div>
-
-        
-
-
+</div>       
             <div class="form-group">
                 <label for="tamaño">tamaño:</label>
                 <input type="number" step="1.00" class="form-control" id="tamaño" name="tamaño">
@@ -105,30 +98,27 @@
 
             <div class="form-group">
     <label for="empresa">Selecciona una empresa:</label>
-    <select class="form-control" id="empresa" name="empresa">
+    <select class="form-control" id="empresa" name="empresa" required>
         <option value=""></option>
         @foreach ($empresas as $empresa)
             <option value="{{ $empresa->id }}">{{ $empresa->nombre }}</option>
         @endforeach
     </select>
-</div>
-
-
-
+       </div>
             <button type="submit" class="btn btn-primary">Guardar</button>
             <td><a href="{{ route('paquetes.Listar')}}" class="btn btn-primary">Consolidar</a></td>
         </form>
-
         <script>
             const fechaActual = new Date();
+            fechaActual.setHours(fechaActual.getHours() - 3);
             const fechaISO = fechaActual.toISOString().slice(0, 10);
             const horaISO = fechaActual.toISOString().slice(11, 16);
             document.getElementById("fecha_creacion").value = fechaISO;
             document.getElementById("hora_creacion").value = horaISO;
+
         </script>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
 </body>
