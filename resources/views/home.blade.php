@@ -321,6 +321,11 @@ body {
         <span class="icon"><i class="fas fa-blog"></i></span>
         <span class="title">Lotes</span>
       </a></li>
+      <li><a href="/fletes" id="PaqueteEstado">
+        <span class="icon"><i class="fas fa-blog"></i></span>
+        <span class="title">Fletes</span>
+      </a></li>
+      
       <li><a href="/paquetes/mostrar" id="pingresados">
         <span class="icon"><i class="fas fa-blog"></i></span>
         <span class="title">Paquetes </span>
@@ -377,6 +382,13 @@ body {
   LotePaquete.addEventListener("click", function (e) {
     e.preventDefault();
     document.getElementById("formulario").src = "/LotePaquete";
+  });
+
+
+  const PaqueteEstado = document.getElementById("PaqueteEstado");
+  PaqueteEstado.addEventListener("click", function (e) {
+    e.preventDefault();
+    document.getElementById("formulario").src = "/fletes";
   });
 
   document.addEventListener('DOMContentLoaded', function () {

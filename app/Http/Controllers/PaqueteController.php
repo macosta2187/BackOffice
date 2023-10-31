@@ -149,6 +149,7 @@ public function Eliminar($id)
 
 
 
+
 public function Actualizar(Request $request, $paquete)
 {
     try {

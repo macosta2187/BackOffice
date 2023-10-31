@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Lote;
+use App\Models\Fletes;
 
 class LotePaquete extends Model
 {
@@ -30,6 +31,11 @@ public function paquete()
 public function camiones()
 {
     return $this->belongsTo(Camiones::class);
+}
+
+public function fletes()
+{
+    return $this->belongsToMany(Fletes::class);
 }
 
 }

@@ -12,9 +12,11 @@ use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\VehiculoController;
 use App\Http\Controllers\ChoferController;
 use App\Http\Controllers\LotePaqueteController;
+use App\Http\Controllers\FletesController;
 use App\Models\Paquete;
 use App\Models\LotePaquete;
 use App\Models\Empresa;
+use App\Models\Fletes;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use App\Http\Middleware\Autenticacion;
@@ -162,6 +164,8 @@ Route::get('/paquetes/Editar', function () {
 })->middleware('auth');
 
 
+
+
 Route::get('/paquetes/mostrarPaquetes', [PaqueteController::class, 'mostrarPaquetes'])->name('paquetes.mostrarPaquetes');
 Route::get('/paquetes/Listar', [PaqueteController::class, 'listarPaquetes'])->name('paquetes.Listar');
 
@@ -256,3 +260,15 @@ Route::get('/seguimiento', function () {
 
 
 Route::get('/LotePaquete', [LotePaqueteController::class, 'LotePaquete'])->middleware('auth');
+
+
+
+Route::get('/lote-paquete', [LotePaqueteController::class, 'listarLotesPaquetes'])->middleware('auth');
+Route::get('/fletes',[LotePaqueteController::class, 'listarFletes'])->middleware('auth');
+
+
+
+
+
+
+

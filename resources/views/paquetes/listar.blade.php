@@ -31,16 +31,7 @@
                 </select>
             </div>
         </div>
-        <div class="col-md-4 mx-auto mb-3">
-            <div class="form-group">
-                <label for="filtroPeso">Filtrar por Peso:</label>
-                <select id="filtroPeso" class="form-control">
-                    <option value="">Todos</option>
-                    <option value="1000">Menos de 1000 kg</option>
-                </select>
-            </div>
-        </div>
-    </div>
+
 
     <form id="consolidarForm" action="{{ route('paquetes.consolidar') }}" method="POST">
         @csrf

@@ -13,6 +13,11 @@
     <h1>Historial de Paquetes consolidados en Sistema</h1>
     <table class="table table-striped" id="tabla-paquetes">
         <thead>
+
+        <div style="text-align: center;">
+    <img src="{{ asset('consolidar.jpg') }}" alt="Flete" width="200" height="150">
+</div>
+
             <tr>
                 <th>Lote ID</th>
                 <th>Camión</th>
