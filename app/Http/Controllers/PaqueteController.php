@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Paquete;
 use App\Http\Controllers\CreasController;
 use App\Models\Lote;
 use App\Models\Camiones;
 use App\Models\LotePaquete;
+use App\Models\Almacena;
+use App\Models\Almacen;
 use App\Models\Creas;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
@@ -41,36 +42,45 @@ class PaqueteController extends Controller
 
 public function Insertar(Request $request)
 {
-    try {
-        $this->ValidarInsertar($request);
+    $this->ValidarInsertar($request);
 
-        $paquete = new Paquete;
-        $paquete->descripcion = $request->input('descripcion');
-        $paquete->calle = $request->input('calle');
-        $paquete->numero = $request->input('numero');
-        $paquete->localidad = $request->input('localidad');
-        $paquete->departamento = $request->input('departamento');
-        $paquete->telefono = $request->input('telefono');
-        $paquete->estado = $request->input('estado');
-        $paquete->tamaño = $request->input('tamaño');
-        $paquete->peso = $request->input('peso');
-        $paquete->fecha_creacion = $request->input('fecha_creacion');
-        $paquete->hora_creacion = $request->input('hora_creacion');
-        $paquete->empresa = $request->input('empresa');
+    $paquete = new Paquete;
+    $paquete->descripcion = $request->input('descripcion');
+    $paquete->calle = $request->input('calle');
+    $paquete->numero = $request->input('numero');
+    $paquete->localidad = $request->input('localidad');
+    $paquete->departamento = $request->input('departamento');
+    $paquete->telefono = $request->input('telefono');
+    $paquete->estado = $request->input('estado');
+    $paquete->tamaño = $request->input('tamaño');
+    $paquete->peso = $request->input('peso');
+    $paquete->fecha_creacion = $request->input('fecha_creacion');
+    $paquete->hora_creacion = $request->input('hora_creacion');
+    $paquete->empresa = $request->input('empresa');
 
+    $identificadorUnico = $request->input('identificadorUnico');
+    $codigoDeSeguimiento = $this->obtenerTracking($identificadorUnico);
+    $paquete->codigo_seguimiento = $codigoDeSeguimiento;
+    $paquete->save();
+
+    if ($paquete->estado === 'En almacén destino') {
+        $almacen = Almacen::where('departamento', $paquete->departamento)->first();
+
+        if (!$almacen) {
+            return 'No se encontró un almacén para el departamento del paquete';
+        }
 
        
-       $identificadorUnico = $request->input('identificadorUnico');
-       $codigoDeSeguimiento = $this->obtenerTracking($identificadorUnico);
-       $paquete->codigo_seguimiento = $codigoDeSeguimiento; 
-
-       $paquete->save();
-
-        return 'Paquete insertado con éxito'; 
-    } catch (\Exception $e) {
-        return 'Error al insertar el paquete: ' . $e->getMessage(); 
+        $almacena = new Almacena;
+        $almacena->id_paquete = $paquete->id;
+        $almacena->id_almacen = $almacen->id;
+        $almacena->save();
     }
+
+    return 'Paquete insertado con éxito';
 }
+
+
 
 public function guardarRelacion($id_empleado, $id_paquete)
 {
@@ -174,6 +184,22 @@ public function Actualizar(Request $request, $paquete)
         $paquete->hora_creacion = $request->input('hora_creacion');  
         $paquete->save();
 
+
+        if ($paquete->estado === 'En almacén destino') {
+            $almacen = Almacen::where('departamento', $paquete->departamento)->first();
+    
+            if (!$almacen) {
+                return 'No se encontró un almacén para el departamento del paquete';
+            }
+    
+           
+            $almacena = new Almacena;
+            $almacena->id_paquete = $paquete->id;
+            $almacena->id_almacen = $almacen->id;
+            $almacena->save();
+        }
+
+        
         return 'Paquete actualizado con éxito';
     } catch (\Exception $e) {
         return 'Error al actualizar el paquete: ' . $e->getMessage();
@@ -194,6 +220,15 @@ public function mostrarPaquetes()
     return view('paquetes.lista', compact('paquetes'));
 }
 
+public function paquetesEnAlmacenDestino()
+{
+    
+    $paquetes = Paquete::where('estado', 'En almacén destino')->get();
+        
+    return view('paquetes.desconsolidar', ['paquetes' => $paquetes]);
+
+
+}
 
 
 

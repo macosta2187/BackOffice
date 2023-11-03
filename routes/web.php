@@ -192,6 +192,8 @@ Route::post('/lote/{id}/actualizar', [LoteController::class, 'actualizarLote'])-
 Route::post('/paquetes/consolidar', [PaqueteController::class, 'consolidar'])->name('paquetes.consolidar');
 
 
+Route::get('/paquetes/desconsolidar', [PaqueteController::class, "paquetesEnAlmacenDestino"])->middleware('auth');
+
 
 Route::get('/IngresarLote', function () {
     return view('IngresarLote');

@@ -15,9 +15,12 @@
     <script src="{{ asset('bootstrap/js/jquery.dataTables.js') }}"></script>
 
     <div class="container mt-5">
-    <h1 class="text-center">Lista de Paquetes cargados en sistema</h1>
-        <table class="table table-striped">
-        <thead class="thead-dark">
+    <h1 class="text-center">Lista de Paquetes cargados en sistema no Cosolidados</h1>
+    <h1 class="text-center">Se permite Edicion y cambio de estado</h1>
+
+    <div class="table-responsive">
+            <table class="table table-bordered table-striped dataTable">
+           <thead class="thead-dark">
                 <tr>
                     <th>ID</th>
                     <th>Descripción</th>
@@ -35,7 +38,7 @@
                     <th>Editar</th>
                     <th>Borrar</th>
                     <th>Actualizar Estado</th>
-                    <th>Guardar</th>
+                    
                 </tr>
             </thead>
             <tbody>
@@ -72,11 +75,11 @@
                             <div class="form-group">
                                 <select name="estado" class="form-control">
                                     <option value="Ingresado" {{ $paquete->estado === 'Ingresado' ? 'selected' : '' }}>Ingresado</option>
-                                    <option value="En almacen origen" {{ $paquete->estado === 'En almacen origen' ? 'selected' : '' }}>En almacen origen</option>
-                                    <option value="En transito" {{ $paquete->estado === 'En transito' ? 'selected' : '' }}>En transito</option>
-                                    <option value="En almacen destino" {{ $paquete->estado === 'En almacen destino' ? 'selected' : '' }}>En almacen destino</option>
+                                    <option value="En almacén origen" {{ $paquete->estado === 'En almacén origen' ? 'selected' : '' }}>En almacén origen</option>
+                                    <option value="En tránsito" {{ $paquete->estado === 'En tránsito' ? 'selected' : '' }}>En tránsito</option>
+                                    <option value="En almacén destino" {{ $paquete->estado === 'En almacén destino' ? 'selected' : '' }}>En almacén destino</option>
                                     <option value="Disponible en pick up" {{ $paquete->estado === 'Disponible en pick up' ? 'selected' : '' }}>Disponible en pick up</option>
-                                    <option value="En distribucion" {{ $paquete->estado === 'En distribucion' ? 'selected' : '' }}>En distribucion</option>
+                                    <option value="En distribución" {{ $paquete->estado === 'En distribución' ? 'selected' : '' }}>En distribución</option>
                                     <option value="Reagenda entrega" {{ $paquete->estado === 'Reagenda entrega' ? 'selected' : '' }}>Reagenda entrega</option>
                                     <option value="Entregado" {{ $paquete->estado === 'Entregado' ? 'selected' : '' }}>Entregado</option>
                                 </select>
@@ -88,6 +91,7 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
     </div>
      
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

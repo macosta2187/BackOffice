@@ -24,10 +24,10 @@ class LotePaqueteController extends Controller
     
     public function listarFletes()
 {
-    $lotesPaquetes = LotePaquete::with('lote.camion', 'paquete')->get();    
+    $paquetes = Paquete::where('estado', 'En almacén destino')->get();
     $fletes = Fletes::all();
-   
-    return view('/fletes', compact('fletes', 'lotesPaquetes'));
+
+    return view('/fletes', compact('fletes', 'paquetes'));
 }
 
 

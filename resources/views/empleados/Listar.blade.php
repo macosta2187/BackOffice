@@ -5,10 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Empleados</title>   
-    <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
-    <script src="{{ asset('bootstrap/js/jquery-3.5.1.slim.min.js') }}"></script>
-    <script src="{{ asset('bootstrap/js/popper.min.js') }}"></script>
-    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.5/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.5/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
     <div class="container">
@@ -39,13 +39,12 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Eliminar</button>
-                                
                             </form>
                         </td>
                     </tr>
                 @empty
                     <tr id="no-results-row">
-                        <td colspan="10">No se encontraron resultados.</td>
+                        <td colspan="7">No se encontraron resultados.</td>
                     </tr>
                 @endforelse
             </tbody>
@@ -53,19 +52,27 @@
         <td><a href="{{ route('empleados.Insertar')}}" class="btn btn-primary">Ingreso empleados</a></td>
     </div>
     
-   
-    <script src="query-3.6.0.min.js"></script>
-   
-    <script src="jquery.dataTables.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.5/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.5/js/buttons.flash.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.5/js/dataTables.buttons.min.js"></script>
+    
     <script>
         $(document).ready(function() {
             $('.dataTable').DataTable({
                 "language": {
                     "url": "Spanish.json" 
-                }
+                },
+                dom: 'Bfrtip',
+                buttons: ['excel']
             });
         });
     </script>
 </body>
 </html>
+
 

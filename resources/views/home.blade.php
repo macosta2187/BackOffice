@@ -325,11 +325,13 @@ body {
         <span class="icon"><i class="fas fa-blog"></i></span>
         <span class="title">Fletes</span>
       </a></li>
-      
-      <li><a href="/paquetes/mostrar" id="pingresados">
+
+      <li><a href="/paquetes/desconsolidar" id="PaqueteDestino">
         <span class="icon"><i class="fas fa-blog"></i></span>
-        <span class="title">Paquetes </span>
+        <span class="title">Arrivos</span>
       </a></li>
+      
+
     </ul>
   </div>
   <iframe id="formulario" src="" frameborder="0" width="100%" height="900" style="margin-top: 110px;"></iframe>
@@ -372,11 +374,7 @@ body {
     document.getElementById("formulario").src = "/seguimiento";
   });
 
-  const pingresados = document.getElementById("pingresados");
-  pingresados.addEventListener("click", function (e) {
-    e.preventDefault();
-    document.getElementById("formulario").src = "/paquetes/mostrar";
-  });
+
 
   const LotePaquete = document.getElementById("LotePaquete");
   LotePaquete.addEventListener("click", function (e) {
@@ -389,6 +387,13 @@ body {
   PaqueteEstado.addEventListener("click", function (e) {
     e.preventDefault();
     document.getElementById("formulario").src = "/fletes";
+  });
+
+  const PaqueteDestino = document.getElementById("PaqueteDestino");
+  PaqueteDestino.addEventListener("click", function (e) {
+    e.preventDefault();
+    document.getElementById("formulario").src = "/paquetes/desconsolidar";
+
   });
 
   document.addEventListener('DOMContentLoaded', function () {

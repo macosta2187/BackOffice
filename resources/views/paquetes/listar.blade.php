@@ -4,18 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consolidar</title>
-    <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('bootstrap/jquery.dataTables.css') }}">
+    <title>Consolidar</title>   
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
 </head>
 <body>
-
-<header class="bg-custom-orange text-white">
-    <div class="container">
-        <h1 class="text-center">Aplicación de Almacén</h1>
-    </div>
-</header>
-
+<h1 class="text-center">Paquetes a Consolidar</h1>
+<header class="bg-custom-orange text-white"></header>
 <div class="container text-center">
     <div class="row">
         <div class="col-md-4 mx-auto mb-3">
@@ -32,68 +27,73 @@
             </div>
         </div>
 
+        <form id="consolidarForm" action="{{ route('paquetes.consolidar') }}" method="POST">
+            @csrf
+            <input type="hidden" id="selectedPackages" name="selectedPackages" value="">
+            <div class="form-group">
+                <label for="selectedCamion">Camión:</label>
+                <select class="form-control" id="selectedCamion" name="selectedCamion" required>
+                    @foreach($camiones as $camion)
+                        <option value="{{ $camion->id_camion }}">{{ $camion->id_camion }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </form>
 
-    <form id="consolidarForm" action="{{ route('paquetes.consolidar') }}" method="POST">
-        @csrf
-        <input type="hidden" id="selectedPackages" name="selectedPackages" value="">
-
-        <div class="form-group">
-            <label for="selectedCamion">Camión:</label>
-            <select class="form-control" id="selectedCamion" name="selectedCamion" required>
-                @foreach($camiones as $camion)
-                <option value="{{ $camion->id_camion }}">{{ $camion->id_camion }}</option>
-                @endforeach
-            </select>
+        <div class="table-responsive">
+            <table class="table table-hover table-lg">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Descripción</th>
+                        <th>Calle</th>
+                        <th>Número</th>
+                        <th>Localidad</th>
+                        <th>Departamento</th>
+                        <th>Teléfono</th>
+                        <th>Estado</th>
+                        <th>Tamaño</th>
+                        <th>Peso</th>
+                        <th>Fecha de Creación</th>
+                        <th>Hora de Creación</th>
+                        <th>Tracking</th>
+                        <th>Seleccionar</th>
+                    </tr>
+                </thead>
+                <tbody id="paquetesData">
+                    @foreach ($paquetes as $paquete)
+                    <tr>
+                        <td>{{ $paquete->id }}</td>
+                        <td>{{ $paquete->descripcion }}</td>
+                        <td>{{ $paquete->calle }}</td>
+                        <td>{{ $paquete->numero }}</td>
+                        <td>{{ $paquete->localidad }}</td>
+                        <td>{{ $paquete->departamento }}</td>
+                        <td>{{ $paquete->telefono }}</td>
+                        <td>{{ $paquete->estado }}</td>
+                        <td>{{ $paquete->tamaño }}</td>
+                        <td>{{ $paquete->peso }}</td>
+                        <td>{{ $paquete->fecha_creacion }}</td>
+                        <td>{{ $paquete->hora_creacion }}</td>
+                        <td>{{ $paquete->codigo_seguimiento }}</td>
+                        <td><input type="checkbox" name="seleccionarPaquete" value="{{ $paquete->id }}" data-peso="{{ $paquete->peso }}"></td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
-    </form>
-
-    <div class="table-responsive text-center">
-        <table class="table table-hover table-lg w-auto">
-            <thead class="thead-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Descripción</th>
-                    <th>Calle</th>
-                    <th>Número</th>
-                    <th>Localidad</th>
-                    <th>Departamento</th>
-                    <th>Teléfono</th>
-                    <th>Estado</th>
-                    <th>Tamaño</th>
-                    <th>Peso</th>
-                    <th>Fecha de Creación</th>
-                    <th>Hora de Creación</th>
-                    <th>Tracking</th>
-                    <th>Seleccionar</th>
-                </tr>
-            </thead>
-            <tbody id="paquetesData">
-                @foreach ($paquetes as $paquete)
-                <tr>
-                    <td>{{ $paquete->id }}</td>
-                    <td>{{ $paquete->descripcion }}</td>
-                    <td>{{ $paquete->calle }}</td>
-                    <td>{{ $paquete->numero }}</td>
-                    <td>{{ $paquete->localidad }}</td>
-                    <td>{{ $paquete->departamento }}</td>
-                    <td>{{ $paquete->telefono }}</td>
-                    <td>{{ $paquete->estado }}</td>
-                    <td>{{ $paquete->tamaño }}</td>
-                    <td>{{ $paquete->peso }}</td>
-                    <td>{{ $paquete->fecha_creacion }}</td>
-                    <td>{{ $paquete->hora_creacion }}</td>
-                    <td>{{ $paquete->codigo_seguimiento }}</td>
-                    <td><input type="checkbox" name="seleccionarPaquete" value="{{ $paquete->id }}" data-peso="{{ $paquete->peso }}"></td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
     </div>
-
     <div class="alert alert-info" role="alert" id="sumaPesosLabel">Peso Total del envío en kg: 0.00 kg</div>
     <button type="button" class="btn btn-primary" onclick="consolidarPaquetes()">Consolidar Paquetes</button>
 </div>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>   
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>    
+<script src="https://cdn.datatables.net/buttons/2.3.5/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.5/js/buttons.html5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.5/js/buttons.flash.min.js"></script>
 <script>
 
 
@@ -170,13 +170,9 @@ filtroGrupo.addEventListener("change", function() {
 });
 
 
-
-
 </script>
 
-   <!-- Enlace al archivo de jQuery -->
-   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Enlace al archivo de DataTables JS -->
-    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+   
+
 </body>
 </html>

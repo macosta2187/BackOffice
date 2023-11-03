@@ -107,6 +107,8 @@
        </div>
             <button type="submit" class="btn btn-primary">Guardar</button>
             <td><a href="{{ route('paquetes.Listar')}}" class="btn btn-primary">Consolidar</a></td>
+            <td><a href="{{ route('paquetes.mostrar')}}" class="btn btn-primary">Administracion</a></td>
+           
         </form>
         <script>
             const fechaActual = new Date();

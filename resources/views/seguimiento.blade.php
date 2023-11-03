@@ -154,7 +154,7 @@ body {
             </li>
             <li class="step-wizard-item">
                 <span class="progress-count">2</span>
-                <span class="progress-label">En almacen origen</span>
+                <span class="progress-label">En almacén origen</span>
             </li>
             <li class="step-wizard-item">
                 <span class="progress-count">3</span>
@@ -203,19 +203,19 @@ body {
                 case 'Ingresado':
                     avanzarAPaso(1);
                     break;
-                case 'En almacen origen':
+                case 'En almacén origen':
                     avanzarAPaso(2);
                     break;
-                case 'En transito':
+                case 'En tránsito':
                     avanzarAPaso(3);
                     break;
-                case 'En almacen destino':
+                case 'En almacén destino':
                     avanzarAPaso(4);
                     break;
                 case 'Disponible en pick up':
                     avanzarAPaso(5);
                     break;
-                case 'En distribucion':
+                case 'En distribución':
                     avanzarAPaso(6);
                     break;
                 case 'Reagenda entrega':
