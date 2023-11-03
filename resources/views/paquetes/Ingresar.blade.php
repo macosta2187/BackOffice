@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
+    <script src="{{ asset('bootstrap/js/jquery-3.5.1.slim.min.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/popper.min.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
     <title>Formulario de Ingreso de Paquetes</title>
 </head>
 <body>
@@ -15,55 +16,69 @@
 
             <div class="form-group">
                 <label for="descripcion">Descripción:</label>
-                <input type="text" class="form-control" id="descripcion" name="descripcion" required>
+                <input type="text" class="form-control" id="descripcion" name="descripcion" required maxlength="50">
             </div>
 
             <div class="form-group">
                 <label for="calle">Calle:</label>
-                <input type="text" class="form-control" id="calle" name="calle" required>
+                <input type="text" class="form-control" id="calle" name="calle" required maxlength="50">
             </div>
 
             <div class="form-group">
                 <label for="numero">Número:</label>
-                <input type="number" class="form-control" id="numero" name="numero" required>
+                <input type="text" class="form-control" id="numero" name="numero" required maxlength="5">
             </div>
 
             <div class="form-group">
                 <label for="localidad">Localidad:</label>
-                <input type="text" class="form-control" id="localidad" name="localidad" required>
+                <input type="text" class="form-control" id="localidad" name="localidad" required maxlength="25">
             </div>
 
             <div class="form-group">
-                <label for="departamento">Departamento:</label>
-                <select class="form-control" id="departamento" name="departamento" required>
-                    <option value="Artigas">Artigas</option>
-                    <option value="Canelones">Canelones</option>
-                    <option value="Cerro Largo">Cerro Largo</option>
-                    <!-- Otras opciones de departamento -->
-                </select>
-            </div>
-
+    <label for="departamento">Departamento:</label>
+    <select class="form-control" id="departamento" name="departamento" required>
+        <option value="Artigas">Artigas</option>
+        <option value="Canelones">Canelones</option>
+        <option value="Cerro Largo">Cerro Largo</option>
+        <option value="Colonia">Colonia</option>
+        <option value="Durazno">Durazno</option>
+        <option value="Flores">Flores</option>
+        <option value="Florida">Florida</option>
+        <option value="Lavalleja">Lavalleja</option>
+        <option value="Maldonado">Maldonado</option>
+        <option value="Montevideo">Montevideo</option>
+        <option value="Paysandú">Paysandú</option>
+        <option value="Río Negro">Río Negro</option>
+        <option value="Rivera">Rivera</option>
+        <option value="Rocha">Rocha</option>
+        <option value="Salto">Salto</option>
+        <option value="San José">San José</option>
+        <option value="Soriano">Soriano</option>
+        <option value="Tacuarembó">Tacuarembó</option>
+        <option value="Treinta y Tres">Treinta y Tres</option>        
+    </select>
+</div>
             <div class="form-group">
                 <label for="telefono">Teléfono:</label>
-                <input type="tel" class="form-control" id="telefono" name="telefono" required>
+                <input type="text" class="form-control" id="telefono" name="telefono" required maxlength="9">
             </div>
 
+<div class="form-group">
+    <label for="estado">Estatus:</label>
+    <select class="form-control" id="estado" name="estado" required>
+        <option value="Ingresado">Ingresado</option>
+        <option value="En almacén origen">En almacén origen</option>
+        <option value="En tránsito">En tránsito</option>
+        <option value="En almacén destino">En almacén destino</option>
+        <option value="Disponible en pick up">Disponible en pick up</option>
+        <option value="En distribución">En distribución</option>
+        <option value="Reagenda entrega">Reagenda entrega</option>
+        <option value="Entregado">Entregado</option>
+    </select>
+</div>       
             <div class="form-group">
-                <label for="estatus">Estatus:</label>
-                <select class="form-control" id="estatus" name="estatus" required>
-                    <option value="Ingresado">Ingresado</option>
-                    <option value="EnAlmacenOrigen">En almacén origen</option>
-                    <!-- Otras opciones de estatus -->
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="tamaño">Tamaño:</label>
-                <select class="form-control" id="tamaño" name="tamaño" required>
-                    <option value="Pequeño">Pequeño</option>
-                    <option value="Mediano">Mediano</option>
-                    <option value="Grande">Grande</option>
-                </select>
+                <label for="tamaño">tamaño:</label>
+                <input type="number" step="1.00" class="form-control" id="tamaño" name="tamaño">
             </div>
 
             <div class="form-group">
@@ -72,31 +87,42 @@
             </div>
 
             <div class="form-group">
-                <label for="fecha">Fecha:</label>
-                <input type="date" class="form-control" id="fecha" name="fecha" required readonly>
+                <label for="fecha_creacion">Fecha:</label>
+                <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion" required readonly>
             </div>
 
             <div class="form-group">
-                <label for="hora">Hora:</label>
-                <input type="time" class="form-control" id="hora" name="hora" required readonly>
+                <label for="hora_creacion">Hora:</label>
+                <input type="time" class="form-control" id="hora_creacion" name="hora_creacion" required readonly>
             </div>
 
+            <div class="form-group">
+    <label for="empresa">Selecciona una empresa:</label>
+    <select class="form-control" id="empresa" name="empresa" required>
+        <option value=""></option>
+        @foreach ($empresas as $empresa)
+            <option value="{{ $empresa->id }}">{{ $empresa->nombre }}</option>
+        @endforeach
+    </select>
+       </div>
             <button type="submit" class="btn btn-primary">Guardar</button>
+            <td><a href="{{ route('paquetes.Listar')}}" class="btn btn-primary">Consolidar</a></td>
+            <td><a href="{{ route('paquetes.mostrar')}}" class="btn btn-primary">Administracion</a></td>
+           
         </form>
-
         <script>
             const fechaActual = new Date();
+            fechaActual.setHours(fechaActual.getHours() - 3);
             const fechaISO = fechaActual.toISOString().slice(0, 10);
             const horaISO = fechaActual.toISOString().slice(11, 16);
-            document.getElementById("fecha").value = fechaISO;
-            document.getElementById("hora").value = horaISO;
+            document.getElementById("fecha_creacion").value = fechaISO;
+            document.getElementById("hora_creacion").value = horaISO;
+
         </script>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
-    <!-- Incluye los scripts de Bootstrap y jQuery al final del documento -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
 

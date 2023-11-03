@@ -273,9 +273,7 @@ body {
   </div>
   @endsection
 
-
-
-<div class="wrapper">
+  <div class="wrapper">
   <div class="top_navbar">
     <div class="hamburger">
        <div class="one"></div>
@@ -283,185 +281,141 @@ body {
        <div class="three"></div>
     </div>
     <div class="top_menu">
-      <div class="">ADN</div>
+      <div>ADN</div>
       <ul>
-    
-      <div id="contenido"></div>
-
-   
+        <li><div id="contenido"></div></li>
       </ul>
     </div>
-  </div>  
+  </div>
   <div class="sidebar">
-      <ul>
-
+    <ul>
       <li><a href="/home" id="home">
-            <span class="icon"><i class="fas fa-file-video"></i></span>
-            <span class="title">Home</span>
-        </a></li>
+        <span class="icon"><i class="fas fa-file-video"></i></span>
+        <span class="title">Home</span>
+      </a></li>
+      <li><a href="/empleados/Listar" id="listarEmpleado">
+        <span class="icon"><i class="fas fa-file-video"></i></span>
+        <span class="title">Empleado</span>
+      </a></li>
+      <li><a href="/almacenes/Ingresar" id="altaAlmacen">
+        <span class="icon"><i class="fas fa-blog"></i></span>
+        <span class="title">Almacen</span>
+      </a></li>
+      <li><a href="/paquetes/Ingresar" id="paquetes">
+        <span class ="icon"><i class="fas fa-blog"></i></span>
+        <span class="title">Paquetes</span>
+      </a></li>
+      <li><a href="/vehiculos/Ingreso" id="vehiculosAlta">
+        <span class="icon"><i class="fas fa-blog"></i></span>
+        <span class="title">Vehiculos</span>
+      </a></li>
+      <li><a href="/empresas/Listar" id="empresasingresar">
+        <span class="icon"><i class="fas fa-blog"></i></span>
+        <span class="title">Empresas</span>
+      </a></li>
+      <li><a href="/seguimiento" id="seguimiento">
+        <span class="icon"><i class="fas fa-blog"></i></span>
+        <span class="title">Seguimiento</span>
+      </a></li>
+      <li><a href="/LotePaquete" id="LotePaquete">
+        <span class="icon"><i class="fas fa-blog"></i></span>
+        <span class="title">Lotes</span>
+      </a></li>
+      <li><a href="/fletes" id="PaqueteEstado">
+        <span class="icon"><i class="fas fa-blog"></i></span>
+        <span class="title">Fletes</span>
+      </a></li>
 
-      <li><a href="/empleados/Ingresar" id="ingresoEmpleado">
-            <span class="icon"><i class="fas fa-file-video"></i></span>
-            <span class="title">Ingreso Empleado</span>
-        </a></li>
-
-        <li><a href="/empleados/Listar" id="listarEmpleado">
-            <span class="icon"><i class="fas fa-file-video"></i></span>
-            <span class="title">Listar Empleado</span>
-        </a></li>
-
-        <li><a href="/paquetes/Listar" id="listarPaquetes">
-            <span class="icon"><i class="fas fa-volleyball-ball"></i></span>
-            <span class="title">Consolidar</span>
-        </a></li>
-
-        <li><a href="/almacenes/Ingresar" id="altaAlmacen">
-            <span class="icon"><i class="fas fa-blog"></i></span>
-            <span class="title">Alta Almacen</span>
-        </a></li>
-
-        <li><a href="/almacenes/Listar" id="listarAlmacen">
-            <span class="icon"><i class="fas fa-leaf"></i></span>
-            <span class="title">Listado Almacen</span>
-        </a></li>
-
-        <li><a href="/paquetes/Ingresar" id="paquetes">
-            <span class="icon"><i class="fas fa-blog"></i></span>
-            <span class="title">Paquetes</span>
-        </a></li>
-
-        <li><a href="/vehiculos/Ingreso" id="vehiculosAlta">
-            <span class="icon"><i class="fas fa-blog"></i></span>
-            <span class="title">Vehiculos Alta</span>
-        </a></li>
-
-        <li><a href="/vehiculos/Listar" id="vehiculosListar">
-            <span class="icon"><i class="fas fa-blog"></i></span>
-            <span class="title">Vehiculos Listar</span>
-        </a></li>
-
-        <li><a href="/registro" id="altaWeb">
-            <span class="icon"><i class="fas fa-blog"></i></span>
-            <span class="title">Alta Web</span>
-        </a></li>
-    </ul>
-
+      <li><a href="/paquetes/desconsolidar" id="PaqueteDestino">
+        <span class="icon"><i class="fas fa-blog"></i></span>
+        <span class="title">Arrivos</span>
+      </a></li>
+      
 
     </ul>
   </div>
-
-
-
   <iframe id="formulario" src="" frameborder="0" width="100%" height="900" style="margin-top: 110px;"></iframe>
+</div>
 
-
-
-	
 <script>
+  const enlaceAltaAlmacen = document.getElementById("altaAlmacen");
+  enlaceAltaAlmacen.addEventListener("click", function (e) {
+    e.preventDefault();
+    document.getElementById("formulario").src = "/almacenes/Ingresar";
+  });
 
+  const listarEmpleado = document.getElementById("listarEmpleado");
+  listarEmpleado.addEventListener("click", function (e) {
+    e.preventDefault();
+    document.getElementById("formulario").src = "/empleados/Listar";
+  });
 
-        const enlaceAltaAlmacen = document.getElementById("altaAlmacen");
-        enlaceAltaAlmacen.addEventListener("click", function (e) {
-            e.preventDefault();
-           
-            document.getElementById("formulario").src = "/almacenes/Ingresar"; 
-        });
+  const paquetes = document.getElementById("paquetes");
+  paquetes.addEventListener("click", function (e) {
+    e.preventDefault();
+    document.getElementById("formulario").src = "/paquetes/Ingresar";
+  });
 
-        const enlacelistaAlmacen = document.getElementById("listarAlmacen");
-        enlacelistaAlmacen.addEventListener("click", function (e) {
-            e.preventDefault();
-      
-            document.getElementById("formulario").src = "/almacenes/Listar";
-        });
+  const vehiculosAlta = document.getElementById("vehiculosAlta");
+  vehiculosAlta.addEventListener("click", function (e) {
+    e.preventDefault();
+    document.getElementById("formulario").src = "/vehiculos/Ingresar";
+  });
 
-        const ingresoEmpleado = document.getElementById("ingresoEmpleado");
-        ingresoEmpleado.addEventListener("click", function (e) {
-            e.preventDefault();
-          
-            document.getElementById("formulario").src = "/empleados/Ingresar";
-        });
+  const empresas = document.getElementById("empresasingresar");
+  empresas.addEventListener("click", function (e) {
+    e.preventDefault();
+    document.getElementById("formulario").src = "/empresas/Listar";
+  });
 
-        const listarEmpleado = document.getElementById("listarEmpleado");
-        listarEmpleado.addEventListener("click", function (e) {
-            e.preventDefault();
-           
-            document.getElementById("formulario").src = "/empleados/Listar"; 
-        });
-
-        const listarPaquetes = document.getElementById("listarPaquetes");
-        listarPaquetes.addEventListener("click", function (e) {
-            e.preventDefault();
-    
-            document.getElementById("formulario").src = "/paquetes/Listar"; 
-        });
-
-        const paquetes = document.getElementById("paquetes");
-        paquetes.addEventListener("click", function (e) {
-            e.preventDefault();
-        
-            document.getElementById("formulario").src = "/paquetes/Ingresar"; 
-        });
-
-
-        const vehiculosAlta = document.getElementById("vehiculosAlta");
-        vehiculosAlta.addEventListener("click", function (e) {
-            e.preventDefault();
-         
-            document.getElementById("formulario").src = "/vehiculos/Ingresar"; 
-        });
-
-        const vehiculosListar = document.getElementById("vehiculosListar");
-        vehiculosListar.addEventListener("click", function (e) {
-            e.preventDefault();
-           
-            document.getElementById("formulario").src = "/vehiculos/Listar";
-        });
-
-        const altaWeb = document.getElementById("altaWeb");
-        altaWeb.addEventListener("click", function (e) {
-            e.preventDefault();
-        
-            document.getElementById("formulario").src = "/registro";
-        });
-
-  
+  const seguimientos = document.getElementById("seguimiento");
+  seguimientos.addEventListener("click", function (e) {
+    e.preventDefault();
+    document.getElementById("formulario").src = "/seguimiento";
+  });
 
 
 
+  const LotePaquete = document.getElementById("LotePaquete");
+  LotePaquete.addEventListener("click", function (e) {
+    e.preventDefault();
+    document.getElementById("formulario").src = "/LotePaquete";
+  });
+
+
+  const PaqueteEstado = document.getElementById("PaqueteEstado");
+  PaqueteEstado.addEventListener("click", function (e) {
+    e.preventDefault();
+    document.getElementById("formulario").src = "/fletes";
+  });
+
+  const PaqueteDestino = document.getElementById("PaqueteDestino");
+  PaqueteDestino.addEventListener("click", function (e) {
+    e.preventDefault();
+    document.getElementById("formulario").src = "/paquetes/desconsolidar";
+
+  });
 
   document.addEventListener('DOMContentLoaded', function () {
-        var logoutLink = document.getElementById('logout-link');
-        
-        if (logoutLink) {
-            logoutLink.addEventListener('click', function (event) {
-                event.preventDefault(); 
-                
-            
-                var logoutForm = document.getElementById('logout-form');
-                if (logoutForm) {
-                    logoutForm.submit();
-                }
-            });
+    var logoutLink = document.getElementById('logout-link');
+
+    if (logoutLink) {
+      logoutLink.addEventListener('click', function (event) {
+        event.preventDefault();
+        var logoutForm = document.getElementById('logout-form');
+        if (logoutForm) {
+          logoutForm.submit();
         }
-    });
-
-    document.addEventListener('DOMContentLoaded', function () {
-  var darkModeToggle = document.getElementById('dark-mode-toggle');
-  var body = document.body;
-
-  darkModeToggle.addEventListener('click', function () {
-    body.classList.toggle('dark-mode');
+      });
+    }
   });
-});
 
   var menuLinks = document.querySelectorAll(".menu-link");
   menuLinks.forEach(function (link) {
-    link.removeEventListener("click", handleMenuClick); 
+    link.removeEventListener("click", handleMenuClick);
     link.addEventListener("click", handleMenuClick);
   });
-
-  
-
 </script>
+
 </body>
 </html>

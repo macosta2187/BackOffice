@@ -14,8 +14,15 @@ class Paquete extends Model
     use SoftDeletes;
    
 
+
     public function lotes()
     {
-        return $this->belongsToMany(Lote::class);
+        return $this->belongsToMany(Lote::class, 'lote_paquete', 'paquete_id', 'lote_id');
     }
+
+    public function almacenes()
+{
+    return $this->belongsToMany(Almacen::class, 'almacena_s', 'id_paquete', 'id_almacen');
+}
+  
 }

@@ -12,6 +12,7 @@ class Vehiculo extends Model
     use HasFactory;
     protected $table = 'vehiculos';
     use SoftDeletes;
+   
 
     
 

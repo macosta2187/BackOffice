@@ -7,9 +7,18 @@ use App\Http\Controllers\PaqueteController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UsuariosController;
+use App\Http\Controllers\CreasController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\VehiculoController;
 use App\Http\Controllers\ChoferController;
+use App\Http\Controllers\LotePaqueteController;
+use App\Http\Controllers\FletesController;
+use App\Http\Controllers\DespachaController;
+use App\Models\Paquete;
+use App\Models\LotePaquete;
+use App\Models\Empresa;
+use App\Models\Fletes;
+use App\Models\Despacha;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use App\Http\Middleware\Autenticacion;
@@ -80,11 +89,15 @@ Route::get('/empleados/Actualizar', function () {
     return view('empleados/Actualizar');
 })->middleware('auth');
 
+
+
+
+Route::post('/vehiculos/Listar', [VehiculoController::class, "Listar"])->name('vehiculos.Listar')->middleware('auth');
 Route::get('/vehiculos/Listar', [VehiculoController::class, "Listar"])->name('vehiculos.Listar')->middleware('auth');
+Route::post('/vehiculos/Insertar', [VehiculoController::class, "Insertar"])->name('vehiculos.Insertar')->middleware('auth');
 
 
-Route::post('/vehiculos/Ingresar', [VehiculoController::class, "Insertar"])->name('vehiculos.Insertar')->middleware('auth');
-
+Route::get('/guardarRelacion/{id_empleado}/{id_paquete}', [PaqueteController::class, 'guardarRelacion'])->name('guardarRelacion');
 
 Route::get('/vehiculos/Ingreso', [EmpleadoController::class, 'listarChoferes'])->middleware('auth');
 
@@ -137,9 +150,38 @@ Route::get('/paquetes/Ingresar', function () {
     return view('paquetes/Ingresar');
 })->middleware('auth');
 
-Route::get('/paquetes/Listar', [PaqueteController::class, 'listarPaquetes'])->name('paquetes.Listar')->middleware('auth');
 
-Route::post('/asignar-lote', [LoteController::class, "asignarLote"])->name('asignar.lote')->middleware('auth');
+Route::get('/paquetes/{id}/Editar', [PaqueteController::class, "Editar"])->name('paquetes.Editar')->middleware('auth');
+Route::put('/paquetes/{paquete}', [PaqueteController::class, "Actualizar"])->name('paquetes.Actualizar')->middleware('auth');
+Route::delete('/paquetes/{paquete}', [PaqueteController::class, "Eliminar"])->name('paquetes.Eliminar')->middleware('auth');
+
+
+
+Route::get('/paquetes/Ingresar', [EmpresaController::class, 'Empresa_paquetes'])->name('empresas.Ingresar')->middleware('auth');
+
+Route::put('/paquetes/estado/{paquete}', [PaqueteController::class, "Estado"])->name('paquetes.Estado')->middleware('auth');
+
+Route::get('/paquetes/Editar', function () {
+    return view('paquetes/Editar');
+})->middleware('auth');
+
+
+
+
+Route::get('/paquetes/mostrarPaquetes', [PaqueteController::class, 'mostrarPaquetes'])->name('paquetes.mostrarPaquetes');
+Route::get('/paquetes/Listar', [PaqueteController::class, 'listarPaquetes'])->name('paquetes.Listar');
+
+Route::get('/paquetes/mostrar', [PaqueteController::class, 'mostrarPaquetes'])->name('paquetes.mostrar');
+
+
+
+Route::post('/asignar-lote', [LoteController::class, "asignarLote"]);
+
+
+
+
+
+
 
 Route::post('/IngresarLote', [LoteController::class, "ingresarLote"])->name('ingresarLote')->middleware('auth');
 
@@ -148,6 +190,11 @@ Route::get('/EliminarLote/{id}', [LoteController::class, "EliminarLote"])->name(
 Route::get('/EditarLote/{id}/editar', [LoteController::class, 'editarLote'])->name('lote.editar')->middleware('auth');
 Route::post('/lote/{id}/actualizar', [LoteController::class, 'actualizarLote'])->name('lote.actualizar')->middleware('auth');
 
+
+Route::post('/paquetes/consolidar', [PaqueteController::class, 'consolidar'])->name('paquetes.consolidar');
+
+
+Route::get('/paquetes/desconsolidar', [PaqueteController::class, "paquetesEnAlmacenDestino"])->middleware('auth');
 
 
 Route::get('/IngresarLote', function () {
@@ -163,7 +210,11 @@ Route::get('/FormularioRlotes', function () {
     return view('/FormularioRlotes');
 });
 
+Route::get('/ingresados', function () {
+    return view('/ingresados');
+});
 
+Route::post('/crearLotes', [LoteController::class, 'crearLotes'])->name('consolidar.paquetes');
 
 
 
@@ -185,11 +236,13 @@ Route::get('/choferes/Ingresar', function () {
 
 /*Empresa*/
 
-Route::get('/empresas/Listado', [EmpresaController::class, 'Listar'])->name('empresas.Listado')->middleware('auth');
+
+Route::get('/empresas/Listar', [EmpresaController::class, 'Listar'])->name('empresas.Listar')->middleware('auth');
 Route::post('/empresas/Ingresar', [EmpresaController::class, "Insertar"])->name('empresas.Insertar')->middleware('auth');
-Route::get('/empresas/{empresas}/editar', [EmpresaController::class, "Editar"])->name('empresas.Editar')->middleware('auth');
+Route::get('/empresas/{rut}/editar', [EmpresaController::class, "Editar"])->name('empresas.Editar')->middleware('auth');
+
 Route::put('/empresas/{empresas}', [EmpresaController::class, "Actualizar"])->name('empresas.Actualizar')->middleware('auth');
-Route::delete('/empresas/{empresas}', [EmpresaController::class, "Eliminar"])->name('empresas.eliminar')->middleware('auth');
+Route::delete('/empresas/{empresa}', [EmpresaController::class, 'Eliminar'])->name('empresas.Eliminar')->middleware('auth');
 
 
 Route::get('/empresas/Listado', function () {
@@ -201,8 +254,27 @@ Route::get('/empresas/Ingresar', function () {
 })->middleware('auth');
 
 
-Route::get('/registro', function () {
-    return view('/registro');
-});
 
-Route::post('/registro',[UsuariosController::class, "RegistroUsuario"])->name('registrar');
+
+
+
+Route::get('/seguimiento', function () {
+    return view('seguimiento');
+})->middleware('auth');
+
+
+Route::get('/LotePaquete', [LotePaqueteController::class, 'LotePaquete'])->middleware('auth');
+
+
+
+Route::get('/lote-paquete', [LotePaqueteController::class, 'listarLotesPaquetes'])->middleware('auth');
+Route::get('/fletes',[LotePaqueteController::class, 'listarFletes'])->middleware('auth');
+
+
+
+
+Route::post('/enviar-paquete', [DespachaController::class, 'Insertar'])->name('enviarPaquete')->middleware('auth');
+
+
+
+Route::get('/fletes', [FletesController::class, 'Listar'])->name('fletes.Listar');

@@ -3,115 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
+    <script src="{{ asset('bootstrap/js/jquery-3.5.1.slim.min.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/popper.min.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
     <title>Paquetes Ingresados en Sistema</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
 
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        table, th, td {
-            border: 1px solid #ddd;
-        }
-
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #333;
-            color: white;
-        }
-
-        td select {
-            width: 100%;
-            padding: 5px;
-        }
-
-        td button {
-            background-color: #333;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-
-        td button:hover {
-            background-color: #555;
-        }
-    </style>
 </head>
 <body>
-    <h1>Paquetes Ingresados en Sistema</h1>
-    <h1>Seleccionar paquetes y asignar Lote de envio</h1>
+    <div class="container">
+        <h1>Paquetes Ingresados en Sistema</h1>
+        <h2>Seleccionar paquetes y asignar Lote de envío</h2>
 
-    <form id="asignarLoteForm" method="POST" action="{{ route('asignar.lote') }}">
-    @csrf
-    <div style="text-align: center;">
-    <label for="comboLote" style="font-size: 16px; color: blue;">Ingresar un lote de la lista:</label>   
-    <input type="number" id="comboLote" name="lote" style="font-size: 16px; background-color: lightgray; border: 2px solid blue;">
-</div>
+        <form id="asignarLoteForm" method="POST" action="{{ route('asignar.lote') }}">
+            @csrf
+            <div class="text-center mb-3">
+                <label for="comboLote" class="form-label">Ingresar un lote de la lista:</label>
+                <input type="number" id="comboLote" name="lote" class="form-control">
+            </div>
 
-        <div style="overflow-x:auto;">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Numero de Paquete</th>
-                        <th>Calle</th>
-                        <th>Número de puerta</th>
-                        <th>Localidad</th>
-                        <th>Departamento destino</th>
-                        <th>Estatus</th>
-                        <th>Tamaño del paquete</th>
-                        <th>Peso</th>
-                        <th>Teléfono contacto</th>
-                        <th>Fecha de recepcion</th>
-                        <th>Seleccionar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($paquetes as $paquete)
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
                         <tr>
-                            <td>{{ $paquete->id }}</td>
-                            <td><input type="text" name="calle" value="{{ $paquete->calle }}" readonly></td>
-                            <td><input type="text" name="numero" value="{{ $paquete->numero }}"readonly></td>
-                            <td><input type="text" name="localidad" value="{{ $paquete->localidad }}"readonly></td>
-                            <td><input type="text" name="departamento" value="{{ $paquete->departamento }}"readonly></td>
-                            <td>
-                        <select name="estatus">
-                        <option value="En viaje" {{ $paquete->estatus == 'En Viaje' ? 'selected' : '' }}>En Viaje</option>
-                        <option value="Entregado" {{ $paquete->estatus == 'Entregado' ? 'selected' : '' }}>Entregado</option>
-                       <option value="Despachado" {{ $paquete->estatus == 'Despachado' ? 'selected' : '' }}>Despachado</option>
-                      </select>
-                         </td>
-
-                            <td><input type="text" name="tamaño" value="{{ $paquete->tamaño }}"readonly></td>
-                            <td><input type="text" name="peso" value="{{ $paquete->peso }}"readonly></td>
-                            <td><input type="text" name="telefono" value="{{ $paquete->telefono }}"readonly></td>
-                            <td><input type="date" name="fecha" value="{{ $paquete->fecha }}"readonly></td>
-
-                            <td><input type="checkbox" name="seleccionar[]" value="{{ $paquete->id }}"></td>
+                            <th>Numero de Paquete</th>
+                            <th>Calle</th>
+                            <th>Número de puerta</th>
+                            <th>Localidad</th>
+                            <th>Departamento destino</th>
+                            <th>Estatus</th>
+                            <th>Tamaño del paquete</th>
+                            <th>Peso</th>
+                            <th>Teléfono contacto</th>
+                            <th>Fecha de recepción</th>
+                            <th>Seleccionar</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody>
+                        @foreach ($paquetes as $paquete)
+                            <tr>
+                                <td>{{ $paquete->id }}</td>
+                                <td><input type="text" name="calle" value="{{ $paquete->calle }}" readonly class="form-control"></td>
+                                <td><input type="text" name="numero" value="{{ $paquete->numero }}" readonly class="form-control"></td>
+                                <td><input type="text" name="localidad" value="{{ $paquete->localidad }}" readonly class="form-control"></td>
+                                <td><input type="text" name="departamento" value="{{ $paquete->departamento }}" readonly class="form-control"></td>
+                                <td>
+                                    <select name="estatus" class="form-select">
+                                        <option value="En Viaje" {{ $paquete->estatus == 'En Viaje' ? 'selected' : '' }}>En Viaje</option>
+                                        <option value="Entregado" {{ $paquete->estatus == 'Entregado' ? 'selected' : '' }}>Entregado</option>
+                                        <option value="Despachado" {{ $paquete->estatus == 'Despachado' ? 'selected' : '' }}>Despachado</option>
+                                    </select>
+                                </td>
+                                <td><input type="text" name="tamaño" value="{{ $paquete->tamaño }}" readonly class="form-control"></td>
+                                <td><input type="text" name="peso" value="{{ $paquete->peso }}" readonly class="form-control"></td>
+                                <td><input type="text" name="telefono" value="{{ $paquete->telefono }}" readonly class="form-control"></td>
+                                <td><input type="date" name="fecha" value="{{ $paquete->fecha }}" readonly class="form-control"></td>
+                                <td><input type="checkbox" name="seleccionar[]" value="{{ $paquete->id }}" class="form-check-input"></td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
 
-        <button id="asignarLoteBtn" type="submit">ASIGNAR LOTE</button>
-        <button id="eliminarPaquetesBtn" type="button">ELIMINAR PAQUETES</button>
-
-    </form>
+            <button id="asignarLoteBtn" type="submit" class="btn btn-primary">ASIGNAR LOTE</button>
+            <button id="eliminarPaquetesBtn" type="button" class="btn btn-danger">ELIMINAR PAQUETES</button>
+        </form>
 
     <script>
     document.addEventListener("DOMContentLoaded", function () {

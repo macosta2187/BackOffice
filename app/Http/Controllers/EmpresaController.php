@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Empresa;
+use App\Models\Paquetes;
 use App\Models\Lote;
 use Illuminate\Support\Facades\DB;
 
@@ -15,7 +16,7 @@ class EmpresaController extends Controller
     {
        
         $rules = [
-            'rut' => 'required|string|max:12|unique:empresas',
+            'RUT' => 'required|string|max:12|unique:empresas',
             'nombre' => 'required|string|max:25',
             'calle' => 'required|string|max:50',
             'numero' => 'required|integer',
@@ -26,14 +27,14 @@ class EmpresaController extends Controller
     
         
         $messages = [
-            'rut.size' => 'El RUT debe tener una longitud de 12 caracteres.',
+            'RUT.size' => 'El RUT debe tener una longitud de 12 caracteres.',
         ];
     
  
         $request->validate($rules, $messages);    
      
         $empresa = new Empresa;
-        $empresa->rut = $request->input('rut');
+        $empresa->RUT = $request->input('RUT');
         $empresa->nombre = $request->input('nombre');
         $empresa->calle = $request->input('calle');
         $empresa->numero = $request->input('numero');
@@ -42,31 +43,38 @@ class EmpresaController extends Controller
         $empresa->telefono = $request->input('telefono');
         $empresa->save();
     
-        return redirect("/home");
+   
+    }
+    
+
+    public function Empresa_paquetes()
+    {
+        $empresas = Empresa::all();
+        return view('paquetes.Ingresar', compact('empresas'));
     }
     
 
     public function Listar()
     {
         $empresas = Empresa::all();
-        return view('empresas.Listado', ['empresas' => $empresas]);
+        return view('empresas.Listar', ['empresas' => $empresas]);
     }
     
     
 
-    public function eliminar($rut)
+    public function Eliminar(Empresa $empresa)
     {
-        $empresa = Empresa::find($rut);         
         $empresa->delete();
-    
-        return redirect("/home");
+        return redirect()->route('empresas.Listar');
+    }
+  
+
+
+    public function Editar(Empresa $rut)
+    {
+        return view('empresas.Editar', compact('rut'));
     }
 
-    public function Editar($rut)
-    {
-        $empresa = Empresa::find($rut);
-        return view('empresas.Editar', compact('empresa'));
-    }
     
     public function Actualizar(Request $request, $rut)
     {
@@ -89,6 +97,6 @@ class EmpresaController extends Controller
         $empresa->telefono = $request->input('telefono');
         $empresa->save();
     
-        return redirect("/");
+ 
     }
 }

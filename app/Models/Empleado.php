@@ -14,4 +14,9 @@ class Empleado extends Model
     use SoftDeletes;
 
     
+
+    public function paquetes()
+    {
+        return $this->belongsToMany(Paquete::class, 'creas', 'id_func', 'id_paquete');
+    }
 }

@@ -12,4 +12,9 @@ class Funcionario extends Model
     use HasFactory;
     protected $table = 'funcionarios';
     use SoftDeletes;
+
+    public function paquetes()
+    {
+        return $this->belongsToMany(Paquete::class, 'tabla_pivot', 'funcionario_id', 'paquete_id');
+    }
 }
