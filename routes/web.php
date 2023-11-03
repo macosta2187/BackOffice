@@ -13,10 +13,12 @@ use App\Http\Controllers\VehiculoController;
 use App\Http\Controllers\ChoferController;
 use App\Http\Controllers\LotePaqueteController;
 use App\Http\Controllers\FletesController;
+use App\Http\Controllers\DespachaController;
 use App\Models\Paquete;
 use App\Models\LotePaquete;
 use App\Models\Empresa;
 use App\Models\Fletes;
+use App\Models\Despacha;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use App\Http\Middleware\Autenticacion;
@@ -271,6 +273,8 @@ Route::get('/fletes',[LotePaqueteController::class, 'listarFletes'])->middleware
 
 
 
+Route::post('/enviar-paquete', [DespachaController::class, 'Insertar'])->name('enviarPaquete')->middleware('auth');
 
 
 
+Route::get('/fletes', [FletesController::class, 'Listar'])->name('fletes.Listar');

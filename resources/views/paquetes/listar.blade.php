@@ -40,7 +40,7 @@
             </div>
         </form>
 
-        <div class="table-responsive">
+        <div class="table-responsive w-100">
             <table class="table table-hover table-lg">
                 <thead class="thead-dark">
                     <tr>

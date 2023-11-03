@@ -6,9 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paquetes Ingresados</title>
     <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('bootstrap/jquery.dataTables.css') }}">
+    <link rel="stylesheet" href="{{ asset('bootstrap/jquery.dataTables.css') }}">   
     
-    <!-- Agregar el CSS de DataTables Buttons -->
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.5/css/buttons.bootstrap4.min.css">
 </head>
 <body>
