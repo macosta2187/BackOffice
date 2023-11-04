@@ -7,38 +7,49 @@ use App\Models\Lote;
 use App\Models\Despacha;
 use App\Models\Paquete;
 use App\Models\Almacena;
+use App\Models\Almacen;
 use Illuminate\Support\Facad;
 use Illuminate\Http\Request;
+use Exception;
 
 
 class DespachaController extends Controller
+
+
 {
     public function Insertar(Request $request)
     {
-
-   $almacena = Almacena::where('id_paquete', $request->input('paquete_id'))->first();
-
-  if ($almacena) {
-        
-        $id_almacen = $almacena->id_almacen;
-    } else {
+        try {
+            $departamentoPaquete = $request->input('departamento_paquete');
+            
+            $almacen = Almacen::where('departamento', $departamentoPaquete)->first();
     
-        $id_almacen = 0; 
+            $id_almacen = 0;
+    
+            if ($almacen) {
+                $id_almacen = $almacen->id;
+            }
+    
+            $registro = new Despacha;
+            $registro->id_flete = $request->input('id_flete');
+            $registro->id_paquetes = $request->input('paquete_id');
+            $registro->id_almacen = $id_almacen;
+            $registro->fecha = now();
+            $registro->hora = now();
+            $registro->save();
+    
+            $paquete = Paquete::find($request->input('paquete_id'));
+            if ($paquete->estado === 'En almacén destino') {
+                $paquete->delete();
+            }
+    
+            
+            return response('Registro insertado correctamente', 200);
+        } catch (\Exception $e) {            
+            return response('Error al insertar el registro: ' . $e->getMessage(), 500);
+        }
     }
-
-    $registro = new Despacha;
-    $registro->id_flete = $request->input('id_flete');
-    $registro->id_paquetes = $request->input('paquete_id');
-    $registro->id_almacen = $id_almacen;
-    $registro->fecha = now();
-    $registro->hora = now();
-    $registro->save();
-
-
-    $paquete = Paquete::find($request->input('paquete_id'));
-    if ($paquete->estado === 'En almacén destino') {
-        $paquete->delete();
-
-       }
-    }
+    
+    
+    
 }
