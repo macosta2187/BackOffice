@@ -70,6 +70,18 @@
     <input type="text" class="form-control" id="telefono" name="telefono" maxlength="9" required minlength="9">
 </div>
 
+<div class="form-group">
+    <label for="latitud">Latitud</label>
+    <input type="text" class="form-control" id="latitud" name="latitud" maxlength="8" required minlength="8">
+</div>
+
+
+<div class="form-group">
+    <label for="longitud">Longitud</label>
+    <input type="text" class="form-control" id="longitud" name="longitud" maxlength="8" required minlength="8">
+</div>
+
+
             <button type="submit" class="btn btn-primary">Guardar</button>
             <td><a href="{{ route('almacenes.Listar')}}" class="btn btn-primary">Gestion Almacen</a></td>
         </form>

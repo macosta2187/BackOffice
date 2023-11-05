@@ -23,6 +23,8 @@
                     <th>Localidad</th>
                     <th>Departamento</th>
                     <th>Teléfono</th> 
+                    <th>Latitud</th>
+                    <th>Longitud</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
                 </tr>
@@ -37,6 +39,8 @@
                         <td>{{ $almacen->localidad }}</td>
                         <td>{{ $almacen->departamento }}</td>
                         <td>{{ $almacen->telefono }}</td>
+                        <td>{{ $almacen->latitud }}</td>
+                        <td>{{ $almacen->longitud }}</td>
                         <td>
                             <a href="{{ route('almacenes.Editar', $almacen->id) }}" class="btn btn-primary">Editar</a>
                         </td>
@@ -60,8 +64,7 @@
    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>   
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script> 
-    <script src="https://cdn.datatables.net/buttons/2.3.5/js/dataTables.buttons.min.js"></script>
-    
+    <script src="https://cdn.datatables.net/buttons/2.3.5/js/dataTables.buttons.min.js"></script>    
     <script src="https://cdn.datatables.net/buttons/2.3.5/js/buttons.bootstrap4.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.3.5/js/buttons.html5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
