@@ -10,6 +10,8 @@ use App\Models\LotePaquete;
 use App\Models\Almacena;
 use App\Models\Almacen;
 use App\Models\Creas;
+use App\Models\Clientes;
+use App\Models\Despacha;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use App\Http\Controllers\TrackingController;
@@ -27,61 +29,70 @@ class PaqueteController extends Controller
 
 
     public function ValidarInsertar(Request $request)
-{
-    return $request->validate([
-        'descripcion' => 'required|max:50',
-        'calle' => 'required|max:50',
-        'numero' => 'required|integer|max:99999',
-        'localidad' => 'required|max:25',
-        'departamento' => 'required|max:25',
-        'telefono' => 'required|max:9',
-        'empresa' => 'required',
-
-    ]);
-}
-
-
-public function Insertar(Request $request)
-{
-    $this->ValidarInsertar($request);
-
-    $paquete = new Paquete;
-    $paquete->descripcion = $request->input('descripcion');
-    $paquete->calle = $request->input('calle');
-    $paquete->numero = $request->input('numero');
-    $paquete->localidad = $request->input('localidad');
-    $paquete->departamento = $request->input('departamento');
-    $paquete->telefono = $request->input('telefono');
-    $paquete->estado = $request->input('estado');
-    $paquete->tamaño = $request->input('tamaño');
-    $paquete->peso = $request->input('peso');
-    $paquete->fecha_creacion = $request->input('fecha_creacion');
-    $paquete->hora_creacion = $request->input('hora_creacion');
-    $paquete->empresa = $request->input('empresa');
-
-    $identificadorUnico = $request->input('identificadorUnico');
-    $codigoDeSeguimiento = $this->obtenerTracking($identificadorUnico);
-    $paquete->codigo_seguimiento = $codigoDeSeguimiento;
-    $paquete->save();
-
-    if ($paquete->estado === 'En almacén destino') {
-        $almacen = Almacen::where('departamento', $paquete->departamento)->first();
-
-        if (!$almacen) {
-            return 'No se encontró un almacén para el departamento del paquete';
-        }
-
-       
-        $almacena = new Almacena;
-        $almacena->id_paquete = $paquete->id;
-        $almacena->id_almacen = $almacen->id;
-        $almacena->save();
+    {
+        return $request->validate([
+            'descripcion' => 'required|max:50',
+            'calle' => 'required|max:50',
+            'numero' => 'required|integer|max:99999',
+            'localidad' => 'required|max:25',
+            'departamento' => 'required|max:25',
+            'telefono' => 'required|max:9',
+            'empresa' => 'required',
+            'cliente_ci' => 'required|exists:clientes,ci', 
+        ]);
     }
+    
 
-    $resultado = $this->enviarCorreo($paquete->descripcion, $paquete->codigo_seguimiento,$paquete->estado);
-
-    return 'Paquete insertado con éxito';
-}
+    public function Insertar(Request $request)
+    {
+        $this->ValidarInsertar($request);
+    
+        $cliente = Clientes::where('ci', $request->input('cliente_ci'))->first();
+    
+        if (!$cliente) {
+            return 'Cliente no encontrado'; 
+        }
+    
+        $paquete = new Paquete;
+        $paquete->descripcion = $request->input('descripcion');
+        $paquete->calle = $request->input('calle');
+        $paquete->numero = $request->input('numero');
+        $paquete->localidad = $request->input('localidad');
+        $paquete->departamento = $request->input('departamento');
+        $paquete->telefono = $request->input('telefono');
+        $paquete->estado = $request->input('estado');
+        $paquete->tamaño = $request->input('tamaño');
+        $paquete->peso = $request->input('peso');
+        $paquete->fecha_creacion = $request->input('fecha_creacion');
+        $paquete->hora_creacion = $request->input('hora_creacion');
+        $paquete->empresa = $request->input('empresa');
+        $paquete->cliente_ci = $request->input('cliente_ci');
+        $email = $cliente->email;
+       
+    
+        $identificadorUnico = $request->input('identificadorUnico');
+        $codigoDeSeguimiento = $this->obtenerTracking($identificadorUnico);
+        $paquete->codigo_seguimiento = $codigoDeSeguimiento;
+        $paquete->save();
+    
+        if ($paquete->estado === 'En almacén destino') {
+            $almacen = Almacen::where('departamento', $paquete->departamento)->first();
+    
+            if (!$almacen) {
+                return 'No se encontró un almacén para el departamento del paquete';
+            }
+    
+            $almacena = new Almacena;
+            $almacena->id_paquete = $paquete->id;
+            $almacena->id_almacen = $almacen->id;
+            $almacena->save();
+        }
+    
+        $resultado = $this->enviarCorreo( $email, $paquete->descripcion, $paquete->codigo_seguimiento, $paquete->estado);
+    
+        return 'Paquete insertado con éxito';
+    }
+    
 
 
 
@@ -164,7 +175,17 @@ public function Eliminar($id)
 
 
 public function Actualizar(Request $request, $paquete)
+
+
+
 {
+
+    $cliente = Clientes::where('ci', $request->input('cliente_ci'))->first();
+
+    if (!$cliente) {
+        return 'Cliente no encontrado'; 
+    }
+
     try {
         $this->ValidarInsertar($request);
 
@@ -184,7 +205,10 @@ public function Actualizar(Request $request, $paquete)
         $paquete->tamaño = $request->input('tamaño');
         $paquete->peso = $request->input('peso');
         $paquete->fecha_creacion = $request->input('fecha_creacion');
-        $paquete->hora_creacion = $request->input('hora_creacion');  
+        $paquete->hora_creacion = $request->input('hora_creacion');
+        $paquete->cliente_ci = $request->input('cliente_ci'); 
+        $email = $cliente->email; 
+        $paquete->codigo_seguimiento;
         $paquete->save();
 
 
@@ -202,7 +226,11 @@ public function Actualizar(Request $request, $paquete)
             $almacena->save();
         }
 
-        $resultado = $this->enviarCorreo($paquete->descripcion,$paquete->estado);
+        
+
+        $resultado = $this->enviarCorreo( $email, $paquete->descripcion, $paquete->codigo_seguimiento, $paquete->estado);
+
+
 
         
         return 'Paquete actualizado con éxito';
@@ -213,14 +241,25 @@ public function Actualizar(Request $request, $paquete)
 
 public function Estado(Request $request, $paquete)
 {  
+    $paquete = Paquete::find($paquete);       
+    $paquete->estado = $request->input('estado');    
+    $paquete->save();
 
-        $paquete = Paquete::find($paquete);       
-        $paquete->estado = $request->input('estado');    
-        $paquete->save();
+    $cliente = Clientes::where('ci', $paquete->cliente_ci)->first();
+    
+    if (!$cliente) {
+        return 'Cliente no encontrado';
+    }
 
-        $resultado = $this->enviarCorreo($paquete->descripcion, $paquete->codigo_seguimiento,$paquete->estado);
+    $descripcion = $paquete->descripcion;
+    $email = $cliente->email;
+    $codigo_seguimiento = $paquete->codigo_seguimiento;
 
+    $resultado = $this->enviarCorreo($email, $descripcion, $codigo_seguimiento, $paquete->estado);
 }
+
+
+
 public function mostrarPaquetes()
 {
     $paquetes = Paquete::all();
@@ -238,23 +277,50 @@ public function paquetesEnAlmacenDestino()
 }
 
 
-public function enviarCorreo($paquetedes,$paqueteTracking,$estado,$msg) {
-    $correoDestino = 'michael.acosta87@hotmail.com';
-    $nombreDestino = '';
+public function enviarCorreo($correoDestino, $paquetedes, $paqueteTracking, $estado) {
+    
+    $nombreDestino = ''; 
 
     $datos = [
-        'mensaje' => 'Su paquete ' . $paquetedes . ' se encuentra ' . '  '. $estado . '  ' . $paqueteTracking . ' Agradecemos su preferencia.',
+        'mensaje' => 'Su paquete ' . $paquetedes . ' se encuentra ' . '  ' . $estado . '  ' . $paqueteTracking . ' Agradecemos su preferencia.',
     ];
       
-    
+   
+    if (!empty($correoDestino)) {
+        Mail::send('correo.mensaje', $datos, function($message) use ($correoDestino, $nombreDestino) {
+            $message->to($correoDestino, $nombreDestino)
+                    ->subject('Su paquete ha sido ingresado al sistema');
+        });
 
-    Mail::send('correo.mensaje', $datos, function($message) use ($correoDestino, $nombreDestino) {
-        $message->to($correoDestino, $nombreDestino)
-                ->subject('Su paquete a sido ingresado al sistema');
-    });
-
-    return "Correo enviado a $correoDestino.";
+        return "Correo enviado a $correoDestino.";
+    } else {
+        return "No se pudo enviar el correo, la dirección de correo electrónico es nula o vacía.";
+    }
 }
+
+public function enviarCorreoFletes($correoDestino) {
+    
+    $nombreDestino = 'Estimado Cliente'; 
+
+    $datos = [
+        'mensaje' => 'Su paquete se encuentra en reparto y en breve estara llegando a su domicilio',
+    ];
+      
+   
+    if (!empty($correoDestino)) {
+        Mail::send('correo.mensaje', $datos, function($message) use ($correoDestino, $nombreDestino) {
+            $message->to($correoDestino, $nombreDestino)
+                    ->subject('Su paquete ha sido ingresado al sistema');
+        });
+
+        return "Correo enviado a $correoDestino.";
+    } else {
+        return "No se pudo enviar el correo, la dirección de correo electrónico es nula o vacía.";
+    }
+}
+
+
+
 
 
 

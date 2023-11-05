@@ -14,6 +14,7 @@ use App\Http\Controllers\ChoferController;
 use App\Http\Controllers\LotePaqueteController;
 use App\Http\Controllers\FletesController;
 use App\Http\Controllers\DespachaController;
+use App\Http\Controllers\ClientesController;
 use App\Models\Paquete;
 use App\Models\LotePaquete;
 use App\Models\Empresa;
@@ -278,3 +279,16 @@ Route::post('/enviar-paquete', [DespachaController::class, 'Insertar'])->name('e
 
 
 Route::get('/fletes', [FletesController::class, 'Listar'])->name('fletes.Listar');
+
+
+
+Route::post('clientes/Ingresar', [ClientesController::class, 'Insertar'])->name('clientes.Ingresar');
+Route::get('clientes/Listar', [ClientesController::class, 'Listar'])->name('clientes.Listar');
+Route::delete('clientes/Eliminar/{id}', [ClientesController::class, 'Eliminar'])->name('clientes.Eliminar');
+Route::put('clientes/Actualizar/{id}', [ClientesController::class, 'Actualizar'])->name('clientes.Actualizar');
+Route::get('clientes/Editar/{id}', [ClientesController::class, 'Editar'])->name('clientes.Editar');
+
+
+Route::get('/clientes/Ingresar', function () {
+    return view('/clientes/Ingresar');
+})->middleware('auth');

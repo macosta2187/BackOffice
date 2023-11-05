@@ -8,8 +8,10 @@ use App\Models\Despacha;
 use App\Models\Paquete;
 use App\Models\Almacena;
 use App\Models\Almacen;
+use App\Models\Clientes;
 use Illuminate\Support\Facad;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Exception;
 
 
@@ -36,19 +38,12 @@ class DespachaController extends Controller
             $registro->id_almacen = $id_almacen;
             $registro->fecha = now();
             $registro->hora = now();
-            $registro->save();
+            $registro->save();         
     
             $paquete = Paquete::find($request->input('paquete_id'));
             if ($paquete->estado === 'En almacén destino') {
                 $paquete->delete();
-            }
-    
-            
-            //$msg = "Paquete listo para tramo final, el paquete está en viaje a su domicilio";
-            //$resultado = $this->enviarCorreo("", "", "", "", $msg);
-            
-
-
+            }              
 
             return response('Registro insertado correctamente', 200);
         } catch (\Exception $e) {            

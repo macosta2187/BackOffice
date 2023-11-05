@@ -97,6 +97,15 @@
             </div>
 
             <div class="form-group">
+    <label for="cliente_ci">Cédula del Cliente:</label>
+    <input type="text" class="form-control" id="cliente_ci" name="cliente_ci" required maxlength="9">
+    @error('cliente_ci')
+        <div class="alert alert-danger">El cliente no existe en el sistema.</div>
+    @enderror
+</div>
+
+
+            <div class="form-group">
     <label for="empresa">Selecciona una empresa:</label>
     <select class="form-control" id="empresa" name="empresa" required>
         <option value=""></option>
@@ -117,6 +126,21 @@
             const horaISO = fechaActual.toISOString().slice(11, 16);
             document.getElementById("fecha_creacion").value = fechaISO;
             document.getElementById("hora_creacion").value = horaISO;
+
+
+            document.addEventListener('DOMContentLoaded', function () {
+           const form = document.getElementById('myForm'); 
+            const clienteCiInput = document.getElementById('cliente_ci');
+
+        form.addEventListener('submit', function (event) {
+            if (clienteCiInput.value.trim() === '') {
+                event.preventDefault(); 
+                alert('Por favor, ingresa la Cedula del Cliente.');
+            }
+        });
+    });
+
+
 
         </script>
     </div>

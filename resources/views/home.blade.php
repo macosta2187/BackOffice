@@ -330,6 +330,11 @@ body {
         <span class="icon"><i class="fas fa-blog"></i></span>
         <span class="title">Arrivos</span>
       </a></li>
+
+      <li><a href="/clientes/Ingresar" id="clientesInsertar">
+        <span class="icon"><i class="fas fa-blog"></i></span>
+        <span class="title">Clientes</span>
+      </a></li>
       
 
     </ul>
@@ -395,6 +400,16 @@ body {
     document.getElementById("formulario").src = "/paquetes/desconsolidar";
 
   });
+
+
+  const clientesInsertar = document.getElementById("clientesInsertar");
+  clientesInsertar.addEventListener("click", function (e) {
+    e.preventDefault();
+    document.getElementById("formulario").src = "/clientes/Ingresar";
+
+  });
+
+  
 
   document.addEventListener('DOMContentLoaded', function () {
     var logoutLink = document.getElementById('logout-link');
