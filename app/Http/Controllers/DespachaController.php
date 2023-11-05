@@ -44,6 +44,12 @@ class DespachaController extends Controller
             }
     
             
+            //$msg = "Paquete listo para tramo final, el paquete está en viaje a su domicilio";
+            //$resultado = $this->enviarCorreo("", "", "", "", $msg);
+            
+
+
+
             return response('Registro insertado correctamente', 200);
         } catch (\Exception $e) {            
             return response('Error al insertar el registro: ' . $e->getMessage(), 500);

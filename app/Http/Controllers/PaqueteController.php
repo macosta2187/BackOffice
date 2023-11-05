@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Empresa;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Mail;
 
 
 
@@ -76,6 +77,8 @@ public function Insertar(Request $request)
         $almacena->id_almacen = $almacen->id;
         $almacena->save();
     }
+
+    $resultado = $this->enviarCorreo($paquete->descripcion, $paquete->codigo_seguimiento,$paquete->estado);
 
     return 'Paquete insertado con éxito';
 }
@@ -199,6 +202,8 @@ public function Actualizar(Request $request, $paquete)
             $almacena->save();
         }
 
+        $resultado = $this->enviarCorreo($paquete->descripcion,$paquete->estado);
+
         
         return 'Paquete actualizado con éxito';
     } catch (\Exception $e) {
@@ -212,6 +217,8 @@ public function Estado(Request $request, $paquete)
         $paquete = Paquete::find($paquete);       
         $paquete->estado = $request->input('estado');    
         $paquete->save();
+
+        $resultado = $this->enviarCorreo($paquete->descripcion, $paquete->codigo_seguimiento,$paquete->estado);
 
 }
 public function mostrarPaquetes()
@@ -231,7 +238,23 @@ public function paquetesEnAlmacenDestino()
 }
 
 
+public function enviarCorreo($paquetedes,$paqueteTracking,$estado,$msg) {
+    $correoDestino = 'michael.acosta87@hotmail.com';
+    $nombreDestino = '';
 
+    $datos = [
+        'mensaje' => 'Su paquete ' . $paquetedes . ' se encuentra ' . '  '. $estado . '  ' . $paqueteTracking . ' Agradecemos su preferencia.',
+    ];
+      
+    
+
+    Mail::send('correo.mensaje', $datos, function($message) use ($correoDestino, $nombreDestino) {
+        $message->to($correoDestino, $nombreDestino)
+                ->subject('Su paquete a sido ingresado al sistema');
+    });
+
+    return "Correo enviado a $correoDestino.";
+}
 
 
 
