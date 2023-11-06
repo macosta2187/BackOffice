@@ -19,11 +19,39 @@ class DespachaController extends Controller
 
 
 {
+
+
+
+    public function enviarCorreoFletes($correoDestino) {
+    
+        $nombreDestino = ''; 
+    
+        $datos = [
+            'mensaje' => 'Su paquete esta en viaje a su domicilio',
+        ];
+          
+       
+        if (!empty($correoDestino)) {
+            Mail::send('correo.mensaje', $datos, function($message) use ($correoDestino, $nombreDestino) {
+                $message->to($correoDestino, $nombreDestino)
+                        ->subject('Su paquete ha sido ingresado al sistema');
+            });
+    
+            return "Correo enviado a $correoDestino.";
+        } else {
+            return "No se pudo enviar el correo, la dirección de correo electrónico es nula o vacía.";
+        }
+    }
+    
+    
+
+
+
     public function Insertar(Request $request)
     {
         try {
             $departamentoPaquete = $request->input('departamento_paquete');
-            
+    
             $almacen = Almacen::where('departamento', $departamentoPaquete)->first();
     
             $id_almacen = 0;
@@ -38,19 +66,29 @@ class DespachaController extends Controller
             $registro->id_almacen = $id_almacen;
             $registro->fecha = now();
             $registro->hora = now();
-            $registro->save();         
+            $registro->save();
     
             $paquete = Paquete::find($request->input('paquete_id'));
             if ($paquete->estado === 'En almacén destino') {
+               
+                $cliente = $paquete->cliente;
+    
+                if ($cliente) {
+                    $correoCliente = $cliente->email;
+                    $resultado = $this->enviarCorreoFletes($correoCliente);
+                    
+                }    
+                
                 $paquete->delete();
-            }              
-
+            }
+    
             return response('Registro insertado correctamente', 200);
         } catch (\Exception $e) {            
             return response('Error al insertar el registro: ' . $e->getMessage(), 500);
         }
     }
     
+
     
     
 }

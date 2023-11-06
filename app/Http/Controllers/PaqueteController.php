@@ -170,10 +170,6 @@ public function Eliminar($id)
 
 
 
-
-
-
-
 public function Actualizar(Request $request, $paquete)
 
 
@@ -298,26 +294,6 @@ public function enviarCorreo($correoDestino, $paquetedes, $paqueteTracking, $est
     }
 }
 
-public function enviarCorreoFletes($correoDestino) {
-    
-    $nombreDestino = 'Estimado Cliente'; 
-
-    $datos = [
-        'mensaje' => 'Su paquete se encuentra en reparto y en breve estara llegando a su domicilio',
-    ];
-      
-   
-    if (!empty($correoDestino)) {
-        Mail::send('correo.mensaje', $datos, function($message) use ($correoDestino, $nombreDestino) {
-            $message->to($correoDestino, $nombreDestino)
-                    ->subject('Su paquete ha sido ingresado al sistema');
-        });
-
-        return "Correo enviado a $correoDestino.";
-    } else {
-        return "No se pudo enviar el correo, la dirección de correo electrónico es nula o vacía.";
-    }
-}
 
 
 
