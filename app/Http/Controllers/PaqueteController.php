@@ -123,7 +123,7 @@ public function consolidar(Request $request)
 
     Paquete::whereIn('id', $paquetesSeleccionados)->delete();
 
-    return redirect()->back()->with('success', 'Paquetes consolidados correctamente y se eliminó la referencia en Paquete.');
+    return redirect()->back()->with('success', 'ok');
 }
 
 
@@ -212,7 +212,7 @@ public function Actualizar(Request $request, $paquete)
             $almacen = Almacen::where('departamento', $paquete->departamento)->first();
     
             if (!$almacen) {
-                return 'No se encontró un almacén para el departamento del paquete';
+                return 'No presente';
             }
     
            
@@ -231,7 +231,7 @@ public function Actualizar(Request $request, $paquete)
         
         return 'Paquete actualizado con éxito';
     } catch (\Exception $e) {
-        return 'Error al actualizar el paquete: ' . $e->getMessage();
+        return 'Error al actualizar' . $e->getMessage();
     }
 }
 
@@ -285,12 +285,12 @@ public function enviarCorreo($correoDestino, $paquetedes, $paqueteTracking, $est
     if (!empty($correoDestino)) {
         Mail::send('correo.mensaje', $datos, function($message) use ($correoDestino, $nombreDestino) {
             $message->to($correoDestino, $nombreDestino)
-                    ->subject('Su paquete ha sido ingresado al sistema');
+                    ->subject('Información de Sistema Automática');
         });
 
         return "Correo enviado a $correoDestino.";
     } else {
-        return "No se pudo enviar el correo, la dirección de correo electrónico es nula o vacía.";
+        return "No se pudo enviar el correo";
     }
 }
 

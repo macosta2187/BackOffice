@@ -34,12 +34,12 @@ class DespachaController extends Controller
         if (!empty($correoDestino)) {
             Mail::send('correo.mensaje', $datos, function($message) use ($correoDestino, $nombreDestino) {
                 $message->to($correoDestino, $nombreDestino)
-                        ->subject('Su paquete ha sido ingresado al sistema');
+                        ->subject('Información de Sistema Automática');
             });
     
             return "Correo enviado a $correoDestino.";
         } else {
-            return "No se pudo enviar el correo, la dirección de correo electrónico es nula o vacía.";
+            return "No se pudo enviar el correo";
         }
     }
     
