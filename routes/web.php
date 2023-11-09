@@ -15,6 +15,7 @@ use App\Http\Controllers\LotePaqueteController;
 use App\Http\Controllers\FletesController;
 use App\Http\Controllers\DespachaController;
 use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\GraficoController;
 use App\Models\Paquete;
 use App\Models\LotePaquete;
 use App\Models\Empresa;
@@ -292,3 +293,6 @@ Route::get('clientes/Editar/{id}', [ClientesController::class, 'Editar'])->name(
 Route::get('/clientes/Ingresar', function () {
     return view('/clientes/Ingresar');
 })->middleware('auth');
+
+
+Route::get('/grafica', [PaqueteController::class, 'contarPaquetesConsolidados']);

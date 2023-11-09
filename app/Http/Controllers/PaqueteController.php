@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Empresa;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 
@@ -73,6 +74,7 @@ class PaqueteController extends Controller
         $identificadorUnico = $request->input('identificadorUnico');
         $codigoDeSeguimiento = $this->obtenerTracking($identificadorUnico);
         $paquete->codigo_seguimiento = $codigoDeSeguimiento;
+        $resultado = $this->enviarCorreo( $email, $paquete->descripcion, $paquete->codigo_seguimiento, $paquete->estado);
         $paquete->save();
     
         if ($paquete->estado === 'En almacén destino') {
@@ -88,7 +90,7 @@ class PaqueteController extends Controller
             $almacena->save();
         }
     
-        $resultado = $this->enviarCorreo( $email, $paquete->descripcion, $paquete->codigo_seguimiento, $paquete->estado);
+       
     
         return 'Paquete insertado con éxito';
     }
@@ -296,6 +298,16 @@ public function enviarCorreo($correoDestino, $paquetedes, $paqueteTracking, $est
 
 
 
+public function contarPaquetesConsolidados()
+{
+    $resultados = DB::table('paquetes')
+        ->select(DB::raw('YEAR(fecha_creacion) as año'), DB::raw('MONTH(fecha_creacion) as mes'), DB::raw('COUNT(*) as cantidad'))
+        ->where('estado', 'Entregado')
+        ->groupBy('año', 'mes')
+        ->get();
+
+    return view('grafica', compact('resultados'));
+}
 
 
 

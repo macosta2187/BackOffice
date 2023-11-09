@@ -82,9 +82,9 @@ class DespachaController extends Controller
                 $paquete->delete();
             }
     
-            return response('Registro insertado correctamente', 200);
+            return response('ok', 200);
         } catch (\Exception $e) {            
-            return response('Error al insertar el registro: ' . $e->getMessage(), 500);
+            return response('Error al insertar: ' . $e->getMessage(), 500);
         }
     }
     

@@ -252,8 +252,7 @@ body {
   @section('content')
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-md-8">
-        <!-- <div class="card-header">{{ __('Dashboard') }}</div>-->
+      <div class="col-md-8">   
         <div class="card-body">
           @if (session('status'))
           <div class="alert alert-success" role="alert">
@@ -266,7 +265,7 @@ body {
   </div>
 
   <div class="usuario-logueado">
-  <!--<li><button id="dark-mode-toggle">Dark Mode</button></li>-->
+  
   {{ Auth::user()->name    }} 
   <a class="dropdown-item" href="{{ route('logout') }}" id="logout-link">{{ __('Logout') }}</a>
     {{ __('|Usuario logueado') }}
@@ -334,6 +333,11 @@ body {
       <li><a href="/clientes/Ingresar" id="clientesInsertar">
         <span class="icon"><i class="fas fa-blog"></i></span>
         <span class="title">Clientes</span>
+      </a></li>
+
+      <li><a href="/grafica" id="estaditicas">
+        <span class="icon"><i class="fas fa-blog"></i></span>
+        <span class="title">Estadisticas</span>
       </a></li>
       
 
@@ -409,6 +413,13 @@ body {
 
   });
 
+  const estaditicas = document.getElementById("estaditicas");
+  estaditicas.addEventListener("click", function (e) {
+    e.preventDefault();
+    document.getElementById("formulario").src = "/grafica";
+
+  });
+
   
 
   document.addEventListener('DOMContentLoaded', function () {
@@ -430,6 +441,8 @@ body {
     link.removeEventListener("click", handleMenuClick);
     link.addEventListener("click", handleMenuClick);
   });
+
+  
 </script>
 
 </body>
