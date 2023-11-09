@@ -30,7 +30,7 @@ public function Insertar(Request $request)
     try {
         $this->ValidarInsertar($request); 
 
-        // Crear un nuevo empleado
+        
         $empleado = new Empleado;
         $empleado->ci = $request->input('ci');
         $empleado->nombre = $request->input('nombre');

@@ -46,6 +46,19 @@
             <input type="tel" class="form-control" id="telefono" name="telefono" value="{{ $almacen->telefono }}" required maxlength="9">
         </div>
 
+
+        <div class="form-group">
+            <label for="latitud">Latitud:</label>
+            <input type="text" class="form-control" id="latitud" name="latitud" value="{{ $almacen->latitud }}" required maxlength="8">
+        </div>
+
+
+        <div class="form-group">
+            <label for="longitud">Longitud:</label>
+            <input type="text" class="form-control" id="longitud" name="longitud" value="{{ $almacen->longitud }}" required maxlength="8">
+        </div>
+
+
         <button type="submit" class="btn btn-primary">Guardar cambios</button>
     </form>
 </div>

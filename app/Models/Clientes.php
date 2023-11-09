@@ -4,8 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Tracking extends Model
+class Clientes extends Model
 {
     use HasFactory;
+    protected $table = 'clientes';
+    use SoftDeletes;
 }

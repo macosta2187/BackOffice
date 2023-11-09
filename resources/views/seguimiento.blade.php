@@ -19,7 +19,7 @@ body {
     height: 100vh;
     width: 100%;
     display: flex;
-    flex-direction: column; /* Cambia la dirección de flex a columna */
+    flex-direction: column; 
     justify-content: center;
     align-items: center;
 }

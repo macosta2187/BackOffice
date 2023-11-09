@@ -37,7 +37,7 @@
             @foreach ($paquetes as $paquete)
                 <tr>
                     <td>
-                        <input type="checkbox" name="seleccionar_paquete[]" value="{{ $paquete->id }}">
+                    <input type="radio" name="seleccionar_paquete" value="{{ $paquete->id }}">
                     </td>
                     <td>{{ $paquete->id }}</td>
                     <td>{{ $paquete->telefono }}</td>
@@ -64,10 +64,12 @@
         </tbody>
     </table>
 
+
     <form method="POST" action="{{ route('enviarPaquete') }}" id="enviarPaqueteForm">
         @csrf
-        <input type="hidden" name="id_flete" id="idFlete" value=""> 
-        <input type="hidden" name="paquete_id" value="{{ $paquete->id }}">
+        <input type="hidden" name="id_flete" id="idFlete" value="">      
+        <input type="hidden" name="paquete_id" value="{{ isset($paquete) ? $paquete->id : '' }}">
+        <input type="hidden" name="departamento_paquete" value="{{ isset($paquete) ? $paquete->departamento : '' }}">
         <button type="submit" class="btn btn-primary">Enviar Paquete</button>
     </form>
 </div>
@@ -84,15 +86,15 @@
 <script>
 
 document.getElementById('enviarPaqueteForm').addEventListener('submit', function(e) {
-    var checkboxes = document.querySelectorAll('input[name="seleccionar_paquete[]"]');
-    var checked = Array.from(checkboxes).some(checkbox => checkbox.checked);
-
-    if (!checked) {
-        e.preventDefault(); 
-        alert('Por favor, selecciona al menos un paquete antes de enviar.');
-    } else {        
-        var selectedFlete = document.getElementById('selectedFlete').value;
-        document.getElementById('idFlete').value = selectedFlete;
+    e.preventDefault();  
+    var selectedFlete = document.getElementById('selectedFlete').value;
+    document.getElementById('idFlete').value = selectedFlete;
+    var selectedPaquete = document.querySelector('input[name="seleccionar_paquete"]:checked');
+    if (selectedPaquete) {
+        document.querySelector('input[name="paquete_id"]').value = selectedPaquete.value;
+        this.submit();  
+    } else {
+        alert('Por favor, selecciona un paquete antes de enviar.');
     }
 });
 

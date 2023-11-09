@@ -24,5 +24,11 @@ class Paquete extends Model
 {
     return $this->belongsToMany(Almacen::class, 'almacena_s', 'id_paquete', 'id_almacen');
 }
+
+public function cliente()
+{
+    return $this->belongsTo(Clientes::class, 'cliente_ci', 'ci');
+}
+
   
 }
