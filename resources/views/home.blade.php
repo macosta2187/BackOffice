@@ -284,6 +284,9 @@ body {
       <ul>
         <li><div id="contenido"></div></li>
       </ul>
+      <ul style="text-align: left;">
+                <li><a href="https://github.com/macosta2187/Manual/blob/develop/Manual%20de%20Usuario.pdf" target="_blank">Manual</a></li>
+            </ul>
     </div>
   </div>
   <div class="sidebar">
@@ -339,7 +342,8 @@ body {
         <span class="icon"><i class="fas fa-blog"></i></span>
         <span class="title">Estadisticas</span>
       </a></li>
-      
+
+
 
     </ul>
   </div>
@@ -419,6 +423,14 @@ body {
     document.getElementById("formulario").src = "/grafica";
 
   });
+
+  const mapa = document.getElementById("mapa");
+  mapa.addEventListener("click", function (e) {
+    e.preventDefault();
+    document.getElementById("formulario").src = "/mapa";
+
+  });
+
 
   
 

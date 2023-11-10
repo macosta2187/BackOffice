@@ -92,7 +92,7 @@ class PaqueteController extends Controller
     
        
     
-        return 'Paquete insertado con éxito';
+        return 'ok';
     }
     
 

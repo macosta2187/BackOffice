@@ -184,6 +184,9 @@ body {
        <div class="step-wizard-controls">
         <input type="text" id="paqueteInput" placeholder="Ingrese el TRACKING del paquete">
         <button class="btn btn-primary" id="avanzarButton">Buscar Tracking</button>
+        <p style="min-height: 20px;"></p>
+        <td><a href="{{ route('mapa')}}" class="btn btn-primary">Localizar en Mapa</a></td>
+
     </div>
     </section>
 

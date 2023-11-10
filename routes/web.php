@@ -296,3 +296,8 @@ Route::get('/clientes/Ingresar', function () {
 
 
 Route::get('/grafica', [PaqueteController::class, 'contarPaquetesConsolidados']);
+
+
+Route::get('/mapa', function () {
+    return view('/mapa');
+})->middleware('auth')->name('mapa');
