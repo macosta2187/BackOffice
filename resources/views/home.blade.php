@@ -424,12 +424,6 @@ body {
 
   });
 
-  const mapa = document.getElementById("mapa");
-  mapa.addEventListener("click", function (e) {
-    e.preventDefault();
-    document.getElementById("formulario").src = "/mapa";
-
-  });
 
 
   
