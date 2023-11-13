@@ -303,7 +303,7 @@ body {
         <span class="icon"><i class="fas fa-blog"></i></span>
         <span class="title">Almacen</span>
       </a></li>
-      <li><a href="/paquetes/Ingresar" id="paquetes">
+      <li><a href="/paquetes/mostrar" id="paquetes">
         <span class ="icon"><i class="fas fa-blog"></i></span>
         <span class="title">Paquetes</span>
       </a></li>
@@ -366,7 +366,7 @@ body {
   const paquetes = document.getElementById("paquetes");
   paquetes.addEventListener("click", function (e) {
     e.preventDefault();
-    document.getElementById("formulario").src = "/paquetes/Ingresar";
+    document.getElementById("formulario").src = "/paquetes/mostrar";
   });
 
   const vehiculosAlta = document.getElementById("vehiculosAlta");

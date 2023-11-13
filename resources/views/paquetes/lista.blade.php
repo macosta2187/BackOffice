@@ -91,6 +91,8 @@
                 @endforeach
             </tbody>
         </table>
+        <td><a href="{{ route('paquetes.Listar')}}" class="btn btn-primary">Consolidar</a></td>
+        <td><a href="{{ route('paquetes.Insertar')}}" class="btn btn-primary">Ingresar</a></td>
     </div>
     </div>
      
