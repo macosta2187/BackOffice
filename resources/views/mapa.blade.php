@@ -15,31 +15,45 @@
         }
 
         #info-panel {
-       background-color: #fff;
-       opacity: 0.8;
-       position: absolute;
-       bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 10px;
-      width: 80%; 
-      max-width: 500px; 
-      border: 1px solid #ddd;
+    background-color: #fff;
+    opacity: 0.8;
+    position: fixed;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    padding: 20px;
+    width: 400px; /* Ancho fijo */
+    max-width: 90vw; /* Ancho máximo relativo al 90% del ancho de la ventana */
+    max-height: 80vh; /* Altura máxima relativa al 80% de la altura de la ventana */
+    overflow-y: auto; /* Agregar desplazamiento vertical si el contenido excede la altura máxima */
+    border: 1px solid #ddd;
+}
+
+
+
+        body {
+            overflow-x: hidden; /* Evitar la barra de desplazamiento horizontal */
         }
+
     </style>
 </head>
 <body>
+<div class="container text-center">
+    <h1 class="my-5">Buscador</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <label for="searchId">ID del paquete a buscar:</label>
+            <input type="number" id="searchId" class="form-control" min="1">
+        </div>
+        <div class="col-md-2">
+            <label>&nbsp;</label>
+            <button class="btn btn-info form-control" id="searchBtn">Buscar</button>
+        </div>
+    </div>
+
+
     <div class="container">
-        <h1 class="mt-5">Buscador</h1>
-        <div class="row mb-3">
-            <div class="col-md-6">
-                <label for="searchId">ID del paquete a buscar:</label>
-                <input type="number" id="searchId" class="form-control" min="1">
-            </div>
-            <div class="col-md-2">
-                <label>&nbsp;</label>
-                <button class="btn btn-primary form-control" id="searchBtn">Buscar</button>
-            </div>
+        
             <h1 class="mt-5">Paquetes en viaje en tiempo real</h1>
         </div>
         <table class="table table-dark" id="paquetes-table">

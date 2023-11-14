@@ -10,48 +10,55 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.5/css/buttons.bootstrap4.min.css">
 </head>
 <body>
-    <div class="container mt-5">
-        <h1 class="text-center">Lista de Empresas</h1>
-        <table id="tabla-empresas" class="table table-striped">
-            <thead class="thead-dark">
-                <tr>
-                    <th>id</th>
-                    <th>RUT</th>
-                    <th>Nombre</th>
-                    <th>Calle</th>
-                    <th>Número</th>
-                    <th>Localidad</th>
-                    <th>Departamento</th>
-                    <th>Teléfono</th>
-                    <th>Eliminar</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($empresas as $empresa)
-                    <tr>
-                        <td>{{ $empresa->id }}</td>
-                        <td>{{ $empresa->RUT }}</td>
-                        <td>{{ $empresa->nombre }}</td>
-                        <td>{{ $empresa->calle }}</td>
-                        <td>{{ $empresa->numero }}</td>
-                        <td>{{ $empresa->localidad }}</td>
-                        <td>{{ $empresa->departamento }}</td>
-                        <td>{{ $empresa->telefono }}</td>
-                        <td>
-                            <form method="POST" action="{{ route('empresas.Eliminar', $empresa->id) }}">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Eliminar</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+<div class="container text-center">
+        <h1 class="my-5">Lista de empresas </h1>
+        <div class="col-12 d-flex justify-content-end align-items-start mb-2">
+        <a href="{{ route('empresas.Insertar') }}" class="btn btn-secondary">Insertar Empresa</a>
+            </div>
+</div>
+    <div class="container ">
 
-        <div class="mb-3">
-            <a href="{{ route('empresas.Insertar') }}" class="btn btn-success">Insertar Empresa</a>
-        </div>
+         <div class="table-responsive">
+            <table id="tabla-empresas" class="table table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>id</th>
+                        <th>RUT</th>
+                        <th>Nombre</th>
+                        <th>Calle</th>
+                        <th>Número</th>
+                        <th>Localidad</th>
+                        <th>Departamento</th>
+                        <th>Teléfono</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($empresas as $empresa)
+                        <tr>
+                            <td>{{ $empresa->id }}</td>
+                            <td>{{ $empresa->RUT }}</td>
+                            <td>{{ $empresa->nombre }}</td>
+                            <td>{{ $empresa->calle }}</td>
+                            <td>{{ $empresa->numero }}</td>
+                            <td>{{ $empresa->localidad }}</td>
+                            <td>{{ $empresa->departamento }}</td>
+                            <td>{{ $empresa->telefono }}</td>
+                            <td>
+                                <form method="POST" action="{{ route('empresas.Eliminar', $empresa->id) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+
+           
+         </div>
+
 
     
     </div>

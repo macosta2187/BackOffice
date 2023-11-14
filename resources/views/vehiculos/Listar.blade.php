@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.5/css/buttons.bootstrap4.min.css">
+
 </head>
 <body>
     <div class="container">
@@ -51,7 +52,7 @@
                             @endif
                         </td>
                         <td>
-                            <a href="{{ route('vehiculos.Editar', $vehiculo->id) }}" class="btn btn-primary">Editar</a>
+                            <a href="{{ route('vehiculos.Editar', $vehiculo->id) }}" class="btn btn-secondary">Editar</a>
                         </td>
                         <td>
                             <form action="{{ route('vehiculos.eliminar', ['id' => $vehiculo->id]) }}" method="POST">

@@ -139,9 +139,31 @@ body {
 }
 
 #paqueteInput {
-   width: 300px;
-    margin-bottom: 30px; 
+    width: 300px;
+    padding: 10px; 
+    border-radius: 15px; 
+    border: 1px solid #ccc; 
+    margin-bottom: 30px;
 }
+
+.btn-custom {
+    background-color: #3498db; 
+    color: #fff; 
+    border: none; 
+    padding: 10px 20px; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3); 
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; 
+}
+
+.btn-custom:hover {
+    background-color: #2980b9; 
+    box-shadow: 0 6px 12px rgba(41, 128, 185, 0.5); 
+    transform: scale(1.05); 
+}
+
+
+
 
     </style>
 </head>
@@ -183,9 +205,10 @@ body {
         </ul>
        <div class="step-wizard-controls">
         <input type="text" id="paqueteInput" placeholder="Ingrese el TRACKING del paquete">
-        <button class="btn btn-primary" id="avanzarButton">Buscar Tracking</button>
+        <button class="btn btn-primary btn-custom" id="avanzarButton">Buscar Tracking</button>
         <p style="min-height: 20px;"></p>
-        <td><a href="{{ route('mapa')}}" class="btn btn-primary">Localizar en Mapa</a></td>
+        <td><a href="{{ route('mapa')}}" class="btn btn-primary btn-custom">Localizar en Mapa</a></td>
+
 
     </div>
     </section>

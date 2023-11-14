@@ -11,10 +11,15 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.5/css/buttons.dataTables.min.css">
 </head>
 <body>
-    <div class="container mt-5">
-        <h1 class="text-center">Lista de Almacenes</h1>
-        <table id="tabla-almacenes" class="table table-striped">
-            <thead class="thead-dark">
+<div class="container d-flex align-items-center justify-content-center">
+        <h1 class="mt-5 mb-5 text-center">Lista de Almacenes </h1>
+</div>
+    <div class="container mt-3">
+        
+        <div class=".table-responsive ">
+            <table id="tabla-almacenes"  class="table table-hover">
+            
+            <thead class="table-info ">
                 <tr>
                     <th>id</th>
                     <th>Nombre</th>
@@ -42,7 +47,7 @@
                         <td>{{ $almacen->latitud }}</td>
                         <td>{{ $almacen->longitud }}</td>
                         <td>
-                            <a href="{{ route('almacenes.Editar', $almacen->id) }}" class="btn btn-primary">Editar</a>
+                            <a href="{{ route('almacenes.Editar', $almacen->id) }}" class="btn btn-secondary">Editar</a>
                         </td>
                         <td>
                             <form action="{{ route('almacenes.eliminar', $almacen->id) }}" method="POST" class="delete-form">
@@ -58,7 +63,11 @@
                     </tr>
                 @endforelse
             </tbody>
-        </table>
+
+            </table>
+        </div>
+
+
     </div>
     
    

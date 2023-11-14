@@ -9,25 +9,27 @@
     <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
 </head>
 <body>
-
-<div class="container mt-4">
-    <h1 class="text-center">Editar Empleados</h1>
+<div class="container d-flex align-items-center justify-content-center">
+        <h1 class="mt-5 mb-5 text-center">Editar Empleados</h1>
+</div>
+<div class="container d-flex align-items-center justify-content-center">
+    
     <form action="{{ route('empleados.Actualizar', $empleado->id) }}" method="POST">
         @csrf
         @method('PUT')
 
-        <div class="form-group">
-    <label for="ci">Cédula:</label>
-    <input type="text" class="form-control" name="ci" value="{{ $empleado->ci }}" pattern="[0-9]{8}" required maxlength="8" readonly>
-</div>
+        <div class="form-row mb-2">
+            <label for="ci">Cédula:</label>
+            <input type="text" class="form-control" name="ci" value="{{ $empleado->ci }}" pattern="[0-9]{8}" required maxlength="8" readonly>
+        </div>
 
 
-        <div class="form-group">
+        <div class="form-group col-md-30">
             <label for="nombre">Nombre:</label>
             <input type="text" class="form-control" name="nombre" value="{{ $empleado->nombre }}" maxlength="25" required>
         </div>
 
-        <div class="form-group">
+        <div class="form-group col-md-30 mb-2">
             <label for="apellido">Apellido:</label>
             <input type="text" class="form-control" name="apellido" value="{{ $empleado->apellido }}" maxlength="25" required>
         </div>
@@ -37,27 +39,32 @@
             <input type="text" class="form-control" name="email" value="{{ $empleado->email }}" maxlength="50" required>
         </div>
 
-        <div class="form-group">
+        <div class="form-group mb-2">
             <label for="celular">Número de celular:</label>
             <input type="tel" class="form-control" name="celular" value="{{ $empleado->celular }}" maxlength="9" required minlength="9">
         </div>
 
-        <div class="form-group">
-    <label for="contraseña">
-        Contraseña (Debe tener 12 caracteres):
-    </label>
-    <input type="password" class="form-control" id="contraseña" name="contraseña" required maxlength="12" value="{{ $empleado->contraseña }}">
-</div>
+        <div class="form- mb-2">
+            <label for="contraseña">
+                Contraseña (Debe tener 12 caracteres):
+            </label>
+            <input type="password" class="form-control" id="contraseña" name="contraseña" required maxlength="12" value="{{ $empleado->contraseña }}">
+        </div>
 
-<div class="form-check">
-    <input type="checkbox" name="op_almacen" id="op_almacen" value="1"> Funcionario de Almacén<br>
-</div>
+        <div class="form-check form-switch mb-2">
+            <input type="checkbox" name="op_almacen" id="op_almacen" value="1" class="form-check-input">
+            <label class="form-check-label" for="op_almacen">Funcionario de Almacén</label>
+        </div>
 
-<div class="form-check">
-    <input type="checkbox" name="op_chofer" id="op_chofer" value="1"> Chofer<br>
-</div>
+        <div class="form-check form-switch mb-2">
+            <input type="checkbox" name="op_chofer" id="op_chofer" value="1" class="form-check-input">
+        <label class="form-check-label" for="op_chofer">Chofer</label>
+        </div>
 
-        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+        
+
+
+        <button type="submit" class="btn btn-success">Guardar cambios</button>
     </form>
 </div>
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,47 +9,52 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.5/css/buttons.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.5/css/buttons.bootstrap4.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
+    <link rel="stylesheet" href="styles.css"> 
 <body>
-    <div class="container">
-        <h1 class="mt-5">Lista de empleados</h1>
-        <table class="table table-bordered table-striped dataTable">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Cedula</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Celular</th>
-                    <th>Email</th>                                      
-                    <th>Editar</th>
-                    <th>Eliminar</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse($empleados as $empleado)
+<div class="container d-flex align-items-center justify-content-center">
+        <h1 class="mt-5 mb-5 text-center">Lista de empleados </h1>
+</div>
+    <div class="container ">
+        
+        <div class=".table-responsive">
+        <table class="table table-hover">
+                <thead class="table-info">
                     <tr>
-                        <td>{{ $empleado->ci }}</td>
-                        <td>{{ $empleado->nombre }}</td>
-                        <td>{{ $empleado->apellido }}</td>
-                        <td>{{ $empleado->celular }}</td>
-                        <td>{{ $empleado->email }}</td>
-                        <td><a href="{{ route('empleados.Editar', $empleado->id) }}" class="btn btn-primary">Editar</a></td>
-                        <td>
-                            <form action="{{ route('empleados.eliminar', $empleado->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Eliminar</button>
-                            </form>
-                        </td>
+                        <th>Cedula</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Celular</th>
+                        <th>Email</th>                                      
+                        <th>Editar</th>
+                        <th>Eliminar</th>
                     </tr>
-                @empty
-                    <tr id="no-results-row">
-                        <td colspan="7">No se encontraron resultados.</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
-        <td><a href="{{ route('empleados.Insertar')}}" class="btn btn-primary">Ingreso empleados</a></td>
+                </thead>
+                <tbody>
+                    @forelse($empleados as $empleado)
+                        <tr>
+                            <td>{{ $empleado->ci }}</td>
+                            <td>{{ $empleado->nombre }}</td>
+                            <td>{{ $empleado->apellido }}</td>
+                            <td>{{ $empleado->celular }}</td>
+                            <td>{{ $empleado->email }}</td>
+                            <td><a href="{{ route('empleados.Editar', $empleado->id) }}" class="btn btn-secondary">Editar</a></td>
+                            <td>
+                                <form action="{{ route('empleados.eliminar', $empleado->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr id="no-results-row">
+                            <td colspan="7">No se encontraron resultados.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+        <td><a href="{{ route('empleados.Insertar')}}" class="btn btn-secondary">Ingreso empleados</a></td>
     </div>
     
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -74,5 +79,3 @@
     </script>
 </body>
 </html>
-
-

@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -18,12 +17,13 @@
       @import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap');
 
 .usuario-logueado {
-  position: absolute;
-  top: 10px;
+  position: fixed;
+  top: 70px; 
   right: 10px;
-  background-color: rgba(255, 255, 255, 0.8); 
+  background-color: rgba(255, 255, 255, 0.8);
   padding: 5px 10px;
   border-radius: 5px;
+  z-index: 2; 
 }
 
 *{
@@ -35,15 +35,19 @@ box-sizing: border-box;
 font-family: 'Montserrat', sans-serif;
 }
 body{
-  background-image: url('fondo.jpg');
+  background-image: url('FonDO.jpeg');
   background-repeat: no-repeat;
- 
+  background-position: center calc(50% + 30px);  
+  background-size: contain;
+  max-width: 100%; 
+  max-height: 100vh; 
   
   margin: 0;
-    padding: 0;
+  padding: 0;
 }
 .wrapper{
-margin: 10px;
+  margin: 10px;
+  display: flex;
 }
 .wrapper .top_navbar{
 width: calc(100% - 20px);
@@ -56,7 +60,7 @@ top: 10px;
 .wrapper .top_navbar .hamburger{
 width: 70px;
 height: 100%;
-background: #f85c3d;
+background: #778899;
 padding: 15px 17px;
 border-top-left-radius: 20px;
 cursor: pointer;
@@ -73,7 +77,7 @@ border-radius: 5px;
 .wrapper .top_navbar .top_menu{
 width: calc(100% - 70px);
 height: 100%;
-background: #f85c3d;
+background: #778899;
 border-top-right-radius: 20px;
 display: flex;
 justify-content: space-between;
@@ -106,7 +110,7 @@ color: #ffff;
 }
 
 .wrapper .top_navbar .top_menu ul li a:hover{
-background: #4360b5;
+background: #4682B4;
 color: #fff;
 }
 
@@ -118,7 +122,7 @@ color: #fff;
 position: fixed;
 top: 70px;
 left: 10px;
-background: #4d45b2;
+background: #4682B4;
 width: 200px;
 height: calc(100% - 80px);
 border-bottom-left-radius: 20px;
@@ -159,7 +163,7 @@ display: inline-block;
 
 .wrapper .sidebar ul li a:hover,
 .wrapper .sidebar ul li a.active{
-background: #f85c3d;
+background: #778899;
 color: #fff;
 }
 
@@ -204,6 +208,22 @@ display: none;
 width: (100% - 70px);
 margin-left: 70px;
 }
+.minimal-button {
+  background-color:#4682B4; 
+    border: none;
+    border-radius: 10%; 
+    padding: 10px 15px; 
+    color: #ffffff; 
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.minimal-button:hover {
+  background-color: #6a1e9b; 
+    color: #ffffff;
+}
+
 
 
 
@@ -264,13 +284,16 @@ body {
     </div>
   </div>
 
-  <div class="usuario-logueado">
   
-  {{ Auth::user()->name    }} 
-  <a class="dropdown-item" href="{{ route('logout') }}" id="logout-link">{{ __('Logout') }}</a>
-    {{ __('|Usuario logueado') }}
-  </div>
-  @endsection
+  
+  <div class="usuario-logueado">
+    {{ Auth::user()->name }} 
+    <form action="{{ route('logout') }}" method="post" id="logout-form" style="display: inline-block;">
+        @csrf
+        <a  href="#" onclick="document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+    </form>
+    {{ __('| Usuario logueado') }}
+</div>
 
   <div class="wrapper">
   <div class="top_navbar">
@@ -280,66 +303,70 @@ body {
        <div class="three"></div>
     </div>
     <div class="top_menu">
-      <div>ADN</div>
-      <ul>
-        <li><div id="contenido"></div></li>
-      </ul>
-      <ul style="text-align: left;">
-                <li><a href="https://github.com/macosta2187/Manual/blob/develop/Manual%20de%20Usuario.pdf" target="_blank">Manual</a></li>
-            </ul>
-    </div>
+  <div class="logo">
+    <img src="fondooLogo-.png" alt="ADN Logo" style="height: 60px; width: auto;">
+  </div>
+  <ul>
+    
+    <li><div id="contenido"></div></li>
+  </ul>
+  <ul style="text-align: left;">
+    <li><button class="minimal-button" onclick="window.open('https://github.com/macosta2187/Manual/blob/develop/Manual%20de%20Usuario.pdf', '_blank')">Manual</button></li>
+</ul>
+
+</div>
   </div>
   <div class="sidebar">
     <ul>
       <li><a href="/home" id="home">
-        <span class="icon"><i class="fas fa-file-video"></i></span>
+        <span class="icon"><i class="fas fa-home"></i></span>
         <span class="title">Home</span>
       </a></li>
       <li><a href="/empleados/Listar" id="listarEmpleado">
-        <span class="icon"><i class="fas fa-file-video"></i></span>
+        <span class="icon"><i class="fas fa-user"></i></span>
         <span class="title">Empleado</span>
       </a></li>
       <li><a href="/almacenes/Ingresar" id="altaAlmacen">
-        <span class="icon"><i class="fas fa-blog"></i></span>
+        <span class="icon"><i class="fas fa-warehouse"></i></span>
         <span class="title">Almacen</span>
       </a></li>
-      <li><a href="/paquetes/mostrar" id="paquetes">
-        <span class ="icon"><i class="fas fa-blog"></i></span>
+      <li><a href="/paquetes/Ingresar" id="paquetes">
+        <span class ="icon"><i class="fas fa-box"></i></span>
         <span class="title">Paquetes</span>
       </a></li>
       <li><a href="/vehiculos/Ingreso" id="vehiculosAlta">
-        <span class="icon"><i class="fas fa-blog"></i></span>
+        <span class="icon"><i class="fas fa-truck"></i></span>
         <span class="title">Vehiculos</span>
       </a></li>
       <li><a href="/empresas/Listar" id="empresasingresar">
-        <span class="icon"><i class="fas fa-blog"></i></span>
+        <span class="icon"><i class="fas fa-building"></i></span>
         <span class="title">Empresas</span>
       </a></li>
       <li><a href="/seguimiento" id="seguimiento">
-        <span class="icon"><i class="fas fa-blog"></i></span>
+        <span class="icon"><i class="fas fa-map-marked-alt"></i></span>
         <span class="title">Seguimiento</span>
       </a></li>
       <li><a href="/LotePaquete" id="LotePaquete">
-        <span class="icon"><i class="fas fa-blog"></i></span>
+        <span class="icon"><i class="fas fa-cubes"></i></span>
         <span class="title">Lotes</span>
       </a></li>
       <li><a href="/fletes" id="PaqueteEstado">
-        <span class="icon"><i class="fas fa-blog"></i></span>
+        <span class="icon"><i class="fas fa-shipping-fast"></i></span>
         <span class="title">Fletes</span>
       </a></li>
 
       <li><a href="/paquetes/desconsolidar" id="PaqueteDestino">
-        <span class="icon"><i class="fas fa-blog"></i></span>
+        <span class="icon"><i class="fas fa-sign-in-alt"></i></span>
         <span class="title">Arrivos</span>
       </a></li>
 
       <li><a href="/clientes/Ingresar" id="clientesInsertar">
-        <span class="icon"><i class="fas fa-blog"></i></span>
+        <span class="icon"><i class="fas fa-users"></i></span>
         <span class="title">Clientes</span>
       </a></li>
 
       <li><a href="/grafica" id="estaditicas">
-        <span class="icon"><i class="fas fa-blog"></i></span>
+        <span class="icon"><i class="fas fa-chart-bar"></i></span>
         <span class="title">Estadisticas</span>
       </a></li>
 
@@ -351,6 +378,9 @@ body {
 </div>
 
 <script>
+  
+
+
   const enlaceAltaAlmacen = document.getElementById("altaAlmacen");
   enlaceAltaAlmacen.addEventListener("click", function (e) {
     e.preventDefault();
@@ -366,7 +396,7 @@ body {
   const paquetes = document.getElementById("paquetes");
   paquetes.addEventListener("click", function (e) {
     e.preventDefault();
-    document.getElementById("formulario").src = "/paquetes/mostrar";
+    document.getElementById("formulario").src = "/paquetes/Ingresar";
   });
 
   const vehiculosAlta = document.getElementById("vehiculosAlta");
@@ -424,6 +454,12 @@ body {
 
   });
 
+  const mapa = document.getElementById("mapa");
+  mapa.addEventListener("click", function (e) {
+    e.preventDefault();
+    document.getElementById("formulario").src = "/mapa";
+
+  });
 
 
   
