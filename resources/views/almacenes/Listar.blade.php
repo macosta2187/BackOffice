@@ -11,8 +11,11 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.5/css/buttons.dataTables.min.css">
 </head>
 <body>
-<div class="container d-flex align-items-center justify-content-center">
-        <h1 class="mt-5 mb-5 text-center">Lista de Almacenes </h1>
+<div class="container text-center">
+        <h1 class="my-5">Lista de Almacenes </h1>
+        <div class="col-12 d-flex justify-content-end align-items-start mb-2">
+        <a href="{{ route('almacenes.Insertar')}}" class="btn btn-secondary">Ingreso Almacen</a>
+            </div>
 </div>
     <div class="container mt-3">
         

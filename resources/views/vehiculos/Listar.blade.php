@@ -11,10 +11,16 @@
 
 </head>
 <body>
+<div class="container text-center">
+        <h1 class="my-5">Listar Vehiculos</h1>
+            <div class="col-12 d-flex justify-content-end align-items-start">
+                <a href="{{ route('vehiculos.Insertar')}}" class="btn btn-secondary">Ingresar vehiculo</a>
+            </div>
+    </div>
+
     <div class="container">
-        <h1 class="text-center">Lista de vehículos</h1>
         
-        
+        <div class="table-responsive">
         <table class="table" id="vehiculos-table">
             <thead>
                 <tr>
@@ -69,6 +75,9 @@
                 @endforelse
             </tbody>
         </table>
+        </div>
+        
+        
        
     </div>
    

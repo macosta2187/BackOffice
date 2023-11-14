@@ -26,8 +26,8 @@
    
     
 
-    <div class="table-responsive">
-            <table class="table table-bordered table-striped dataTable">
+    <div class="w-100">
+            <table class="table table-hover table-lg" style="overflow-x: auto;">
            <thead class="thead-dark">
                 <tr>
                     <th>ID</th>

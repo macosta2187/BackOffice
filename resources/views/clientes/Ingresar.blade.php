@@ -10,32 +10,38 @@
     <title>Formulario de Ingreso de Cliente</title>
 </head>
 <body>
-    <div class="container mt-5">
-        <h1 class="text-center">Alta de Clientes en Sistema</h1>
+<div class="container text-center">
+        <h1 class="my-5">Alta de clientes en sistema</h1>
+            <div class="col-12 d-flex justify-content-end align-items-start">
+                <a href="{{ route('clientes.Listar')}}" class="btn btn-outline-info">Administracion</a>
+            </div>
+    </div>
+    <div class="container d-flex align-items-center justify-content-center">
+        
         <form id="myForm" action="{{ route('clientes.Ingresar') }}" method="POST">
             @csrf
 
-            <div class="form-group">
+            <div class="form-group col-md-30">
                 <label for="nombre">Nombre:</label>
                 <input type="text" class="form-control" id="nombre" name="nombre" required maxlength="50">
             </div>
 
-            <div class="form-group">
+            <div class="form-group col-md-30 mb-2">
                 <label for="apellido">Apellido:</label>
                 <input type="text" class="form-control" id="apellido" name="apellido" required maxlength="50">
             </div>
 
-            <div class="form-group">
+            <div class="form-group col-md-30 mb-2">
                 <label for = "ci">Cedula:</label>
                 <input type="text" class="form-control" id="ci" name="ci" required maxlength="9">
             </div>
 
-            <div class="form-group">
+            <div class="form-group col-md-30 mb-2">
                 <label for = "direccion">Direccion:</label>
                 <input type="text" class="form-control" id="direccion" name="direccion" required maxlength="50">
             </div>
 
-            <div class="form-group">
+            <div class="form-group col-md-30 mb-2">
     <label for="departamento">Departamento:</label>
     <select class="form-control" id="departamento" name="departamento" required>
         <option value="Artigas">Artigas</option>
@@ -61,19 +67,19 @@
 </div>
 
 
-             <div class="form-group">
+             <div class="form-group col-md-30 mb-2">
                 <label for = "email">Email:</label>
                 <input type="text" class="form-control" id="email" name="email" required maxlength="50">
             </div>
             
-            <div class="form-group">
+            <div class="form-group col-md-30 mb-2">
                 <label for="telefono">Telefono:</label>
                 <input type="text"  class="form-control" id="telefono" name="telefono"  required maxlength="9">
             </div>
 
 
-            <button type="submit" class="btn btn-primary">Guardar</button>
-            <td><a href="{{ route('clientes.Listar')}}" class="btn btn-primary">Administracion</a></td>
+            <button type="submit" class="btn btn-success">Guardar</button>
+            <td></td>
         </form>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

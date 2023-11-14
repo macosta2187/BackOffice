@@ -10,11 +10,19 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.5/css/buttons.bootstrap4.min.css">
 </head>
 <body>
-    <div class="container">
-        <h1 class="text-center">Lista de Clientes</h1>
 
-        <table class="table" id="clientes-table">
-            <thead>
+<div class="container text-center">
+        <h1 class="my-5">Lista de Clientes </h1>
+        <div class="col-12 d-flex justify-content-end align-items-start mb-2">
+        <a href="{{ route('clientes.Ingresar') }}" class="btn btn-outline-info">Insertar Cliente</a>
+            </div>
+</div>
+    <div class="container">
+       
+
+        <div class="table-responsive">
+        <table class="table table-hover" id="clientes-table">
+            <thead class="thead-dark">
                 <tr>
                     <th>Nombre</th>
                     <th>Apellido</th>
@@ -38,7 +46,7 @@
                         <td>{{ $cliente->departamento }}</td>
                         <td>{{ $cliente->telefono }}</td>
                         <td>
-                            <a href="{{ route('clientes.Editar', $cliente->id) }}" class="btn btn-primary">Editar</a>
+                            <a href="{{ route('clientes.Editar', $cliente->id) }}" class="btn btn-secondary">Editar</a>
                         </td>
                         <td>
                             <form action="{{ route('clientes.Eliminar', ['id' => $cliente->id]) }}" method="POST">
@@ -55,6 +63,7 @@
                 @endforelse
             </tbody>
         </table>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

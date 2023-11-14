@@ -112,8 +112,8 @@ Route::get('/vehiculos/{vehiculo}/editar', [VehiculoController::class, "Editar"]
 Route::put('/vehiculos/{vehiculo}', [VehiculoController::class, "Actualizar"])->name('vehiculos.Actualizar')->middleware('auth');
 Route::delete('/vehiculos/{id}', [VehiculoController::class, "Eliminar"])->name('vehiculos.eliminar')->middleware('auth');
 
-Route::get('/vehiculos/Ingresar', function () {
-    return view('vehiculos/Ingresar');
+Route::get('/vehiculos/Insertar', function () {
+    return view('vehiculos/Insertar');
 })->middleware('auth');
 
 Route::get('/vehiculos/Eliminar', function () {

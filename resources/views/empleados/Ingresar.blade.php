@@ -10,9 +10,12 @@
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
 </head>
 <body>
-<div class="container d-flex align-items-center justify-content-center">
-        <h1 class="mt-5 mb-5 text-center">Ingreso de Empleados</h1>
-</div>
+    <div class="container text-center">
+        <h1 class="my-5">Ingreso de Empleados</h1>
+            <div class="col-12 d-flex justify-content-end align-items-start">
+                <a href="{{ route('empleados.Listar')}}" class="btn btn-outline-info">Administracion</a>
+            </div>
+    </div>
 <div class="container d-flex align-items-center justify-content-center">
     <form id="myForm" action="{{ route('empleados.Insertar') }}" method="POST">
         @csrf

@@ -6,12 +6,30 @@
     <title>Gráfico</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .chart-container {
+            margin-top: 50px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+    </style>
 </head>
+
 <body>
-    <div class="container mt-4">
-        <h1 class="mb-4">Paquetes en (Estado: Entregado)</h1>
-        <div class="row">
-            <div class="col-lg-8"> 
+<div class="container text-center">
+        <h1 class="my-5">Paquetes en (Estado: Entregado)</h1>
+        
+</div>
+
+    <div class="container ">
+  
+        <div class="row justify-content-center">
+            <div class="col-lg-8 chart-container"> 
                 <canvas id="graficoBarras" style="width: 100%; height: 400px;"></canvas> 
             </div>
         </div>

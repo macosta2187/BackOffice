@@ -12,6 +12,9 @@
 <body>
     <div class="container text-center">
         <h1 class="my-5">Editar Almacen</h1>
+        <div class="col-12 d-flex justify-content-end align-items-start">
+    <a href="{{ route('almacenes.Listar')}}" class="btn btn-outline-info">Gestion Almacen</a>
+            </div>
     </div>
 
 <div class="container d-flex align-items-center justify-content-center">

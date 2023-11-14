@@ -9,9 +9,12 @@
     <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
 </head>
 <body>
-<div class="container d-flex align-items-center justify-content-center">
-        <h1 class="mt-5 mb-5 text-center">Editar Empleados</h1>
-</div>
+<div class="container text-center">
+        <h1 class="my-5">Editar Empleado</h1>
+            <div class="col-12 d-flex justify-content-end align-items-start">
+                <a href="{{ route('empleados.Listar')}}" class="btn btn-outline-info">Administracion</a>
+            </div>
+    </div>
 <div class="container d-flex align-items-center justify-content-center">
     
     <form action="{{ route('empleados.Actualizar', $empleado->id) }}" method="POST">

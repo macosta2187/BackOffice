@@ -11,13 +11,16 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css"> 
 <body>
-<div class="container d-flex align-items-center justify-content-center">
-        <h1 class="mt-5 mb-5 text-center">Lista de empleados </h1>
+<div class="container text-center">
+        <h1 class="my-5">Lista de empleados </h1>
+        <div class="col-12 d-flex justify-content-end align-items-start mb-2">
+        <a href="{{ route('empleados.Insertar')}}" class="btn btn-secondary">Ingreso empleados</a>
+            </div>
 </div>
     <div class="container ">
         
         <div class=".table-responsive">
-        <table class="table table-hover">
+            <table class="table table-hover">
                 <thead class="table-info">
                     <tr>
                         <th>Cedula</th>
@@ -54,7 +57,7 @@
                 </tbody>
             </table>
         </div>
-        <td><a href="{{ route('empleados.Insertar')}}" class="btn btn-secondary">Ingreso empleados</a></td>
+        
     </div>
     
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

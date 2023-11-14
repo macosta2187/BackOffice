@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paquetes en Almacén Destino</title>
+    <title>Reparto</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.5/css/buttons.dataTables.min.css">
 </head>
 <body>
 <div class="container text-center">
-        <h1 class="my-5">Paquetes en Almacén Destino</h1>
-        <img src="{{ asset('flete.jpg') }}" alt="Flete" width="200" height="150">
+        <h1 class="my-5">Enviar paquetes a domicilio</h1>
+        <img src="{{ asset('flete.png') }}" alt="Flete" width="200" height="150">
         <div class="col-12 d-flex justify-content-end align-items-start mb-2">
         <form method="POST" action="{{ route('enviarPaquete') }}" id="enviarPaqueteForm">
         @csrf

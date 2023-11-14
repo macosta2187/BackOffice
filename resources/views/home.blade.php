@@ -268,7 +268,7 @@ body {
 
 
 
-@extends('layouts.app')
+  @extends('layouts.app')
   @section('content')
   <div class="container">
     <div class="row justify-content-center">
@@ -284,8 +284,6 @@ body {
     </div>
   </div>
 
-  
-  
   <div class="usuario-logueado">
     {{ Auth::user()->name }} 
     <form action="{{ route('logout') }}" method="post" id="logout-form" style="display: inline-block;">
@@ -294,6 +292,8 @@ body {
     </form>
     {{ __('| Usuario logueado') }}
 </div>
+
+  @endsection
 
   <div class="wrapper">
   <div class="top_navbar">
@@ -326,15 +326,15 @@ body {
         <span class="icon"><i class="fas fa-user"></i></span>
         <span class="title">Empleado</span>
       </a></li>
-      <li><a href="/almacenes/Ingresar" id="altaAlmacen">
+      <li><a href="/almacenes/Listar" id="ListarAlmacen">
         <span class="icon"><i class="fas fa-warehouse"></i></span>
         <span class="title">Almacen</span>
       </a></li>
-      <li><a href="/paquetes/Ingresar" id="paquetes">
+      <li><a href="/paquetes/mostrar" id="paquetes">
         <span class ="icon"><i class="fas fa-box"></i></span>
         <span class="title">Paquetes</span>
       </a></li>
-      <li><a href="/vehiculos/Ingreso" id="vehiculosAlta">
+      <li><a href="/vehiculos/Listar" id="vehiculosListar">
         <span class="icon"><i class="fas fa-truck"></i></span>
         <span class="title">Vehiculos</span>
       </a></li>
@@ -360,7 +360,7 @@ body {
         <span class="title">Arrivos</span>
       </a></li>
 
-      <li><a href="/clientes/Ingresar" id="clientesInsertar">
+      <li><a href="/clientes/Listar" id="clientesListar">
         <span class="icon"><i class="fas fa-users"></i></span>
         <span class="title">Clientes</span>
       </a></li>
@@ -381,10 +381,10 @@ body {
   
 
 
-  const enlaceAltaAlmacen = document.getElementById("altaAlmacen");
+  const enlaceAltaAlmacen = document.getElementById("ListarAlmacen");
   enlaceAltaAlmacen.addEventListener("click", function (e) {
     e.preventDefault();
-    document.getElementById("formulario").src = "/almacenes/Ingresar";
+    document.getElementById("formulario").src = "/almacenes/Listar";
   });
 
   const listarEmpleado = document.getElementById("listarEmpleado");
@@ -396,13 +396,13 @@ body {
   const paquetes = document.getElementById("paquetes");
   paquetes.addEventListener("click", function (e) {
     e.preventDefault();
-    document.getElementById("formulario").src = "/paquetes/Ingresar";
+    document.getElementById("formulario").src = "/paquetes/mostrar";
   });
 
-  const vehiculosAlta = document.getElementById("vehiculosAlta");
+  const vehiculosAlta = document.getElementById("vehiculosListar");
   vehiculosAlta.addEventListener("click", function (e) {
     e.preventDefault();
-    document.getElementById("formulario").src = "/vehiculos/Ingresar";
+    document.getElementById("formulario").src = "/vehiculos/Listar";
   });
 
   const empresas = document.getElementById("empresasingresar");
@@ -440,10 +440,10 @@ body {
   });
 
 
-  const clientesInsertar = document.getElementById("clientesInsertar");
+  const clientesInsertar = document.getElementById("clientesListar");
   clientesInsertar.addEventListener("click", function (e) {
     e.preventDefault();
-    document.getElementById("formulario").src = "/clientes/Ingresar";
+    document.getElementById("formulario").src = "/clientes/Listar";
 
   });
 
