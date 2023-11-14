@@ -14,9 +14,17 @@
     <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('bootstrap/js/jquery.dataTables.js') }}"></script>
 
-    <div class="container mt-5">
-    <h1 class="text-center">Lista de Paquetes cargados en sistema no Cosolidados</h1>
-    <h1 class="text-center">Se permite Edicion y cambio de estado</h1>
+    <div class="container text-center">
+        <h1 class="my-5">Lista de Paquetes sin consolidar</h1>
+        <div class="col-12 d-flex justify-content-end align-items-start mb-2">
+        <a href="{{ route('paquetes.Listar')}}" class="btn btn-outline-info">Consolidar</a>
+                <a href="{{ route('paquetes.Insertar')}}" class="btn btn-outline-info">Ingresar Paquete</a>
+            </div>
+</div>
+
+    <div class="container ">
+   
+    
 
     <div class="table-responsive">
             <table class="table table-bordered table-striped dataTable">
@@ -91,8 +99,6 @@
                 @endforeach
             </tbody>
         </table>
-        <td><a href="{{ route('paquetes.Listar')}}" class="btn btn-primary">Consolidar</a></td>
-        <td><a href="{{ route('paquetes.Insertar')}}" class="btn btn-primary">Ingresar</a></td>
     </div>
     </div>
      
