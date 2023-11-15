@@ -72,7 +72,8 @@ class EmpresaController extends Controller
 
     public function Editar(Empresa $rut)
     {
-        return view('empresas.Editar', compact('rut'));
+        $empresa = Empresa::find($rut);
+        return view('empresas.Editar', compact('empresa'));
     }
 
     

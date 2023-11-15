@@ -14,6 +14,7 @@
         <h1 class="my-5">Alta de Empresa</h1>
         <div class="col-12 d-flex justify-content-end align-items-start">
         <a href="{{ route('empresas.Listar')}}" class="btn btn-outline-info">Gestion</a>
+        
             </div>
     </div>
 
@@ -24,7 +25,7 @@
             @csrf
             <div class="form-group col-md-30">
                 <label for="RUT">RUT:</label>
-                <input type="text" class="form-control" id="RUT" name="RUT" maxlength="12" required>
+                <input type="text" class="form-control" id="RUT" name="RUT" pattern="[0-9]{12}" required maxlength="12">
             </div>
 
             <div class="form-group col-md-30 mb-2">
@@ -39,7 +40,7 @@
 
             <div class="form-group col-md-30 mb-2">
                 <label for="numero">Número:</label>
-                <input type="number" class="form-control" id="numero" name="numero" maxlength="5" required>
+                <input type="text" class="form-control" id="numero" name="numero" pattern="[0-9]{4}" required maxlength="4">
             </div>
 
             <div class="form-group col-md-30 mb-2">
