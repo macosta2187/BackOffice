@@ -79,7 +79,7 @@
             <div class="col-md-6">
                 <div class="form-group mb-2">
                     <label for="telefono">Teléfono:</label>
-                    <input type="text" class="form-control" id="telefono" name="telefono" required maxlength="9">
+                    <input type="text" class="form-control" id="telefono" name="telefono" pattern="[0-9]{9}" required maxlength="9">
                 </div>
 
                 <div class="form-group mb-2">
