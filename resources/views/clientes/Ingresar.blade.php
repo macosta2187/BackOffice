@@ -33,7 +33,7 @@
 
             <div class="form-group col-md-30 mb-2">
                 <label for = "ci">Cedula:</label>
-                <input type="text" class="form-control" id="ci" name="ci" required maxlength="9">
+                <input type="text" class="form-control" id="ci" name="ci" pattern="[0-9]{8}" required maxlength="8">
             </div>
 
             <div class="form-group col-md-30 mb-2">
@@ -69,12 +69,12 @@
 
              <div class="form-group col-md-30 mb-2">
                 <label for = "email">Email:</label>
-                <input type="text" class="form-control" id="email" name="email" required maxlength="50">
+                <input type="email" class="form-control" id="email" name="email" required maxlength="50">
             </div>
             
             <div class="form-group col-md-30 mb-2">
                 <label for="telefono">Telefono:</label>
-                <input type="text"  class="form-control" id="telefono" name="telefono"  required maxlength="9">
+                <input type="text"  class="form-control" id="telefono" name="telefono"  pattern="[0-9]{9}" required maxlength="9">
             </div>
 
 

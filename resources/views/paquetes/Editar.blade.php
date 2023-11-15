@@ -81,13 +81,13 @@
 
             <div class="form-group">
                 <label for="tamaño">tamaño:</label>
-                <input type="number" step="0.01" class="form-control" id="tamaño" name="tamaño" value="{{ $paquete->tamaño }}">
+                <input type="number" step="0.01" class="form-control" id="tamaño" name="tamaño" value="{{ $paquete->tamaño }}"required>
 
             </div>
 
             <div class="form-group">
                 <label for="peso">Peso:</label>
-                <input type="number" step="0.01" class="form-control" id="peso" name="peso" value="{{ $paquete->peso }}">
+                <input type="number" step="0.01" class="form-control" id="peso" name="peso" value="{{ $paquete->peso }}"required>
             </div>
 
             <div class="form-group">
@@ -97,7 +97,7 @@
 
             <div class="form-group">
                 <label for="hora_creacion">Hora:</label>
-                <input type="time" class="form-control" id="hora_creacion" name="hora_creacion" value="{{ $paquete->hora_creacion }}"required readonly> required readonly>
+                <input type="time" class="form-control" id="hora_creacion" name="hora_creacion" value="{{ $paquete->hora_creacion }}"required readonly>
             </div>
             
             <button type="submit" class="btn btn-primary">Guardar</button>

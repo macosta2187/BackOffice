@@ -44,14 +44,14 @@
 
         <div class="form-group">
             <label for="telefono">Teléfono:</label>
-            <input type="tel" class="form-control" name="telefono" value="{{ $empresa->telefono }}" required>
+            <input type="tel" class="form-control" name="telefono" value="{{ $empresa->telefono }}" pattern="[0-9]{9}" required maxlength="9">
         </div>
 
         <button type="submit" class="btn btn-primary">Guardar cambios</button>
     </form>
 </div>
 
-<!-- Incluye los scripts de Bootstrap y jQuery al final del documento -->
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
