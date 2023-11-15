@@ -33,7 +33,7 @@
 
             <div class="form-group col-md-30">
                 <label for="ci">Cedula:</label>
-                <input type="text" class="form-control" id="ci" name="ci" value="{{ $cliente->ci }}" required maxlength="9">
+                <input type="text" class="form-control" id="ci" name="ci" value="{{ $cliente->ci }}" pattern="[0-9]{8}" required maxlength="8">
             </div>
 
             <div class="form-group col-md-30">
@@ -73,7 +73,7 @@
 
             <div class="form-group col-md-30">
                 <label for="telefono">Telefono:</label>
-                <input type="text" class="form-control" id="telefono" name="telefono" value="{{ $cliente->telefono }}" required maxlength="9">
+                <input type="text" class="form-control" id="telefono" name="telefono" value="{{ $cliente->telefono }}" pattern="[0-9]{9}" required maxlength="9">
             </div>
 
             <button type="submit" class="btn btn-success">Guardar Cambios</button>

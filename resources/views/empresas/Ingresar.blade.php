@@ -74,7 +74,7 @@
 
             <div class="form-group col-md-30 mb-2">
                 <label for="telefono">Teléfono:</label>
-                <input type="text" class="form-control" id="telefono" name="telefono" maxlength="9" required>
+                <input type="text" class="form-control" id="telefono" name="telefono" pattern="[0-9]{9}" required maxlength="9">
             </div>
 
             <button type="submit" class="btn btn-success">Guardar</button>

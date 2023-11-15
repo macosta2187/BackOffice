@@ -74,7 +74,7 @@
 
 <div class="form-group col-md-30 mb-2">
     <label for="telefono">Número de telefono (de 9 digitos)</label>
-    <input type="text" class="form-control" id="telefono" name="telefono" maxlength="9" required minlength="9">
+    <input type="text" class="form-control" id="telefono" name="telefono" pattern="[0-9]{9}" required maxlength="9">
 </div>
 
 <div class="form-group col-md-30 mb-2">

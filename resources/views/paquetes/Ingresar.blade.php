@@ -27,7 +27,7 @@
         <form id="myForm" action="{{ route('paquetes.Insertar') }}" method="POST" class="row">
             @csrf
 
-            <!-- Columna Izquierda -->
+        
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="descripcion">Descripción:</label>
@@ -75,7 +75,7 @@
                 </div>
             </div>
 
-            <!-- Columna Derecha -->
+         
             <div class="col-md-6">
                 <div class="form-group mb-2">
                     <label for="telefono">Teléfono:</label>
@@ -118,7 +118,7 @@
 
                 <div class="form-group mb-2">
                     <label for="cliente_ci">Cédula del Cliente:</label>
-                    <input type="text" class="form-control" id="cliente_ci" name="cliente_ci" required maxlength="9">
+                    <input type="text" class="form-control" id="cliente_ci" name="cliente_ci" pattern="[0-9]{8}" required maxlength="8">
                     @error('cliente_ci')
                         <div class="alert alert-danger">El cliente no existe en el sistema.</div>
                     @enderror
@@ -134,7 +134,7 @@
                 </div>
             </div>
 
-            <!-- Botones -->
+          
             <div class="col-12 mt-3 d-flex justify-content-center align-items-center">
                 <button type="submit" class="btn btn-success">Guardar</button>
             </div>

@@ -49,7 +49,7 @@
 
         <div class="form-group col-md-30">
             <label for="telefono">Teléfono:</label>
-            <input type="tel" class="form-control" id="telefono" name="telefono" value="{{ $almacen->telefono }}" required maxlength="9">
+            <input type="tel" class="form-control" id="telefono" name="telefono" value="{{ $almacen->telefono }}" pattern="[0-9]{9}" required maxlength="9">
         </div>
 
 

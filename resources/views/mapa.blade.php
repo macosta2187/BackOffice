@@ -22,17 +22,17 @@
     right: 0;
     transform: translateY(-50%);
     padding: 20px;
-    width: 400px; /* Ancho fijo */
-    max-width: 90vw; /* Ancho máximo relativo al 90% del ancho de la ventana */
-    max-height: 80vh; /* Altura máxima relativa al 80% de la altura de la ventana */
-    overflow-y: auto; /* Agregar desplazamiento vertical si el contenido excede la altura máxima */
+    width: 400px; 
+    max-width: 90vw; 
+    max-height: 80vh; 
+    overflow-y: auto; 
     border: 1px solid #ddd;
 }
 
 
 
         body {
-            overflow-x: hidden; /* Evitar la barra de desplazamiento horizontal */
+            overflow-x: hidden;
         }
 
     </style>
