@@ -13,9 +13,11 @@
     </style>
 </head>
 <body>
-
-<div class="container">
-    <h1 class="text-center">Editar Vehículos</h1>
+<div class="container text-center">
+        <h1 class="my-5">Editar Vehículos</h1>
+    </div>
+<div class="container d-flex align-items-center justify-content-center">
+ 
     <form action="{{ route('vehiculos.eliminar', ['id' => $vehiculo->id]) }}" method="POST">
         @csrf
         @method('PUT')
@@ -24,36 +26,39 @@
             <input type="text" class="form-control" name="matricula" value="{{ $vehiculo->matricula }}" required maxlength="7">
         </div>
 
-        <div class="form-group">
+        <div class="form-group col-md-30">
             <label for="marca">Marca:</label>
             <input type="text" class="form-control" name="marca" value="{{ $vehiculo->marca }}" required maxlength="20">
         </div>
 
-        <div class="form-group">
+        <div class="form-group col-md-30">
             <label for="modelo">Modelo:</label>
             <input type="text" class="form-control" name="modelo" value="{{ $vehiculo->modelo }}" required maxlength="20">
         </div>
 
-        <div class="form-group">
+        <div class="form-group col-md-30">
             <label for="peso_camion">Peso:</label>
             <input type="text" class="form-control" name="peso_camion" value="{{ $vehiculo->peso_camion }}" required>
         </div>
 
-        <div class="form-group">
+        <div class="form-group col-md-30">
             <label for="capacidad_camion">Capacidad:</label>
             <input type="text" class="form-control" name="capacidad_camion" value="{{ $vehiculo->capacidad_camion }}" required>
         </div>
 
-        <div class="form-check">
-    <input type="checkbox" name="op_camion" id="op_camion" value="1"> Camión
+        <div class="form-check form-switch mb-2">
+    <input type="checkbox" name="op_camion" id="op_camion" value="1" class="form-check-input">
+    <label class="form-check-label" for="op_camion">Camión</label>
 </div>
 
-<div class="form-check">
-    <input type="checkbox" name="op_flete" id="op_flete" value="1"> Flete
+<div class="form-check form-switch mb-2">
+    <input type="checkbox" name="op_flete" id="op_flete" value="1" class="form-check-input">
+    <label class="form-check-label" for="op_flete">Flete</label>
 </div>
+
     
 
-        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+        <button type="submit" class="btn btn-success">Guardar cambios</button>
     </form>
 </div>
 <script>

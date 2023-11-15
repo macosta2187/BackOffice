@@ -8,49 +8,58 @@
     <script src="{{ asset('bootstrap/js/popper.min.js') }}"></script>
     <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
     <title>Formulario de Ingreso de Vehículos</title>
+
 </head>
 <body>
-    <div class="container mt-5">
-        <h1 class="text-center">Formulario de Ingreso de Vehículos</h1>
+
+    <div class="container text-center">
+            <h1 class="my-5">Registro de Vehículos</h1>
+                <div class="col-12 d-flex justify-content-end align-items-start">
+                    <a href="{{ route('vehiculos.Listar')}}" class="btn btn-outline-info">Gestion de vehiculos</a>
+                </div>
+    </div>
+    <div class="container d-flex align-items-center justify-content-center">
+        
         <form id="myForm" action="{{ route('vehiculos.Insertar') }}" method="POST">
             @csrf
 
-            <div class="form-group">
+            <div class="form-group col-md-30">
                 <label for="matricula">Matrícula:</label>
                 <input type="text" class="form-control" id="matricula" name="matricula" required maxlength="7">
             </div>
 
-            <div class="form-group">
+            <div class="form-group col-md-30">
                 <label for="marca">Marca:</label>
                 <input type="text" class="form-control" id="marca" name="marca" required maxlength="20">
             </div>
 
-            <div class="form-group">
+            <div class="form-group col-md-30">
                 <label for = "modelo">Modelo:</label>
                 <input type="text" class="form-control" id="modelo" name="modelo" required maxlength="20">
             </div>
 
-            <div class="form-group">
+            <div class="form-group col-md-30">
                 <label for="peso_camion">Peso:</label>
                 <input type="number" step="0.01" class="form-control" id="peso_camion" name="peso_camion" required>
             </div>
 
-            <div class="form-group">
+            <div class="form-group col-md-30">
                 <label for="capacidad_camion">Capacidad:</label>
                 <input type="number" step="0.01" class="form-control" id="capacidad_camion" name="capacidad_camion" required>
             </div>
 
-            <div class="form-check">
-    <input type="checkbox" name="op_camion" id="op_camion" value="1"> Camión
-</div>
+            <div class="form-check form-switch mb-2">
+            <input type="checkbox" name="op_camion" id="op_camion" value="1" class="form-check-input">
+            <label class="form-check-label" for="op_camion">Camión</label>
+        </div>
 
-<div class="form-check">
-    <input type="checkbox" name="op_flete" id="op_flete" value="1"> Flete
-</div>
-
+        <div class="form-check form-switch mb-2">
+            <input type="checkbox" name="op_flete" id="op_flete" value="1" class="form-check-input">
+            <label class="form-check-label" for="op_flete">Flete</label>
+        </div>
 
             <button type="submit" class="btn btn-primary">Guardar</button>
-            <td><a href="{{ route('vehiculos.Listar') }}" class="btn btn-primary">Gestión de Vehículos</a></td>
+            
         </form>
     </div>
 

@@ -57,7 +57,7 @@ public function Insertar(Request $request)
         
         
     } catch (\Exception $e) {           
-        return view('empleados.Ingresar')->with('error', 'Error al insertar el empleado: ' . $e->getMessage());
+        return view('empleados.Ingresar')->with('error', 'Error' . $e->getMessage());
     }
 }
 

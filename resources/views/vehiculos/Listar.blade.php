@@ -8,12 +8,19 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.5/css/buttons.bootstrap4.min.css">
+
 </head>
 <body>
+<div class="container text-center">
+        <h1 class="my-5">Listar Vehiculos</h1>
+            <div class="col-12 d-flex justify-content-end align-items-start">
+                <a href="{{ route('vehiculos.Insertar')}}" class="btn btn-secondary">Ingresar vehiculo</a>
+            </div>
+    </div>
+
     <div class="container">
-        <h1 class="text-center">Lista de vehículos</h1>
         
-        
+        <div class="table-responsive">
         <table class="table" id="vehiculos-table">
             <thead>
                 <tr>
@@ -51,7 +58,7 @@
                             @endif
                         </td>
                         <td>
-                            <a href="{{ route('vehiculos.Editar', $vehiculo->id) }}" class="btn btn-primary">Editar</a>
+                            <a href="{{ route('vehiculos.Editar', $vehiculo->id) }}" class="btn btn-secondary">Editar</a>
                         </td>
                         <td>
                             <form action="{{ route('vehiculos.eliminar', ['id' => $vehiculo->id]) }}" method="POST">
@@ -68,6 +75,9 @@
                 @endforelse
             </tbody>
         </table>
+        </div>
+        
+        
        
     </div>
    

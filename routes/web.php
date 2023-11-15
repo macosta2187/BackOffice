@@ -42,7 +42,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//Route::view('/register', 'auth.register')->name('register');
+
 
 Route::get('/inicio', function () {
     return view('/inicio');
@@ -53,7 +53,7 @@ Route::get('/almacenes/Listar', [AlmacenController::class, "Listar"])->name('alm
 Route::post('/almacenes/Ingresar', [AlmacenController::class, "Insertar"])->name('almacenes.Insertar')->middleware('auth');
 Route::get('/almacenes/{almacen}/editar', [AlmacenController::class, "Editar"])->name('almacenes.Editar')->middleware('auth');
 Route::put('/almacenes/{almacen}', [AlmacenController::class, "Actualizar"])->name('almacenes.Actualizar')->middleware('auth');
-Route::delete('/almacenes/{almacen}', [AlmacenController::class, "Eliminar"])->name('almacenes.eliminar');
+Route::delete('/almacenes/{almacen}', [AlmacenController::class, "Eliminar"])->name('almacenes.eliminar')->middleware('auth');
 
 
 Route::get('/almacenes/Ingresar', function () {
@@ -105,15 +105,15 @@ Route::get('/vehiculos/Ingreso', [EmpleadoController::class, 'listarChoferes'])-
 
 
 
-Route::get('/vehiculos/Ingresar', [ChoferController::class, 'mostrarVistaIngresar'])->name('vehiculos.Insertar');
+Route::get('/vehiculos/Ingresar', [ChoferController::class, 'mostrarVistaIngresar'])->name('vehiculos.Insertar')->middleware('auth');
 
 
 Route::get('/vehiculos/{vehiculo}/editar', [VehiculoController::class, "Editar"])->name('vehiculos.Editar')->middleware('auth');
 Route::put('/vehiculos/{vehiculo}', [VehiculoController::class, "Actualizar"])->name('vehiculos.Actualizar')->middleware('auth');
 Route::delete('/vehiculos/{id}', [VehiculoController::class, "Eliminar"])->name('vehiculos.eliminar')->middleware('auth');
 
-Route::get('/vehiculos/Ingresar', function () {
-    return view('vehiculos/Ingresar');
+Route::get('/vehiculos/Insertar', function () {
+    return view('vehiculos/Insertar');
 })->middleware('auth');
 
 Route::get('/vehiculos/Eliminar', function () {
@@ -170,14 +170,13 @@ Route::get('/paquetes/Editar', function () {
 
 
 
-Route::get('/paquetes/mostrarPaquetes', [PaqueteController::class, 'mostrarPaquetes'])->name('paquetes.mostrarPaquetes');
-Route::get('/paquetes/Listar', [PaqueteController::class, 'listarPaquetes'])->name('paquetes.Listar');
-
-Route::get('/paquetes/mostrar', [PaqueteController::class, 'mostrarPaquetes'])->name('paquetes.mostrar');
-
+Route::get('/paquetes/mostrarPaquetes', [PaqueteController::class, 'mostrarPaquetes'])->name('paquetes.mostrarPaquetes')->middleware('auth');
+Route::get('/paquetes/Listar', [PaqueteController::class, 'listarPaquetes'])->name('paquetes.Listar')->middleware('auth');
+Route::get('/paquetes/mostrar', [PaqueteController::class, 'mostrarPaquetes'])->name('paquetes.mostrar')->middleware('auth');
 
 
-Route::post('/asignar-lote', [LoteController::class, "asignarLote"]);
+
+Route::post('/asignar-lote', [LoteController::class, "asignarLote"])->middleware('auth');
 
 
 
@@ -193,9 +192,7 @@ Route::get('/EditarLote/{id}/editar', [LoteController::class, 'editarLote'])->na
 Route::post('/lote/{id}/actualizar', [LoteController::class, 'actualizarLote'])->name('lote.actualizar')->middleware('auth');
 
 
-Route::post('/paquetes/consolidar', [PaqueteController::class, 'consolidar'])->name('paquetes.consolidar');
-
-
+Route::post('/paquetes/consolidar', [PaqueteController::class, 'consolidar'])->name('paquetes.consolidar')->middleware('auth');
 Route::get('/paquetes/desconsolidar', [PaqueteController::class, "paquetesEnAlmacenDestino"])->middleware('auth');
 
 
@@ -216,7 +213,7 @@ Route::get('/ingresados', function () {
     return view('/ingresados');
 });
 
-Route::post('/crearLotes', [LoteController::class, 'crearLotes'])->name('consolidar.paquetes');
+Route::post('/crearLotes', [LoteController::class, 'crearLotes'])->name('consolidar.paquetes')->middleware('auth');
 
 
 
@@ -236,7 +233,7 @@ Route::get('/choferes/Ingresar', function () {
 
 
 
-/*Empresa*/
+
 
 
 Route::get('/empresas/Listar', [EmpresaController::class, 'Listar'])->name('empresas.Listar')->middleware('auth');
@@ -276,18 +273,15 @@ Route::get('/fletes',[LotePaqueteController::class, 'listarFletes'])->middleware
 
 
 Route::post('/enviar-paquete', [DespachaController::class, 'Insertar'])->name('enviarPaquete')->middleware('auth');
+Route::get('/fletes', [FletesController::class, 'Listar'])->name('fletes.Listar')->middleware('auth');
 
 
 
-Route::get('/fletes', [FletesController::class, 'Listar'])->name('fletes.Listar');
-
-
-
-Route::post('clientes/Ingresar', [ClientesController::class, 'Insertar'])->name('clientes.Ingresar');
-Route::get('clientes/Listar', [ClientesController::class, 'Listar'])->name('clientes.Listar');
-Route::delete('clientes/Eliminar/{id}', [ClientesController::class, 'Eliminar'])->name('clientes.Eliminar');
-Route::put('clientes/Actualizar/{id}', [ClientesController::class, 'Actualizar'])->name('clientes.Actualizar');
-Route::get('clientes/Editar/{id}', [ClientesController::class, 'Editar'])->name('clientes.Editar');
+Route::post('clientes/Ingresar', [ClientesController::class, 'Insertar'])->name('clientes.Ingresar')->middleware('auth');
+Route::get('clientes/Listar', [ClientesController::class, 'Listar'])->name('clientes.Listar')->middleware('auth');
+Route::delete('clientes/Eliminar/{id}', [ClientesController::class, 'Eliminar'])->name('clientes.Eliminar')->middleware('auth');
+Route::put('clientes/Actualizar/{id}', [ClientesController::class, 'Actualizar'])->name('clientes.Actualizar')->middleware('auth');
+Route::get('clientes/Editar/{id}', [ClientesController::class, 'Editar'])->name('clientes.Editar')->middleware('auth');
 
 
 Route::get('/clientes/Ingresar', function () {
@@ -295,4 +289,9 @@ Route::get('/clientes/Ingresar', function () {
 })->middleware('auth');
 
 
-Route::get('/grafica', [PaqueteController::class, 'contarPaquetesConsolidados']);
+Route::get('/grafica', [PaqueteController::class, 'contarPaquetesConsolidados'])->middleware('auth');
+
+
+Route::get('/mapa', function () {
+    return view('/mapa');
+})->middleware('auth')->name('mapa');

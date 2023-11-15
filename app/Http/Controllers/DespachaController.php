@@ -54,8 +54,9 @@ class DespachaController extends Controller
     
             $almacen = Almacen::where('departamento', $departamentoPaquete)->first();
     
-            $id_almacen = 0;
-    
+           
+            $id_almacen = 1;
+            
             if ($almacen) {
                 $id_almacen = $almacen->id;
             }

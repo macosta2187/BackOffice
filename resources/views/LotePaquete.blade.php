@@ -15,14 +15,13 @@
         <thead>
 
         <div style="text-align: center;">
-    <img src="{{ asset('consolidar.jpg') }}" alt="Flete" width="200" height="150">
-</div>
+            <img src="{{ asset('consolidar.jpg') }}" alt="Flete" width="200" height="150">
+        </div>
 
             <tr>
                 <th>Lote ID</th>
                 <th>Camión</th>
                 <th>Paquetes</th>
-                
             </tr>
         </thead>
         <tbody>
@@ -32,7 +31,7 @@
             @endphp
 
             @foreach ($lotesPaquetes as $lotePaquete)
-                @if ($currentLoteId !== $lotePaquete->lote->id)
+                @if ($lotePaquete->lote && $currentLoteId !== $lotePaquete->lote->id)
                     @if ($currentLoteId !== null)
                         <tr>
                             <td>{{ $currentLoteId }}</td>
@@ -44,7 +43,7 @@
                         $currentLoteId = $lotePaquete->lote->id;
                         $concatenatedPaquetes = $lotePaquete->paquete_id;
                     @endphp
-                @else
+                @elseif ($lotePaquete->lote)
                     @php
                         $concatenatedPaquetes .= ', ' . $lotePaquete->paquete_id;
                     @endphp
@@ -73,9 +72,8 @@
             }
         });
     });
-
-    
 </script>
 
 </body>
 </html>
+

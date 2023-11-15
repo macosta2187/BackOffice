@@ -10,12 +10,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Lote extends Model
 {
-    protected $table = 'lotes';    
-    //protected $fillable = ['paqueteId', 'lote', 'estatus','camionId'];
+    protected $table = 'lotes';       
     use SoftDeletes;
     use HasFactory;
 
-// Lote.php
+
 
 public function paquetes()
 {

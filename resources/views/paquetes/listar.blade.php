@@ -84,7 +84,7 @@
         </div>
     </div>
     <div class="alert alert-info" role="alert" id="sumaPesosLabel">Peso Total del envío en kg: 0.00 kg</div>
-    <button type="button" class="btn btn-primary" onclick="consolidarPaquetes()">Consolidar Paquetes</button>
+    <button type="button" class="btn btn-success" onclick="consolidarPaquetes()">Consolidar Paquetes</button>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>   
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>    
